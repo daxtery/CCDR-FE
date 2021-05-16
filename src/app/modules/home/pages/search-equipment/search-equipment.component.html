@@ -1,1 +1,12 @@
-<p>search-equipment works!</p>
+<mat-grid-list cols="1" rowHeight="4:1">
+    <mat-grid-tile>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Search</mat-label>
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput placeholder="Search for Equipments" [(ngModel)]="search_value">
+            <button mat-icon-button matSuffix (click)="search()" ><mat-icon>send</mat-icon></button>
+        </mat-form-field>
+        
+    </mat-grid-tile>
+    <mat-grid-tile>2</mat-grid-tile>
+</mat-grid-list>
