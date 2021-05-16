@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
+
+import { EquipmentService } from '../../../../core/services/equipment.service';
 
 @Component({
   selector: 'app-add-equipment',
@@ -7,9 +11,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEquipmentComponent implements OnInit {
 
-  constructor() { }
+
+  equipmentFormGroup = new FormGroup({
+
+    area: new FormControl(''),
+    type: new FormControl('')
+  })
+
+  constructor(private equipmentService: EquipmentService) { }
 
   ngOnInit(): void {
+  }
+
+  formSubmit() {
+
+    const equipment: CreateEquipmentDto = this.equipmentFormGroup.value;
+
+    this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
+
+      this.equipmentFormGroup.reset();
+
+    }, (error) => {
+      console.log('there was an error sending the query', error);
+    });
   }
 
 }
