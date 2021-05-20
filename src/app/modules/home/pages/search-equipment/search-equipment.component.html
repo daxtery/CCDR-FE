@@ -3,10 +3,16 @@
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Search</mat-label>
             <mat-icon matPrefix>search</mat-icon>
-            <input matInput placeholder="Search for Equipments" [(ngModel)]="search_value">
+            <input matInput placeholder="Search for Equipments" [(ngModel)]="searchValue">
             <button mat-icon-button matSuffix (click)="search()" ><mat-icon>send</mat-icon></button>
         </mat-form-field>
         
     </mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>
+        <mat-list role="list">
+            <mat-list-item *ngFor="let equipment of $queryResults" role="listitem">
+                {{equipment.area}}, {{equipment.type}}
+            </mat-list-item>
+          </mat-list>
+    </mat-grid-tile>
 </mat-grid-list>

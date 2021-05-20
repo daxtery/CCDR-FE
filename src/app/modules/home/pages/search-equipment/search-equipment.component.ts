@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { EquipmentService } from '../../../../core/services/equipment.service';
+
 @Component({
   selector: 'app-search-equipment',
   templateUrl: './search-equipment.component.html',
@@ -7,19 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchEquipmentComponent implements OnInit {
 
-  search_value=''
+  searchValue=''
+  $queryResults = []
 
-  constructor() { }
+  constructor(private equipmentService: EquipmentService) { }
 
   ngOnInit(): void {
   }
 
   search() {
 
-    //Some fancy stuff with BE
-    console.log(this.search_value)
+    this.equipmentService.queryEquipments(this.searchValue).subscribe(({ data }) => {
+
+      this.$queryResults = data['queryEquipments']
+
+    }, (error) => {
+      console.log('there was an error sending the query', error);
+    });
+
+    console.log(this.searchValue)
     
-    this.search_value = ''
+    this.searchValue = ''
   }
 
 }
