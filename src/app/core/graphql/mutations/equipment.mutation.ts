@@ -7,6 +7,9 @@ createEquipment($equipment: CreateEquipmentDto!) {
     createEquipment(equipment: $equipment) {
       area
       type
+      extras {
+        name
+      }
     }
   }
 `

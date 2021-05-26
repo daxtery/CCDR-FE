@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
+import { CreateEquipmentDto, Extras } from 'src/app/shared/dtos/create-equipment.dto';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
 
@@ -25,7 +25,9 @@ export class AddEquipmentComponent implements OnInit {
 
   formSubmit() {
 
-    const equipment: CreateEquipmentDto = this.equipmentFormGroup.value;
+    let equipment: CreateEquipmentDto = this.equipmentFormGroup.value;
+
+    equipment.extras = {name: ''}
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

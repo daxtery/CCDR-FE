@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
 
@@ -9,7 +9,7 @@ import { EquipmentService } from '../../../../core/services/equipment.service';
 })
 export class SearchEquipmentComponent implements OnInit {
 
-  searchValue=''
+  searchValue = ''
   $queryResults = []
 
   constructor(private equipmentService: EquipmentService) { }
@@ -17,19 +17,41 @@ export class SearchEquipmentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+
+
+  }
+
   search() {
 
-    this.equipmentService.queryEquipments(this.searchValue).subscribe(({ data }) => {
+    if (this.searchValue != '') {
 
-      this.$queryResults = data['queryEquipments']
+      this.equipmentService.queryEquipments(this.searchValue).subscribe(({ data }) => {
 
-    }, (error) => {
-      console.log('there was an error sending the query', error);
-    });
+        this.$queryResults = data['queryEquipments'].map((query) => {
 
-    console.log(this.searchValue)
-    
-    this.searchValue = ''
+          return { result: query, clicked: false }
+        })
+
+      }, (error) => {
+        console.log('there was an error sending the query', error);
+      });
+
+      this.searchValue = ''
+    }
+
+  }
+
+  markAsClicked(id) {
+
+    let clickedItem = this.$queryResults.find((query) => { return query.result._id == id });
+
+    clickedItem.clicked = true;
+  }
+
+  sendQueriesFeedback() {
+
+
   }
 
 }

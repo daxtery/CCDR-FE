@@ -9,10 +9,10 @@
         
     </mat-grid-tile>
     <mat-grid-tile>
-        <mat-list role="list">
-            <mat-list-item *ngFor="let equipment of $queryResults" role="listitem">
-                {{equipment.area}}, {{equipment.type}}
-            </mat-list-item>
-          </mat-list>
+        <mat-selection-list role="list">
+            <mat-list-option *ngFor="let equipment of $queryResults" (click)="markAsClicked(equipment.result._id)" role="listitem">
+                {{equipment.result.area}}, {{equipment.result.type}}
+            </mat-list-option>
+          </mat-selection-list>
     </mat-grid-tile>
 </mat-grid-list>
