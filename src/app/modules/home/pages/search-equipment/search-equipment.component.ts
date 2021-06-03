@@ -50,7 +50,7 @@ export class SearchEquipmentComponent implements OnInit {
 
   markAsClicked(id) {
 
-    let clickedItem = this.$queryResults.find((query) => { return query.result._id == id });
+    let clickedItem = this.$queryResults.find((query) => { return query.result.equipment._id == id });
 
     clickedItem.clicked = true;
   }
@@ -61,7 +61,7 @@ export class SearchEquipmentComponent implements OnInit {
 
       const query = this.previousSearch;
 
-      const feedbacks: Array<FeedBack> = this.$queryResults.map((query) => { return <FeedBack>{ _id: query.result._id, clicked: query.clicked } })
+      const feedbacks: Array<FeedBack> = this.$queryResults.map((query) => { return <FeedBack>{ _id: query.result.equipment._id, clicked: query.clicked, score: query.result.score } })
 
       const queryFeedBack: QueryFeedBackDto = { query: query, feedBacks: feedbacks }
 

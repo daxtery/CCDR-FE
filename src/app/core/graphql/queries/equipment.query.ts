@@ -5,9 +5,12 @@ export const queryEquipments =
 query 
 queryEquipments($query: String!) {
     queryEquipments(query: $query) {
-      _id
-      area
-      type
+      equipment {
+        _id
+        area
+        type
+      }
+      score
     }
   }
 `

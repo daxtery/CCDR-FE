@@ -4,6 +4,6 @@ export const giveQueryFeedback =
     gql`
 mutation giveQueryFeedback($queryFeedBack: QueryFeedBackDto!) {
 
-    giveQueryFeedback(queryFeedBack: $queryFeedBack)
+    storeQueryFeedback(queryFeedBack: $queryFeedBack)
 }
 `

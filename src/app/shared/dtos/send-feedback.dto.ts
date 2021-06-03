@@ -1,13 +1,14 @@
 export class FeedBack {
 
-    _id: String;
-    clicked: Boolean;
+    _id: string;
+    clicked: boolean;
+    score: number;
 }
 
 
 export class QueryFeedBackDto {
 
-    query: String;
+    query: string;
 
     feedBacks: Array<FeedBack>;
 }
