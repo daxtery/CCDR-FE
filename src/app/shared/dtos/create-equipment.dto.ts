@@ -8,4 +8,5 @@ export class CreateEquipmentDto {
     area: String;
     type: String;
     extras: Extras;
+    equipmentDetails: Object;
 }

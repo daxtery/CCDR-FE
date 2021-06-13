@@ -10,6 +10,7 @@ createEquipment($equipment: CreateEquipmentDto!) {
       extras {
         name
       }
+      equipmentDetails
     }
   }
 `

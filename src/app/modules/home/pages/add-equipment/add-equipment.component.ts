@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { CreateEquipmentDto, Extras } from 'src/app/shared/dtos/create-equipment.dto';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
+import { CultureFormComponent } from '../../components/culture-form/culture-form.component';
 import { SocialFormComponent } from '../../components/social-form/social-form.component';
 
 @Component({
@@ -13,6 +14,7 @@ import { SocialFormComponent } from '../../components/social-form/social-form.co
 export class AddEquipmentComponent implements OnInit {
 
   @ViewChild(SocialFormComponent, {static: true}) socialForm: SocialFormComponent;
+  @ViewChild(CultureFormComponent, {static: true}) cultureForm: CultureFormComponent;
 
   equipmentFormGroup: FormGroup;
 
@@ -24,8 +26,10 @@ export class AddEquipmentComponent implements OnInit {
 
       area: [''],
       type: [''],
-      social: this.socialForm.createGroup()
+      social: this.socialForm.createGroup(),
+      cultura: this.cultureForm.createGroup(),
     }) 
+
   }
 
   currentArea() {
@@ -35,9 +39,12 @@ export class AddEquipmentComponent implements OnInit {
 
   formSubmit() {
 
-    let equipment: CreateEquipmentDto = this.equipmentFormGroup.value;
+    const details = this.equipmentFormGroup.value[this.currentArea()]
 
-    equipment.extras = { name: '' }
+    const area = this.equipmentFormGroup.value['area']
+    const type = this.equipmentFormGroup.value['type']
+
+    let equipment: CreateEquipmentDto = {area: area, type: type, equipmentDetails: details, extras: { name: '' }}
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 
@@ -47,5 +54,4 @@ export class AddEquipmentComponent implements OnInit {
       console.log('there was an error sending the query', error);
     });
   }
-
 }

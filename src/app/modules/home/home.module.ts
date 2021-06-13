@@ -15,6 +15,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { SocialFormComponent } from './components/social-form/social-form.component';
 
 import { MaterialModule } from '../../material.module';
+import { CultureFormComponent } from './components/culture-form/culture-form.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { MaterialModule } from '../../material.module';
     AddEquipmentComponent,
     SearchEquipmentComponent,
     NavigationComponent,
-    SocialFormComponent
+    SocialFormComponent,
+    CultureFormComponent
   ]
 })
 export class HomePageModule { }

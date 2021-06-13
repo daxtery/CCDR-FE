@@ -1,0 +1,30 @@
+<form [formGroup]="cultureFormGroup">
+    <p>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Número médio de visitantes</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="num_visitantes_medio" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Com acesso de mobilidade reduzida</mat-label>
+            <mat-select formControlName="mobilidade_reduzida">
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Acesso gratuito</mat-label>
+            <mat-select formControlName="acesso_gratuito">
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Tutela</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="tutela">
+        </mat-form-field>
+    </p>
+</form>

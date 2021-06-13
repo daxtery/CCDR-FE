@@ -2,20 +2,20 @@
     <p>
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Número de utentes</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="num_utentes">
+            <input matInput placeholder="Placeholder" formControlName="num_utentes" type="number">
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Capacidade</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="capacidade">
+            <input matInput placeholder="Placeholder" formControlName="capacidade" type="number">
         </mat-form-field>
     </p>
     <p>
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Fins lucrativos</mat-label>
             <mat-select formControlName="fins_lucrativos">
-                <mat-option value="true">Sim</mat-option>
-                <mat-option value="false">Não</mat-option>
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
             </mat-select>
         </mat-form-field>
 
