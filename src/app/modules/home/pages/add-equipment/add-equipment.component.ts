@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { CreateEquipmentDto, Extras } from 'src/app/shared/dtos/create-equipment.dto';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
+import { SocialFormComponent } from '../../components/social-form/social-form.component';
 
 @Component({
   selector: 'app-add-equipment',
@@ -11,23 +12,32 @@ import { EquipmentService } from '../../../../core/services/equipment.service';
 })
 export class AddEquipmentComponent implements OnInit {
 
+  @ViewChild(SocialFormComponent, {static: true}) socialForm: SocialFormComponent;
 
-  equipmentFormGroup = new FormGroup({
+  equipmentFormGroup: FormGroup;
 
-    area: new FormControl(''),
-    type: new FormControl('')
-  })
-
-  constructor(private equipmentService: EquipmentService) { }
+  constructor(private equipmentService: EquipmentService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.equipmentFormGroup = this.formBuilder.group({
+
+      area: [''],
+      type: [''],
+      social: this.socialForm.createGroup()
+    }) 
+  }
+
+  currentArea() {
+
+    return this.equipmentFormGroup.get('area').value
   }
 
   formSubmit() {
 
     let equipment: CreateEquipmentDto = this.equipmentFormGroup.value;
 
-    equipment.extras = {name: ''}
+    equipment.extras = { name: '' }
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

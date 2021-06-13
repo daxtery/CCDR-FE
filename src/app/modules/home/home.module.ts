@@ -12,6 +12,7 @@ import { AddEquipmentComponent } from './pages/add-equipment/add-equipment.compo
 import { SearchEquipmentComponent } from './pages/search-equipment/search-equipment.component';
 
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { SocialFormComponent } from './components/social-form/social-form.component';
 
 import { MaterialModule } from '../../material.module';
 
@@ -29,7 +30,8 @@ import { MaterialModule } from '../../material.module';
     HomePageComponent,
     AddEquipmentComponent,
     SearchEquipmentComponent,
-    NavigationComponent
+    NavigationComponent,
+    SocialFormComponent
   ]
 })
 export class HomePageModule { }
