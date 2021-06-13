@@ -1,0 +1,39 @@
+<form [formGroup]="sportFormGroup">
+    <p>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Capacidade</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="capacidade" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Iluminado</mat-label>
+            <mat-select formControlName="mobilidade_reduzida_pratica">
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Acesso a mobilidade reduzida</mat-label>
+            <mat-select formControlName="mobilidade_reduzida_assitencia">
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Acesso a práticas de mobilidade reduzida</mat-label>
+            <mat-select formControlName="mobilidade_reduzida_pratica">
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Instalação de Apoio</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="instalacao_apoio">
+        </mat-form-field>
+    </p>
+</form>

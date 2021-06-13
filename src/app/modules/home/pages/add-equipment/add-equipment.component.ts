@@ -5,6 +5,7 @@ import { CreateEquipmentDto, Extras } from 'src/app/shared/dtos/create-equipment
 import { EquipmentService } from '../../../../core/services/equipment.service';
 import { CultureFormComponent } from '../../components/culture-form/culture-form.component';
 import { SocialFormComponent } from '../../components/social-form/social-form.component';
+import { SportFormComponent } from '../../components/sport-form/sport-form.component';
 
 @Component({
   selector: 'app-add-equipment',
@@ -15,6 +16,7 @@ export class AddEquipmentComponent implements OnInit {
 
   @ViewChild(SocialFormComponent, {static: true}) socialForm: SocialFormComponent;
   @ViewChild(CultureFormComponent, {static: true}) cultureForm: CultureFormComponent;
+  @ViewChild(SportFormComponent, {static: true}) sportForm: SportFormComponent;
 
   equipmentFormGroup: FormGroup;
 
@@ -28,6 +30,7 @@ export class AddEquipmentComponent implements OnInit {
       type: [''],
       social: this.socialForm.createGroup(),
       cultura: this.cultureForm.createGroup(),
+      desporto: this.sportForm.createGroup()
     }) 
 
   }
