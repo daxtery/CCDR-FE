@@ -24,7 +24,8 @@ export class EquipmentService {
 
     return this.apollo.query({
       query: queryEquipments,
-      variables: {query: query}
+      variables: {query: query},
+      fetchPolicy: 'no-cache'
     })
   }
 }

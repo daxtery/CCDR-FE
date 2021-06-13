@@ -1,4 +1,5 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { MatListOption, MatSelectionList } from '@angular/material/list';
 import { FeedbackService } from 'src/app/core/services/feedback.service';
 import { FeedBack, QueryFeedBackDto } from 'src/app/shared/dtos/send-feedback.dto';
 
@@ -10,6 +11,8 @@ import { EquipmentService } from '../../../../core/services/equipment.service';
   styleUrls: ['./search-equipment.component.sass']
 })
 export class SearchEquipmentComponent implements OnInit {
+
+  @ViewChild('searchResults') searchResults: MatSelectionList;
 
   searchValue = ''
   previousSearch = ''
@@ -32,18 +35,22 @@ export class SearchEquipmentComponent implements OnInit {
     if (this.searchValue != '') {
 
       this.equipmentService.queryEquipments(this.searchValue).subscribe(({ data }) => {
-
+        
         this.$queryResults = data['queryEquipments'].map((query) => {
 
           return { result: query, clicked: false }
         })
 
+        this.searchResults.options.forEach( (item: MatListOption) => item.selected = false);
+
+        this.previousSearch = this.searchValue
+        this.searchValue = ''
+        
+
       }, (error) => {
         console.log('there was an error sending the query', error);
       });
 
-      this.previousSearch = this.searchValue
-      this.searchValue = ''
     }
 
   }
