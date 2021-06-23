@@ -7,6 +7,7 @@ queryEquipments($query: String!) {
     queryEquipments(query: $query) {
       equipment {
         _id
+        name
         area
         type
       }

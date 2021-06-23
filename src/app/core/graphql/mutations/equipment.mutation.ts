@@ -5,12 +5,11 @@ export const createEquipment =
 mutation 
 createEquipment($equipment: CreateEquipmentDto!) {
     createEquipment(equipment: $equipment) {
+      name
       area
       type
-      extras {
-        name
-      }
       equipmentDetails
+      extras
     }
   }
 `

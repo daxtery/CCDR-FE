@@ -1,12 +1,10 @@
-export class Extras {
+export class CreateEquipmentDto {
 
     name: String;
-}
-
-export class CreateEquipmentDto {
 
     area: String;
     type: String;
-    extras: Extras;
+
+    extras: Object;
     equipmentDetails: Object;
 }

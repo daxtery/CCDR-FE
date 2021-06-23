@@ -4,6 +4,13 @@
             <form [formGroup]="equipmentFormGroup" (ngSubmit)="formSubmit()">
                 <p>
                     <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Denominação</mat-label>
+                        <input matInput placeholder="Denominação do equipamento" formControlName="name">
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Área do Equipamento</mat-label>
                         <mat-select formControlName="area">
                             <mat-option value="social">Social</mat-option>
@@ -20,11 +27,10 @@
                         <input matInput placeholder="Descrição do equipamento a inserir" formControlName="type">
                     </mat-form-field>
                 </p>
-                
+
                 <app-social-form [hidden]="currentArea() != 'social'"></app-social-form>
                 <app-culture-form [hidden]="currentArea() != 'cultura'"></app-culture-form>
                 <app-sport-form [hidden]="currentArea() != 'desporto'"></app-sport-form>
-                
 
                 <button mat-raised-button type="submit" layout-align="center" color="warn">Add Equipment</button>
             </form>
