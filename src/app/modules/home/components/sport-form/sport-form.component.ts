@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SportFormComponent implements OnInit {
 
   sportFormGroup: FormGroup;
+  facilities: Array<string> = [];
 
   constructor(private formbuilder: FormBuilder) { }
 
@@ -28,5 +29,22 @@ export class SportFormComponent implements OnInit {
 
     return this.sportFormGroup
   }
+
+  addFacility() {
+
+    this.facilities.push(this.sportFormGroup.get('instalacao_apoio').value)
+  }
+
+  getFormData() {
+
+    let formValue = this.sportFormGroup.value
+
+    formValue['instalacao_apoio'] = this.facilities
+
+    this.facilities = []
+
+    return formValue;
+  }
+
 
 }

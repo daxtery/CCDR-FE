@@ -27,4 +27,9 @@ export class CultureFormComponent implements OnInit {
 
     return this.cultureFormGroup
   }
+
+  getFormData() {
+
+    return this.cultureFormGroup.value
+  }
 }

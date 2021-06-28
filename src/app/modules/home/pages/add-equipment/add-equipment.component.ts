@@ -20,6 +20,8 @@ export class AddEquipmentComponent implements OnInit {
 
   equipmentFormGroup: FormGroup;
 
+  forms;
+
   constructor(private equipmentService: EquipmentService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -33,6 +35,8 @@ export class AddEquipmentComponent implements OnInit {
       desporto: this.sportForm.createGroup()
     })
 
+    this.forms = {'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm}
+
   }
 
   currentArea() {
@@ -42,7 +46,7 @@ export class AddEquipmentComponent implements OnInit {
 
   formSubmit() {
 
-    const details = this.equipmentFormGroup.value[this.currentArea()]
+    const details = this.forms[this.currentArea()].getFormData()
 
     const name = this.equipmentFormGroup.value['name']
 

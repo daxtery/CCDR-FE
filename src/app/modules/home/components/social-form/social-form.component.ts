@@ -28,4 +28,9 @@ export class SocialFormComponent implements OnInit {
     return this.socialFormGroup
   }
 
+  getFormData() {
+
+    return this.socialFormGroup.value
+  }
+
 }
