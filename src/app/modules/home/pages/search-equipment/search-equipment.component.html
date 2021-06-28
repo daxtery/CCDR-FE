@@ -4,15 +4,18 @@
             <mat-label>Search</mat-label>
             <mat-icon matPrefix>search</mat-icon>
             <input matInput placeholder="Search for Equipments" [(ngModel)]="searchValue">
-            <button mat-icon-button matSuffix (click)="search()" ><mat-icon>send</mat-icon></button>
+            <button mat-icon-button matSuffix (click)="search()">
+                <mat-icon>send</mat-icon>
+            </button>
         </mat-form-field>
-        
+
     </mat-grid-tile>
     <mat-grid-tile>
         <mat-selection-list #searchResults>
-            <mat-list-option *ngFor="let equipment of $queryResults" (click)="markAsClicked(equipment.result.equipment._id)">
-                {{equipment.result.equipment.name}}: {{equipment.result.equipment.area}}, {{equipment.result.equipment.type}}
+            <mat-list-option *ngFor="let equipment of $queryResults"
+                (click)="markAsClicked(equipment.result.equipment._id)">
+                <app-equipment-preview [equipment]="equipment.result.equipment"></app-equipment-preview>
             </mat-list-option>
-          </mat-selection-list>
+        </mat-selection-list>
     </mat-grid-tile>
 </mat-grid-list>
