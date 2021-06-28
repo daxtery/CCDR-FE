@@ -18,6 +18,7 @@ import { MaterialModule } from '../../material.module';
 import { CultureFormComponent } from './components/culture-form/culture-form.component';
 import { SportFormComponent } from './components/sport-form/sport-form.component';
 import { HealthFormComponent } from './components/health-form/health-form.component';
+import { EducationFormComponent } from './components/education-form/education-form.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { HealthFormComponent } from './components/health-form/health-form.compon
     SocialFormComponent,
     CultureFormComponent,
     SportFormComponent,
-    HealthFormComponent
+    HealthFormComponent,
+    EducationFormComponent
   ]
 })
 export class HomePageModule { }

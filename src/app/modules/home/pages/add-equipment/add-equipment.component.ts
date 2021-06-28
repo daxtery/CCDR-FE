@@ -4,6 +4,7 @@ import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
 import { CultureFormComponent } from '../../components/culture-form/culture-form.component';
+import { EducationFormComponent } from '../../components/education-form/education-form.component';
 import { HealthFormComponent } from '../../components/health-form/health-form.component';
 import { SocialFormComponent } from '../../components/social-form/social-form.component';
 import { SportFormComponent } from '../../components/sport-form/sport-form.component';
@@ -19,6 +20,7 @@ export class AddEquipmentComponent implements OnInit {
   @ViewChild(CultureFormComponent, { static: true }) cultureForm: CultureFormComponent;
   @ViewChild(SportFormComponent, { static: true }) sportForm: SportFormComponent;
   @ViewChild(HealthFormComponent, { static: true }) healthForm: HealthFormComponent;
+  @ViewChild(EducationFormComponent, { static: true }) educationForm: EducationFormComponent;
 
 
   equipmentFormGroup: FormGroup;
@@ -36,10 +38,11 @@ export class AddEquipmentComponent implements OnInit {
       social: this.socialForm.createGroup(),
       cultura: this.cultureForm.createGroup(),
       desporto: this.sportForm.createGroup(),
-      saude: this.healthForm.createGroup()
+      saude: this.healthForm.createGroup(),
+      educacao: this.educationForm.createGroup()
     })
 
-    this.forms = { 'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm, 'saude': this.healthForm }
+    this.forms = {'educacao': this.educationForm, 'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm, 'saude': this.healthForm }
 
   }
 

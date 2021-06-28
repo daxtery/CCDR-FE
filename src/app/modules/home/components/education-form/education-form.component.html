@@ -1,0 +1,29 @@
+<form [formGroup]="educationFormGroup">
+    <p formGroupName="escolas">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Número de Alunos</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="num_alunos" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Capacidade</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="capacidade" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Grau de Ensino</mat-label>
+            <mat-select formControlName="grau_ensino">
+                <mat-option [value]="'1_ciclo'">1º Ciclo</mat-option>
+                <mat-option [value]="'2_ciclo'">2º Ciclo</mat-option>
+                <mat-option [value]="'3_ciclo'">3º Ciclo</mat-option>
+                <mat-option [value]="'secundario'">Secundário</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button (click)="addSchool()" layout-align="center" color="warn">Adicionar Escola</button>
+    </p>
+    <p *ngFor="let school of schools">
+        {{ school.num_alunos }}{{ school.capacidade }}{{ school.grau_ensino }}
+    </p>
+    
+</form>
