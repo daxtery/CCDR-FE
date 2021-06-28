@@ -4,6 +4,7 @@ import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
 import { CultureFormComponent } from '../../components/culture-form/culture-form.component';
+import { HealthFormComponent } from '../../components/health-form/health-form.component';
 import { SocialFormComponent } from '../../components/social-form/social-form.component';
 import { SportFormComponent } from '../../components/sport-form/sport-form.component';
 
@@ -17,6 +18,8 @@ export class AddEquipmentComponent implements OnInit {
   @ViewChild(SocialFormComponent, { static: true }) socialForm: SocialFormComponent;
   @ViewChild(CultureFormComponent, { static: true }) cultureForm: CultureFormComponent;
   @ViewChild(SportFormComponent, { static: true }) sportForm: SportFormComponent;
+  @ViewChild(HealthFormComponent, { static: true }) healthForm: HealthFormComponent;
+
 
   equipmentFormGroup: FormGroup;
 
@@ -32,10 +35,11 @@ export class AddEquipmentComponent implements OnInit {
       type: [''],
       social: this.socialForm.createGroup(),
       cultura: this.cultureForm.createGroup(),
-      desporto: this.sportForm.createGroup()
+      desporto: this.sportForm.createGroup(),
+      saude: this.healthForm.createGroup()
     })
 
-    this.forms = {'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm}
+    this.forms = { 'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm, 'saude': this.healthForm }
 
   }
 

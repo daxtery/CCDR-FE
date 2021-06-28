@@ -1,0 +1,89 @@
+<form [formGroup]="healthFormGroup">
+    <p>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Número de Utentes</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="num_utentes" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Tipo de Instituição</mat-label>
+            <mat-select formControlName="tipo_saude">
+                <mat-option [value]="'saude_geral'">Saúde Geral</mat-option>
+                <mat-option [value]="'saude_hospitalar'">Saúde Hospitalar</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <form [hidden]="currentHealth() != 'saude_geral'" [formGroup]="generalHealthForm">
+        <p>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Capacidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="capacidade" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Número de Centros de Saúde</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="num_centros_saude" type="number">
+            </mat-form-field>
+        </p>
+    </form>
+
+    <form [hidden]="currentHealth() != 'saude_hospitalar'" [formGroup]="hospitalHealthForm">
+        <p formGroupName="num_equipamentos_por_especialidade">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Especialidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="especialidade" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Nº de Equipamentos</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="num_equipamentos" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addEquipmentBySpecialty()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let num_equi of getMapAsArray()">
+            {{ num_equi[0] }} {{ num_equi[1] }}
+        </p>
+        <p>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Agrupamento de Saúde</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="agrupamento_saude" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Centro Hospitalar</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="centro_hospitalar" type="text">
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Especialidades</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="especialidades" type="text">
+            </mat-form-field>
+            <button mat-raised-button (click)="addSpecialty()" layout-align="center" color="warn">Adicionar Especialidade</button>
+        </p>
+        <p *ngFor="let specialty of especialidades">
+            {{ specialty }}
+        </p>
+        <p>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Valências</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="valencias" type="text">
+            </mat-form-field>
+            <button mat-raised-button (click)="addValency()" layout-align="center" color="warn">Adicionar Valência</button>
+        </p>
+        <p *ngFor="let valency of valencias">
+            {{ valency }}
+        </p>
+        <p>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Unidades</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tipo_unidades" type="text">
+            </mat-form-field>
+            <button mat-raised-button (click)="addUnitType()" layout-align="center" color="warn">Adicionar Unidade</button>
+        </p>
+        <p *ngFor="let unit of unidades">
+            {{ unit }}
+        </p>
+    </form>
+</form>
