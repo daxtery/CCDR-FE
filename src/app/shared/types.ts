@@ -1,4 +1,5 @@
 export interface Equipment<T = object> {
+    _id: string;
     area: string;
     details: T;
     extras: object;
