@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { EquipmentDetailsService } from 'src/app/core/services/equipment-details-service';
 import { FeedbackService } from 'src/app/core/services/feedback.service';
 import { FeedBack, QueryFeedBackDto } from 'src/app/shared/dtos/send-feedback.dto';
-import { Equipment, EquipmentAndScore } from 'src/app/shared/types';
+import { Equipment, EquipmentAndScore, EquipmentPreview } from 'src/app/shared/types';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
 
@@ -21,7 +21,7 @@ export class SearchEquipmentComponent implements OnInit {
   clickedMap = new Map<string, boolean>();
   scoresMap = new Map<string, number>();
 
-  $queryResults: Equipment[] = [];
+  $queryResults: EquipmentPreview[] = [];
 
   constructor(
     private equipmentService: EquipmentService,
@@ -66,12 +66,11 @@ export class SearchEquipmentComponent implements OnInit {
 
   }
 
-  markAsClicked(equipment: Equipment) {
+  markAsClicked(equipment: EquipmentPreview) {
+    this.equipmentDetailsService.set_equipment(equipment);
 
     const { _id } = equipment;
-
     this.clickedMap.set(_id, true);
-    this.equipmentDetailsService.set(equipment);
   }
 
   sendQueriesFeedback() {

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { EquipmentDetailsService } from 'src/app/core/services/equipment-details-service';
 
 import { Equipment } from 'src/app/shared/types';
@@ -11,20 +12,14 @@ import { Equipment } from 'src/app/shared/types';
   styleUrls: ['./equipment-page.component.sass']
 })
 export class EquipmentDetailsPageComponent implements OnInit {
+  equipment$: Observable<Equipment>;
 
-  equipment?: Equipment;
-
-  constructor(private equipmentDetailsService: EquipmentDetailsService, private route: ActivatedRoute) {
-    equipmentDetailsService.selected.subscribe({
-      next: (data) => { this.equipment = data; }
-    });
-
-  }
+  constructor(private equipmentDetailsService: EquipmentDetailsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
-      this.equipmentDetailsService.set(id);
+      this.equipment$ = this.equipmentDetailsService.get_or_fetch_and_set(id);
     });
   }
 

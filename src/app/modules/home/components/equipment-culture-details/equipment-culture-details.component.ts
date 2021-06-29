@@ -6,14 +6,10 @@ import { CultureDetails, Equipment } from 'src/app/shared/types';
   templateUrl: './equipment-culture-details.component.html',
   styleUrls: ['./equipment-culture-details.component.sass']
 })
-export class CultureDetailsComponent implements OnInit {
+export class CultureDetailsComponent {
 
   @Input() details!: CultureDetails;
 
   constructor() { }
-
-  ngOnInit(): void {
-    console.log(this.details);
-  }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { skip } from 'rxjs/operators';
-import { Equipment } from 'src/app/shared/types';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { map, skip } from 'rxjs/operators';
+import { Equipment, EquipmentPreview } from 'src/app/shared/types';
 import { EquipmentService } from './equipment.service';
 
 @Injectable({
@@ -9,36 +9,31 @@ import { EquipmentService } from './equipment.service';
 })
 export class EquipmentDetailsService {
 
-    private _selected: BehaviorSubject<Equipment | undefined>;
-    selected: Observable<Equipment>;
+    equipment?: Equipment;
 
-    constructor(private equipmentService: EquipmentService) {
-        this._selected = new BehaviorSubject<Equipment | undefined>(undefined);
-        this.selected = this._selected.pipe(skip(1));
+    equipment$?: Observable<Equipment>;
+
+    constructor(private equipmentService: EquipmentService) { }
+
+    set_equipment(equipment: EquipmentPreview) {
+        this.equipment$ = this.equipmentService.queryByIdExtraDetails(equipment._id)
+            .pipe(
+                map(response =>
+                    this.equipment = { ...equipment, ...response.data.queryById }
+                ));
     }
 
-    set(equipment: Equipment): void;
-    set(id: string): void;
-
-    async set(id_or_equipment: string | Equipment) {
-        let equipment: Equipment;
-        const value = this._selected.value;
-
-        if (typeof id_or_equipment === 'string') {
-            if (value && id_or_equipment == value._id) {
-                equipment = value;
-            } else {
-                equipment = ((await this.equipmentService.queryById(id_or_equipment).toPromise()).data)["queryById"];
-                this._selected.next(equipment);
-            }
-
-        } else {
-            equipment = id_or_equipment;
-            if (value && equipment._id != value._id) {
-                this._selected.next(equipment);
-            }
+    get_or_fetch_and_set(id: string) {
+        if (this.equipment && this.equipment._id == id) {
+            return of(this.equipment);
         }
 
+        if (this.equipment$) {
+            return this.equipment$;
+        }
+
+        return this.equipmentService.queryById(id).pipe(map(response => response.data.queryById));
     }
+
 
 }

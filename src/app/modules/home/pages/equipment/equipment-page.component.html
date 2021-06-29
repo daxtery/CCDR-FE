@@ -1,4 +1,4 @@
-<app-equipment-details *ngIf="equipment; else elseBlock" [equipment]="equipment">
-</app-equipment-details>
-
-<ng-template #elseBlock>Loading...<ng-template>
+<div *ngIf="equipment$ | async as equipment">
+    <app-equipment-details [equipment]="equipment">
+    </app-equipment-details>
+</div>

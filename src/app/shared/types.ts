@@ -1,16 +1,22 @@
 export type Area = "social" | "cultura" | "educacao" | "desporto" | "saude";
 
-export interface Equipment {
+export interface EquipmentPreview {
     _id: string;
     area: Area;
-    equipmentDetails: object;
-    extras: object;
     name: string;
     type: string;
 }
 
+export interface EquipmentExtraDetails {
+    equipmentDetails: object;
+    extras: object;
+}
+
+export interface Equipment extends EquipmentPreview, EquipmentExtraDetails {
+}
+
 export interface EquipmentAndScore {
-    equipment: Equipment;
+    equipment: EquipmentPreview;
     score: number;
 };
 

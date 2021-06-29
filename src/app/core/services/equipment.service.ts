@@ -5,8 +5,8 @@ import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 import { createEquipment } from '../graphql/mutations/equipment.mutation';
 import { queryEquipments } from '../graphql/queries/equipment.query';
 import { queryById } from '../graphql/queries/by_id.query';
-import { Observable, Subject } from 'rxjs';
-import { Equipment, EquipmentAndScore } from 'src/app/shared/types';
+import { queryByIdExtraDetails } from '../graphql/queries/by_id_extras_details.query';
+import { Equipment, EquipmentAndScore, EquipmentExtraDetails } from 'src/app/shared/types';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,15 @@ export class EquipmentService {
     return this.apollo.mutate<{ createEquipment: Equipment }>({
       mutation: createEquipment,
       variables: { equipment: equipment }
+    })
+  }
+
+  queryByIdExtraDetails(id: string) {
+
+    return this.apollo.query<{ queryById: EquipmentExtraDetails }>({
+      query: queryByIdExtraDetails,
+      variables: { id: id },
+      fetchPolicy: 'no-cache'
     })
   }
 
