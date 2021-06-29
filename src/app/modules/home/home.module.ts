@@ -18,6 +18,8 @@ import { MaterialModule } from '../../material.module';
 import { CultureFormComponent } from './components/culture-form/culture-form.component';
 import { SportFormComponent } from './components/sport-form/sport-form.component';
 import { EquipmentPreviewComponent } from './components/equipment-preview/equipment-preview.component';
+import { EquipmentDetailsComponent } from './components/equipment-details/equipment-details.component';
+import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.component';
 
 @NgModule({
   imports: [
@@ -37,6 +39,8 @@ import { EquipmentPreviewComponent } from './components/equipment-preview/equipm
     SocialFormComponent,
     CultureFormComponent,
     SportFormComponent,
+    EquipmentDetailsComponent,
+    EquipmentDetailsPageComponent,
     EquipmentPreviewComponent,
   ]
 })

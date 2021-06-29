@@ -1,5 +1,7 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatListOption, MatSelectionList } from '@angular/material/list';
+import { Router } from '@angular/router';
+import { EquipmentDetailsService } from 'src/app/core/services/equipment-details-service';
 import { FeedbackService } from 'src/app/core/services/feedback.service';
 import { FeedBack, QueryFeedBackDto } from 'src/app/shared/dtos/send-feedback.dto';
 
@@ -18,7 +20,12 @@ export class SearchEquipmentComponent implements OnInit {
   previousSearch = ''
   $queryResults = []
 
-  constructor(private equipmentService: EquipmentService, private feedbackService: FeedbackService) { }
+  constructor(
+    private equipmentService: EquipmentService,
+    private feedbackService: FeedbackService,
+    private equipmentDetailsService: EquipmentDetailsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -35,17 +42,17 @@ export class SearchEquipmentComponent implements OnInit {
     if (this.searchValue != '') {
 
       this.equipmentService.queryEquipments(this.searchValue).subscribe(({ data }) => {
-        
+
         this.$queryResults = data['queryEquipments'].map((query) => {
 
           return { result: query, clicked: false }
         })
 
-        this.searchResults.options.forEach( (item: MatListOption) => item.selected = false);
+        this.searchResults.options.forEach((item: MatListOption) => item.selected = false);
 
         this.previousSearch = this.searchValue
         this.searchValue = ''
-        
+
 
       }, (error) => {
         console.log('there was an error sending the query', error);
@@ -58,8 +65,10 @@ export class SearchEquipmentComponent implements OnInit {
   markAsClicked(id) {
 
     let clickedItem = this.$queryResults.find((query) => { return query.result.equipment._id == id });
-
     clickedItem.clicked = true;
+
+    this.equipmentDetailsService.set(clickedItem.result.equipment);
+    this.router.navigateByUrl(`home/equipment/${id}`);
   }
 
   sendQueriesFeedback() {

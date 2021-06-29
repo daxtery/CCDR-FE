@@ -12,10 +12,9 @@
     </mat-grid-tile>
     <mat-grid-tile>
         <mat-selection-list #searchResults>
-            <mat-list-option *ngFor="let equipment of $queryResults"
+            <app-equipment-preview *ngFor="let equipment of $queryResults" [equipment]="equipment.result.equipment"
                 (click)="markAsClicked(equipment.result.equipment._id)">
-                <app-equipment-preview [equipment]="equipment.result.equipment"></app-equipment-preview>
-            </mat-list-option>
+            </app-equipment-preview>
         </mat-selection-list>
     </mat-grid-tile>
 </mat-grid-list>
