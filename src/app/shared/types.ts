@@ -1,7 +1,9 @@
-export interface Equipment<T = object> {
+export type Area = "social" | "cultura" | "educacao" | "desporto" | "saude";
+
+export interface Equipment {
     _id: string;
-    area: string;
-    details: T;
+    area: Area;
+    equipmentDetails: object;
     extras: object;
     name: string;
     type: string;
