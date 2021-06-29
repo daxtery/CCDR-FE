@@ -11,10 +11,12 @@
 
     </mat-grid-tile>
     <mat-grid-tile>
-        <mat-selection-list #searchResults>
-            <app-equipment-preview *ngFor="let equipment of $queryResults" [equipment]="equipment.result.equipment"
-                (click)="markAsClicked(equipment.result.equipment._id)">
-            </app-equipment-preview>
-        </mat-selection-list>
+        <mat-action-list>
+            <a mat-list-item *ngFor="let equipment of $queryResults" (click)="markAsClicked(equipment)"
+                routerLinkActive="active" [routerLink]="['/home/equipment', equipment._id]">
+                <app-equipment-preview [equipment]="equipment">
+                </app-equipment-preview>
+            </a>
+        </mat-action-list>
     </mat-grid-tile>
 </mat-grid-list>
