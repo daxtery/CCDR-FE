@@ -20,6 +20,7 @@ import { SportFormComponent } from './components/sport-form/sport-form.component
 import { EquipmentPreviewComponent } from './components/equipment-preview/equipment-preview.component';
 import { EquipmentDetailsComponent } from './components/equipment-details/equipment-details.component';
 import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.component';
+import { CultureDetailsComponent } from './components/equipment-culture-details/equipment-culture-details.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.
     EquipmentDetailsComponent,
     EquipmentDetailsPageComponent,
     EquipmentPreviewComponent,
+    CultureDetailsComponent,
   ]
 })
 export class HomePageModule { }

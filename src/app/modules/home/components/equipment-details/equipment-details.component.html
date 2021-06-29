@@ -1,4 +1,18 @@
-<h2>{{equipment.name}}</h2>
+<h1>{{equipment.name}}</h1>
 
 <p>Area: {{equipment.area}}</p>
 <p>Tipo: {{equipment.type}}</p>
+
+
+<h2>Detalhes</h2>
+
+<container-element [ngSwitch]="equipment.area">
+    <app-culture-details [details]="equipment.equipmentDetails" *ngSwitchCase="'cultura'"></app-culture-details>
+    <p *ngSwitchDefault>...</p>
+</container-element>
+
+<h2>Outros</h2>
+
+<p *ngFor="let item of equipment.extras | keyvalue">
+    {{item.key}}: {{item.value}}
+</p>
