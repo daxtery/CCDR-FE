@@ -9,6 +9,8 @@ queryById($id: String!) {
       name
       area
       type
+      extras
+      equipmentDetails
     }
   }
 `
