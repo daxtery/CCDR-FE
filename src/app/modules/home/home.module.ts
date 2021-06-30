@@ -12,13 +12,14 @@ import { AddEquipmentComponent } from './pages/add-equipment/add-equipment.compo
 import { SearchEquipmentComponent } from './pages/search-equipment/search-equipment.component';
 
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { SocialFormComponent } from './components/social-form/social-form.component';
+import { SocialFormComponent } from './components/equipment-forms/social-form/social-form.component';
 
 import { MaterialModule } from '../../material.module';
-import { CultureFormComponent } from './components/culture-form/culture-form.component';
-import { SportFormComponent } from './components/sport-form/sport-form.component';
-import { HealthFormComponent } from './components/health-form/health-form.component';
-import { EducationFormComponent } from './components/education-form/education-form.component';
+import { CultureFormComponent } from './components/equipment-forms/culture-form/culture-form.component';
+import { SportFormComponent } from './components/equipment-forms//sport-form/sport-form.component';
+import { HealthFormComponent } from './components/equipment-forms//health-form/health-form.component';
+import { EducationFormComponent } from './components/equipment-forms/education-form/education-form.component';
+import { AddInfraestructureComponent } from './pages/add-infraestructure/add-infraestructure.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { EducationFormComponent } from './components/education-form/education-fo
     CultureFormComponent,
     SportFormComponent,
     HealthFormComponent,
-    EducationFormComponent
+    EducationFormComponent,
+    AddInfraestructureComponent
   ]
 })
 export class HomePageModule { }
