@@ -25,10 +25,10 @@ export interface SocialDetails {
 };
 
 export interface CultureDetails {
-    acesso_gratuito: string;
-    num_visitantes_medio: number;
-    mobilidade_reduzida: boolean;
-    tutela: string;
+    acesso_gratuito?: string;
+    num_visitantes_medio?: number;
+    mobilidade_reduzida?: boolean;
+    tutela?: string;
 };
 
 export interface SportDetails {
