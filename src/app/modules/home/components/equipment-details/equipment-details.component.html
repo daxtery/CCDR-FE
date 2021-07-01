@@ -8,6 +8,7 @@
 
 <container-element [ngSwitch]="equipment.area">
     <app-culture-details [details]="equipment.equipmentDetails" *ngSwitchCase="'cultura'"></app-culture-details>
+    <app-sport-details [details]="equipment.equipmentDetails" *ngSwitchCase="'desporto'"></app-sport-details>
     <p *ngSwitchDefault>...</p>
 </container-element>
 
