@@ -7,9 +7,23 @@ export interface EquipmentPreview {
     type: string;
 }
 
+
+// TODO: what is HORARIO
+export interface Horario {
+};
+
+// TODO: what is Localizacao
+export interface Localizacao {
+};
+
 export interface EquipmentExtraDetails {
     equipmentDetails: object;
     extras: object;
+
+    // TODO: Add these to the query
+    horario?: Horario,
+    numero_de_equipamentos?: number;
+    localizacao?: Localizacao;
 }
 
 export interface Equipment extends EquipmentPreview, EquipmentExtraDetails {
@@ -21,7 +35,10 @@ export interface EquipmentAndScore {
 };
 
 export interface SocialDetails {
-    fins_lucrativos: boolean;
+    fins_lucrativos?: boolean;
+    capacidade?: number
+    numero_de_utentes?: number
+    organizacao?: string
 };
 
 export interface CultureDetails {
@@ -31,24 +48,40 @@ export interface CultureDetails {
     tutela?: string;
 };
 
+
 export interface SportDetails {
-    iluminado: boolean;
-    tipo_piso: string;
-    mobilidade_reduzida_pratica: boolean;
-    mobilidade_reduzida_assistencia: boolean;
+    iluminado?: boolean;
+    tipo_piso?: string;
+    mobilidade_reduzida_pratica?: boolean;
+    mobilidade_reduzida_assistencia?: boolean;
+    capacidade?: number;
+    instalacoes_apoio?: string[];
 };
 
-export interface HospitalHealthDetails {
-    agrupamento_saude: string;
-    centro_sospitalar: string;
-    valencias: string[];
-    especialidades: string[];
+export interface HealthDetails {
+    numero_de_utentes?: number;
+};
+
+export interface HospitalHealthDetails extends HealthDetails {
+    numero_de_equipamentos_por_especialidade?: Map<string, number>;
+    unidades?: string[];
+    agrupamento_saude?: string;
+    centro_hospitalar?: string;
+    valencias?: string[];
+    especialidades?: string[];
+};
+
+export interface GeneralHealthDetails extends HealthDetails {
+    capacidade?: number;
+    numero_centros_saude?: number;
 };
 
 export interface SchoolDetails {
     grau_ensino: string;
+    capacidade: number;
+    numero_de_alunos: number;
 };
 
 export interface EducationDetails {
-    escolas: SchoolDetails[];
+    escolas?: SchoolDetails[];
 };
