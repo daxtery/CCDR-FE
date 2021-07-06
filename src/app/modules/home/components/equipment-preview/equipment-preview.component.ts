@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import type { Equipment } from "../../../../shared/types";
+import type { Equipment, EquipmentPreview } from "../../../../shared/types";
 
 @Component({
   selector: 'app-equipment-preview',
@@ -8,7 +8,7 @@ import type { Equipment } from "../../../../shared/types";
 })
 export class EquipmentPreviewComponent {
 
-  @Input() equipment!: Equipment;
+  @Input() equipment!: EquipmentPreview;
 
   constructor() { }
 
