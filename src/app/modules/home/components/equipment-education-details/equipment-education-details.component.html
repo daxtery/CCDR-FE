@@ -1,0 +1,5 @@
+<ul *ngIf="details.escolas !== null">
+    <li *ngFor="let item of details.escolas">
+        <p>{{item.grau_ensino}} Ocupação: {{item.num_alunos}}/{{item.capacidade}} </p>
+    </li>
+</ul>
