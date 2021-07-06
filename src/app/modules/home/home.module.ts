@@ -21,6 +21,15 @@ import { HealthFormComponent } from './components/equipment-forms//health-form/h
 import { EducationFormComponent } from './components/equipment-forms/education-form/education-form.component';
 import { AddInfraestructureComponent } from './pages/add-infraestructure/add-infraestructure.component';
 
+import { EquipmentPreviewComponent } from './components/equipment-preview/equipment-preview.component';
+import { EquipmentDetailsComponent } from './components/equipment-details/equipment-details.component';
+import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.component';
+import { CultureDetailsComponent } from './components/equipment-culture-details/equipment-culture-details.component';
+import { SportDetailsComponent } from './components/equipment-sport-details/equipment-sport-details.component';
+import { EducationDetailsComponent } from './components/equipment-education-details/equipment-education-details.component';
+import { SocialDetailsComponent } from './components/equipment-social-details/equipment-social-details.component';
+import { HealthDetailsComponent } from './components/equipment-health-details/equipment-health-details.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -41,7 +50,15 @@ import { AddInfraestructureComponent } from './pages/add-infraestructure/add-inf
     SportFormComponent,
     HealthFormComponent,
     EducationFormComponent,
-    AddInfraestructureComponent
+    AddInfraestructureComponent,
+    EquipmentDetailsComponent,
+    EquipmentDetailsPageComponent,
+    EquipmentPreviewComponent,
+    CultureDetailsComponent,
+    SportDetailsComponent,
+    EducationDetailsComponent,
+    SocialDetailsComponent,
+    HealthDetailsComponent,
   ]
 })
 export class HomePageModule { }

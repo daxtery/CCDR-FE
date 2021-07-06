@@ -23,7 +23,7 @@ export class SportFormComponent implements OnInit {
       capacidade: [''],
       iluminado: [''],
       mobilidade_reduzida_pratica: [''],
-      mobilidade_reduzida_assitencia: [''],
+      mobilidade_reduzida_assistencia: [''],
       instalacao_apoio: ['']
     })
 

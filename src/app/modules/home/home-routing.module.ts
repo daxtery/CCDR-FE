@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AddEquipmentComponent } from './pages/add-equipment/add-equipment.component';
 import { SearchEquipmentComponent } from './pages/search-equipment/search-equipment.component';
+import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'search',
         component: SearchEquipmentComponent
+      },
+      {
+        path: 'equipment/:id',
+        component: EquipmentDetailsPageComponent
       }
     ]
   }
@@ -25,4 +30,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomePageRoutingModule {}
+export class HomePageRoutingModule { }

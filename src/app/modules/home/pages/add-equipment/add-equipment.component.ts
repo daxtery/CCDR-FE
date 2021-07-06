@@ -3,11 +3,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
-import { CultureFormComponent } from '../../components/culture-form/culture-form.component';
+import { CultureFormComponent } from '../../components/equipment-forms/culture-form/culture-form.component';
 import { EducationFormComponent } from '../../components/equipment-forms/education-form/education-form.component';
-import { HealthFormComponent } from '../../components/health-form/health-form.component';
-import { SocialFormComponent } from '../../components/social-form/social-form.component';
-import { SportFormComponent } from '../../components/sport-form/sport-form.component';
+import { HealthFormComponent } from '../../components/equipment-forms//health-form/health-form.component';
+import { SocialFormComponent } from '../../components/equipment-forms/social-form/social-form.component';
+import { SportFormComponent } from '../../components/equipment-forms/sport-form/sport-form.component';
 
 @Component({
   selector: 'app-add-equipment',

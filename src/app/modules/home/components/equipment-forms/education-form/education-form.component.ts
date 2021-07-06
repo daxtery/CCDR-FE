@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SchoolDetails } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-education-form',
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class EducationFormComponent implements OnInit {
 
   educationFormGroup: FormGroup;
-  schools: Array<Object> = [];
+  schools: Array<SchoolDetails> = [];
 
   constructor(private formbuilder: FormBuilder) { }
 
