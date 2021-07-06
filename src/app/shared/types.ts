@@ -37,12 +37,12 @@ export interface EquipmentAndScore {
 export interface SocialDetails {
     fins_lucrativos?: boolean;
     capacidade?: number
-    numero_de_utentes?: number
+    num_utentes?: number
     organizacao?: string
 };
 
 export interface CultureDetails {
-    acesso_gratuito?: string;
+    acesso_gratuito?: boolean;
     num_visitantes_medio?: number;
     mobilidade_reduzida?: boolean;
     tutela?: string;
@@ -58,28 +58,30 @@ export interface SportDetails {
     instalacoes_apoio?: string[];
 };
 
-export interface HealthDetails {
-    numero_de_utentes?: number;
+export interface HealthDetails<T extends HospitalHealthDetails | GeneralHealthDetails = unknown> {
+    num_utentes?: number;
+    tipo_saude?: "saude_geral" | "saude_hospitalar";
+    healh_details?: T;
 };
 
-export interface HospitalHealthDetails extends HealthDetails {
-    numero_de_equipamentos_por_especialidade?: Map<string, number>;
-    unidades?: string[];
+export interface HospitalHealthDetails {
+    num_equipamentos_por_especialidade?: [string, number][];
+    tipo_unidades?: string[];
     agrupamento_saude?: string;
     centro_hospitalar?: string;
     valencias?: string[];
     especialidades?: string[];
 };
 
-export interface GeneralHealthDetails extends HealthDetails {
+export interface GeneralHealthDetails {
     capacidade?: number;
-    numero_centros_saude?: number;
+    num_centros_saude?: number;
 };
 
 export interface SchoolDetails {
     grau_ensino: string;
     capacidade: number;
-    numero_de_alunos: number;
+    num_alunos: number;
 };
 
 export interface EducationDetails {
