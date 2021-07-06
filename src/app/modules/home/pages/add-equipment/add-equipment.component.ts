@@ -22,7 +22,6 @@ export class AddEquipmentComponent implements OnInit {
   @ViewChild(HealthFormComponent, { static: true }) healthForm: HealthFormComponent;
   @ViewChild(EducationFormComponent, { static: true }) educationForm: EducationFormComponent;
 
-
   equipmentFormGroup: FormGroup;
 
   forms;
@@ -59,10 +58,11 @@ export class AddEquipmentComponent implements OnInit {
 
     const area = this.equipmentFormGroup.value['area']
     const type = this.equipmentFormGroup.value['type']
+    const group: String = 'equipment';
 
     // TODO: add extras
 
-    let equipment: CreateEquipmentDto = { area, type, name, equipmentDetails: details, extras: {} }
+    let equipment: CreateEquipmentDto = { area, group, type, name, equipmentDetails: details, extras: {} }
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

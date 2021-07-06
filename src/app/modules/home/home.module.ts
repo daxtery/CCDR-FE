@@ -29,6 +29,7 @@ import { SportDetailsComponent } from './components/equipment-sport-details/equi
 import { EducationDetailsComponent } from './components/equipment-education-details/equipment-education-details.component';
 import { SocialDetailsComponent } from './components/equipment-social-details/equipment-social-details.component';
 import { HealthDetailsComponent } from './components/equipment-health-details/equipment-health-details.component';
+import { EnergyFormComponent } from './components/infrastructure-form/energy-form/energy-form.component';
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import { HealthDetailsComponent } from './components/equipment-health-details/eq
     EducationDetailsComponent,
     SocialDetailsComponent,
     HealthDetailsComponent,
+    EnergyFormComponent,
   ]
 })
 export class HomePageModule { }

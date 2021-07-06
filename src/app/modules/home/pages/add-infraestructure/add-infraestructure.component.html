@@ -1,1 +1,36 @@
-<p>add-infraestructure works!</p>
+<mat-grid-list cols="1" rowHeight="1:1">
+    <mat-grid-tile>
+        <mat-card>
+            <form [formGroup]="infrastructureFormGroup" (ngSubmit)="formSubmit()">
+                <p>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Denominação</mat-label>
+                        <input matInput placeholder="Denominação do equipamento" formControlName="name">
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Área da Infraestrutura</mat-label>
+                        <mat-select formControlName="area">
+                            <mat-option value="energia">Energia</mat-option>
+                            <mat-option value="comunicacao">Comunicação</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Descrição</mat-label>
+                        <input matInput placeholder="Descrição da infraestrutura a inserir" formControlName="type">
+                    </mat-form-field>
+                </p>
+
+                <app-energy-form [hidden]="currentArea() != 'energia'"></app-energy-form>
+                <!-- <app-culture-form [hidden]="currentArea() != 'comunicacao'"></app-culture-form> -->
+                
+
+                <button mat-raised-button type="submit" layout-align="center" color="warn">Adicionar Infraestrutura</button>
+            </form>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

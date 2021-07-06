@@ -4,6 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AddEquipmentComponent } from './pages/add-equipment/add-equipment.component';
 import { SearchEquipmentComponent } from './pages/search-equipment/search-equipment.component';
 import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.component';
+import { AddInfraestructureComponent } from './pages/add-infraestructure/add-infraestructure.component';
 
 const routes: Routes = [
   {
@@ -11,8 +12,12 @@ const routes: Routes = [
     component: HomePageComponent,
     children: [
       {
-        path: 'add',
+        path: 'add_equipment',
         component: AddEquipmentComponent,
+      },
+      {
+        path: 'add_infrastructure',
+        component: AddInfraestructureComponent,
       },
       {
         path: 'search',

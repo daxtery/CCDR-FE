@@ -1,0 +1,197 @@
+<form [formGroup]="energyFormGroup">
+    <p>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Número de Operadores</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="num_operadores" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Tipo de Energia</mat-label>
+            <mat-select formControlName="tipo_energia">
+                <mat-option [value]="'gas'">Gás</mat-option>
+                <mat-option [value]="'luz'">Electricidade</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <h4>Número de Lojas por Operador</h4>
+    <p formGroupName="loja_p_operador">
+            
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Operador</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="operador" type="text">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Quantidade</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+        </mat-form-field>
+
+        <button mat-raised-button (click)="addShopByOperator()" layout-align="center" color="warn">Adicionar Equipamento</button>
+    </p>
+    <p *ngFor="let shopByOperator of getShopsByOperator()">
+        {{ shopByOperator[0]}} {{ shopByOperator[1] }}
+    </p>
+
+    <h4>Número de Agentes por Operador</h4>
+    <p formGroupName="agentes_p_operador">
+            
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Operador</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="operador" type="text">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Quantidade</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+        </mat-form-field>
+
+        <button mat-raised-button (click)="addAgentByOperator()" layout-align="center" color="warn">Adicionar Equipamento</button>
+    </p>
+    <p *ngFor="let agentByOperator of getAgentsByOperator()">
+        {{ agentByOperator[0]}} {{ agentByOperator[1] }}
+    </p>
+
+    <form [hidden]="currentEnergy() != 'gas'" [formGroup]="gasForm">
+        <p>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Consumo por habitante</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="consumo_p_habitante" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>População com gás natural</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="populacao_c_gas_naturaç" type="number">
+            </mat-form-field>
+        </p>
+        <h4>Número de Consumo de Gás</h4>
+        <p formGroupName="num_consumo_gas">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addNumberOfGasConsumption()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let gasConsumption of getNumberOfGasConsumption()">
+            {{ gasConsumption[0].latitude }} {{ gasConsumption[0].longitude }} {{ gasConsumption[1] }}
+        </p>
+        <h4>Consumo de Gás</h4>
+        <p formGroupName="consumo_gas">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addGasConsumption()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let gasConsumption of getGasConsumption()">
+            {{ gasConsumption[0].latitude }} {{ gasConsumption[0].longitude }} {{ gasConsumption[1] }}
+        </p>
+
+        <h4>Pontos de Acesso</h4>
+        <p formGroupName="pontos_acesso">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addAccessPoint()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let accessPoint of getAccessPoint()">
+            {{ accessPoint[0].latitude }} {{ accessPoint[0].longitude }} {{ accessPoint[1] }}
+        </p>
+    </form>
+
+    <form [hidden]="currentEnergy() != 'luz'" [formGroup]="electricityForm">
+        <h4>Número Consumo Eléctrico por Atividade</h4>
+        <p formGroupName="num_consumo_elec_p_atividade">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Tipo de Consumo</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tipo_consumo" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Número de Consumidores</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="num_consumidores" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addConsumptionByActivity()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let consumption of getConsumptionByActivity()">
+            {{ consumption[0].latitude }} {{ consumption[0].longitude }} {{ consumption[1].activity }} {{ consumption[1].numberOfConsumers }}
+        </p>
+
+        <h4>Consumo Eléctrico por Atividade</h4>
+        <p formGroupName="consumo_elec_p_atividade">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Tipo de Consumo</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tipo_consumo" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Consumo</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="consumo" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addElectricConsumption()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let consumption of getElectricConsumption()">
+            {{ consumption[0].latitude }} {{ consumption[0].longitude }} {{ consumption[1].activity }} {{ consumption[1].consumption }}
+        </p>
+    </form>
+</form>
