@@ -1,0 +1,22 @@
+<h1>{{equipment.name}}</h1>
+
+<p>Area: {{equipment.area}}</p>
+<p>Tipo: {{equipment.type}}</p>
+
+
+<h2>Detalhes</h2>
+
+<container-element [ngSwitch]="equipment.area">
+    <app-culture-details [details]="equipment.equipmentDetails" *ngSwitchCase="'cultura'"></app-culture-details>
+    <app-sport-details [details]="equipment.equipmentDetails" *ngSwitchCase="'desporto'"></app-sport-details>
+    <app-social-details [details]="equipment.equipmentDetails" *ngSwitchCase="'social'"></app-social-details>
+    <app-health-details [details]="equipment.equipmentDetails" *ngSwitchCase="'saude'"></app-health-details>
+    <app-education-details [details]="equipment.equipmentDetails" *ngSwitchCase="'educacao'"></app-education-details>
+    <p *ngSwitchDefault>...</p>
+</container-element>
+
+<h2>Outros</h2>
+
+<p *ngFor="let item of equipment.extras | keyvalue">
+    {{item.key}}: {{item.value}}
+</p>

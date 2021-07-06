@@ -1,9 +1,12 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { MatListOption, MatSelectionList } from '@angular/material/list';
+import { Router } from '@angular/router';
+import { EquipmentDetailsService } from 'src/app/core/services/equipment-details-service';
 import { FeedbackService } from 'src/app/core/services/feedback.service';
 import { FeedBack, QueryFeedBackDto } from 'src/app/shared/dtos/send-feedback.dto';
+import { Equipment, EquipmentAndScore, EquipmentPreview } from 'src/app/shared/types';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
+
 
 @Component({
   selector: 'app-search-equipment',
@@ -12,13 +15,19 @@ import { EquipmentService } from '../../../../core/services/equipment.service';
 })
 export class SearchEquipmentComponent implements OnInit {
 
-  @ViewChild('searchResults') searchResults: MatSelectionList;
-
   searchValue = ''
   previousSearch = ''
-  $queryResults = []
 
-  constructor(private equipmentService: EquipmentService, private feedbackService: FeedbackService) { }
+  clickedMap = new Map<string, boolean>();
+  scoresMap = new Map<string, number>();
+
+  $queryResults: EquipmentPreview[] = [];
+
+  constructor(
+    private equipmentService: EquipmentService,
+    private feedbackService: FeedbackService,
+    private equipmentDetailsService: EquipmentDetailsService,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -34,18 +43,20 @@ export class SearchEquipmentComponent implements OnInit {
 
     if (this.searchValue != '') {
 
-      this.equipmentService.queryEquipments(this.searchValue).subscribe(({ data }) => {
-        
-        this.$queryResults = data['queryEquipments'].map((query) => {
+      this.scoresMap.clear();
+      this.clickedMap.clear();
+      this.$queryResults = []
 
-          return { result: query, clicked: false }
+      this.equipmentService.queryEquipments(this.searchValue).subscribe(({ data }) => {
+
+        data['queryEquipments'].forEach((value) => {
+          this.scoresMap.set(value.equipment._id, value.score);
+          this.clickedMap.set(value.equipment._id, false);
+          this.$queryResults.push(value.equipment);
         })
 
-        this.searchResults.options.forEach( (item: MatListOption) => item.selected = false);
-
-        this.previousSearch = this.searchValue
-        this.searchValue = ''
-        
+        this.previousSearch = this.searchValue;
+        this.searchValue = '';
 
       }, (error) => {
         console.log('there was an error sending the query', error);
@@ -55,11 +66,11 @@ export class SearchEquipmentComponent implements OnInit {
 
   }
 
-  markAsClicked(id) {
+  markAsClicked(equipment: EquipmentPreview) {
+    this.equipmentDetailsService.set_equipment(equipment);
 
-    let clickedItem = this.$queryResults.find((query) => { return query.result.equipment._id == id });
-
-    clickedItem.clicked = true;
+    const { _id } = equipment;
+    this.clickedMap.set(_id, true);
   }
 
   sendQueriesFeedback() {
@@ -68,9 +79,16 @@ export class SearchEquipmentComponent implements OnInit {
 
       const query = this.previousSearch;
 
-      const feedbacks: Array<FeedBack> = this.$queryResults.map((query) => { return <FeedBack>{ _id: query.result.equipment._id, clicked: query.clicked, score: query.result.score } })
+      const feedbacks = this.$queryResults.
+        map(({ _id }) => {
+          return <FeedBack>{
+            _id: _id,
+            clicked: this.clickedMap.get(_id),
+            score: this.scoresMap.get(_id)
+          }
+        })
 
-      const queryFeedBack: QueryFeedBackDto = { query: query, feedBacks: feedbacks }
+      const queryFeedBack = { query: query, feedBacks: feedbacks }
 
       this.feedbackService.sendFeedBack(queryFeedBack).subscribe(({ data }) => {
 

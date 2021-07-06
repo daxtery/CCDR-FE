@@ -19,6 +19,14 @@ import { CultureFormComponent } from './components/culture-form/culture-form.com
 import { SportFormComponent } from './components/sport-form/sport-form.component';
 import { HealthFormComponent } from './components/health-form/health-form.component';
 import { EducationFormComponent } from './components/education-form/education-form.component';
+import { EquipmentPreviewComponent } from './components/equipment-preview/equipment-preview.component';
+import { EquipmentDetailsComponent } from './components/equipment-details/equipment-details.component';
+import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.component';
+import { CultureDetailsComponent } from './components/equipment-culture-details/equipment-culture-details.component';
+import { SportDetailsComponent } from './components/equipment-sport-details/equipment-sport-details.component';
+import { EducationDetailsComponent } from './components/equipment-education-details/equipment-education-details.component';
+import { SocialDetailsComponent } from './components/equipment-social-details/equipment-social-details.component';
+import { HealthDetailsComponent } from './components/equipment-health-details/equipment-health-details.component';
 
 @NgModule({
   imports: [
@@ -39,7 +47,15 @@ import { EducationFormComponent } from './components/education-form/education-fo
     CultureFormComponent,
     SportFormComponent,
     HealthFormComponent,
-    EducationFormComponent
+    EducationFormComponent,
+    EquipmentDetailsComponent,
+    EquipmentDetailsPageComponent,
+    EquipmentPreviewComponent,
+    CultureDetailsComponent,
+    SportDetailsComponent,
+    EducationDetailsComponent,
+    SocialDetailsComponent,
+    HealthDetailsComponent,
   ]
 })
 export class HomePageModule { }
