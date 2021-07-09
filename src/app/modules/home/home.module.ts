@@ -24,11 +24,11 @@ import { AddInfraestructureComponent } from './pages/add-infraestructure/add-inf
 import { EquipmentPreviewComponent } from './components/equipment-preview/equipment-preview.component';
 import { EquipmentDetailsComponent } from './components/equipment-details/equipment-details.component';
 import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.component';
-import { CultureDetailsComponent } from './components/equipment-culture-details/equipment-culture-details.component';
-import { SportDetailsComponent } from './components/equipment-sport-details/equipment-sport-details.component';
-import { EducationDetailsComponent } from './components/equipment-education-details/equipment-education-details.component';
-import { SocialDetailsComponent } from './components/equipment-social-details/equipment-social-details.component';
-import { HealthDetailsComponent } from './components/equipment-health-details/equipment-health-details.component';
+import { CultureDetailsComponent } from './components/equipment-details/equipment-culture-details/equipment-culture-details.component';
+import { SportDetailsComponent } from './components/equipment-details//equipment-sport-details/equipment-sport-details.component';
+import { EducationDetailsComponent } from './components/equipment-details/equipment-education-details/equipment-education-details.component';
+import { SocialDetailsComponent } from './components/equipment-details//equipment-social-details/equipment-social-details.component';
+import { HealthDetailsComponent } from './components/equipment-details//equipment-health-details/equipment-health-details.component';
 import { EnergyFormComponent } from './components/infrastructure-form/energy-form/energy-form.component';
 
 @NgModule({
