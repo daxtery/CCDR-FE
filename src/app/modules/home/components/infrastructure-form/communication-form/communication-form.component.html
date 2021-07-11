@@ -203,4 +203,81 @@
         </p>
 
     </form>
+
+    <form [hidden]="currentCommunication() != 'internet'" [formGroup]="internetForm">
+        <h4>Número de Clientes com Banda Larga</h4>
+        <p formGroupName="num_clientes_banda_larga">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Operador</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="operador" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addFreeBandClients()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let freeBandClients of getFreeBandClients()">
+            {{ freeBandClients[0] }} {{ freeBandClients[1] }}
+        </p>
+        
+        <h4>Número de Acessos por 100 mil</h4>
+        <p formGroupName="num_acessos_banda_larga_100">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Tipo</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addFreeBandAccessesBy100()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let freeBandAccess of getFreeBandAccessesBy100()">
+            {{ freeBandAccess[0] }} {{ freeBandAccess[1] }}
+        </p>
+       
+
+        <h4>Número de Acessos Banda Larga</h4>
+        <p formGroupName="num_acessos_banda_larga">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Tipo</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addFreeBandAccesses()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let numberOfClients of getFreeBandAccesses()">
+            {{ numberOfClients[0].latitude }} {{ numberOfClients[0].longitude }} {{ numberOfClients[1].type }}
+            {{ numberOfClients[1].numAccess }}
+        </p>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Número de População com 4G</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="populacao_4g" type="number">
+        </mat-form-field>
+    </form>
+    
 </form>

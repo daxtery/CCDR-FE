@@ -31,6 +31,9 @@ export class CommunicationFormComponent implements OnInit {
   number_public_posts: Map<Location, number> = new Map<Location, number>();
   number_clients: Map<Location, ClientNumber> = new Map<Location, ClientNumber>();
 
+  number_clients_free_band: Map<string, number> = new Map<string, number>();
+  number_access_free_band_100: Map<string, number> = new Map<string, number>();
+  number_access_free_band: Map<Location, Access> = new Map<Location, Access>();
 
   constructor(private formbuilder: FormBuilder) { }
 
@@ -53,13 +56,13 @@ export class CommunicationFormComponent implements OnInit {
         operador: [''],
         cobertura: ['']
       }),
-      telefone: this.createTelephoneGroup()
+      telefone: this.createTelephoneGroup(),
+      internet: this.createInternetGroup()
 
     })
 
     return this.energyFormGroup
   }
-
 
   createTelephoneGroup() {
 
@@ -96,13 +99,66 @@ export class CommunicationFormComponent implements OnInit {
     })
   }
 
+  createInternetGroup() {
+
+    this.internetForm = this.formbuilder.group({
+
+      num_clientes_banda_larga: this.formbuilder.group({
+
+        operador: [''],
+        quantidade: [''],
+      }),
+
+      num_acessos_banda_larga_100: this.formbuilder.group({
+
+        tipo: [''],
+        quantidade: [''],
+      }),
+
+      num_acessos_banda_larga: this.formbuilder.group({
+
+        lat: [''],
+        long: [''],
+        tipo: [''],
+        quantidade: ['']
+      }),
+
+      populacao_4g: ['']
+    })
+  }
+
+  addFreeBandClients() {
+
+    const { operador, quantidade } = this.internetForm.get('num_clientes_banda_larga').value;
+
+    this.number_clients_free_band.set(operador, quantidade);
+  }
+
+  addFreeBandAccessesBy100() {
+
+    const { tipo, quantidade } = this.internetForm.get('num_acessos_banda_larga_100').value;
+
+    this.number_access_free_band_100.set(tipo, quantidade);
+  }
+
+  addFreeBandAccesses() {
+
+    const { lat, long, tipo, quantidade } = this.internetForm.get('num_acessos_banda_larga').value;
+
+    const location: Location = {latitude: lat, longitude: long};
+
+    const access: Access = {type: tipo, numAccess: quantidade};
+
+    this.number_access_free_band.set(location, access);
+  }
+
   addShopByOperator() {
 
-    const { operador, quantidade } = this.energyFormGroup.get('loja_p_operador').value;
+    const { operador, quantidade } = this.communicationFormGroup.get('loja_p_operador').value;
 
     this.num_lojas_por_operador.set(operador, quantidade)
 
-    this.energyFormGroup.get('loja_p_operador').reset()
+    this.communicationFormGroup.get('loja_p_operador').reset()
   }
 
   addOperatorCoverageByLocation() {
@@ -180,6 +236,21 @@ export class CommunicationFormComponent implements OnInit {
     this.number_clients.set(location, numClients);
   }
 
+  getFreeBandClients() {
+
+    return Array.from(this.number_clients_free_band);
+  }
+
+  getFreeBandAccesses() {
+
+    return Array.from(this.number_access_free_band);
+  }
+
+  getFreeBandAccessesBy100() {
+
+    return Array.from(this.number_access_free_band_100);
+  }
+
   getNumberOfPost() {
 
     return Array.from(this.number_posts);
@@ -232,12 +303,51 @@ export class CommunicationFormComponent implements OnInit {
 
   getTelephoneFormData() {
 
+    let formData = this.telephoneForm.value;
 
+    const num_postos = this.getNumberOfPost();
+    const num_acessos = this.getNumberOfAccesses();
+    const num_acessos_p_100 = this.getFreeBandAccessesBy100();
+    const num_postos_publicos = this.getNumberOfPublicPosts();
+    const num_clientes = this.getNumberOfClients();
+
+    formData['num_postos'] = num_postos;
+    formData['num_acessos'] = num_acessos;
+    formData['num_acessos_p_100'] = num_acessos_p_100;
+    formData['num_postos_publicos'] = num_postos_publicos;
+    formData['num_clientes'] = num_clientes;
+
+    this.number_posts.clear();
+    this.number_access.clear();
+    this.number_access_100.clear();
+    this.number_public_posts.clear();
+    this.number_clients.clear();
+
+    return formData;
+  }
+
+  getInternetFormData() {
+
+    let formData = this.internetForm.value;
+
+    const num_clientes_banda_larga = this.getFreeBandClients();
+    const num_acessos_banda_larga_100 = this.getFreeBandAccessesBy100();
+    const num_acessos_banda_larga = this.getFreeBandAccesses();
+
+    formData['num_clientes_banda_larga'] = num_clientes_banda_larga;
+    formData['num_acessos_banda_larga_100'] = num_acessos_banda_larga_100;
+    formData['num_acessos_banda_larga'] = num_acessos_banda_larga;
+
+    this.number_clients_free_band.clear();
+    this.number_access_free_band_100.clear();
+    this.number_access_free_band.clear();
+
+    return formData
   }
 
   getFormData() {
 
-    let formData = this.energyFormGroup.value;
+    let formData = this.communicationFormGroup.value;
 
     const lojas_por_operador = this.getShopsByOperator();
     const cobertura_por_operador = this.getOperatorCoverageByLocation();
@@ -247,11 +357,12 @@ export class CommunicationFormComponent implements OnInit {
     switch (this.currentCommunication()) {
       case 'telefone':
 
-        details = this.getTelephoneFormData()
+        details = this.getTelephoneFormData();
         break;
 
       case 'internet':
 
+        details = this.getInternetFormData();
         break;
 
       default:
