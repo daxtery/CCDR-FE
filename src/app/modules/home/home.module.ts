@@ -30,6 +30,7 @@ import { EducationDetailsComponent } from './components/equipment-details/equipm
 import { SocialDetailsComponent } from './components/equipment-details//equipment-social-details/equipment-social-details.component';
 import { HealthDetailsComponent } from './components/equipment-details//equipment-health-details/equipment-health-details.component';
 import { EnergyFormComponent } from './components/infrastructure-form/energy-form/energy-form.component';
+import { CommunicationFormComponent } from './components/infrastructure-form/communication-form/communication-form.component';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { EnergyFormComponent } from './components/infrastructure-form/energy-for
     SocialDetailsComponent,
     HealthDetailsComponent,
     EnergyFormComponent,
+    CommunicationFormComponent,
   ]
 })
 export class HomePageModule { }

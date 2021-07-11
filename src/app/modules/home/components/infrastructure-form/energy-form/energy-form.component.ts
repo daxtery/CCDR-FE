@@ -45,7 +45,7 @@ export class EnergyFormComponent implements OnInit {
         quantidade: ['']
       }),
       gas: this.createGasGroup(),
-      saude_hospitalar: this.createElectricityGroup()
+      electricity: this.createElectricityGroup()
     })
 
     return this.energyFormGroup

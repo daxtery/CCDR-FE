@@ -1,0 +1,206 @@
+<form [formGroup]="communicationFormGroup">
+    <p>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Número de Operadores</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="num_operadores" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Tipo de Comunicação</mat-label>
+            <mat-select formControlName="tipo_comunicacao">
+                <mat-option [value]="'telefone'">Telefone</mat-option>
+                <mat-option [value]="'internet'">Internet</mat-option>
+                <mat-option [value]="'correio'">Correio</mat-option>
+                <mat-option [value]="'televisao'">Televisão</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <h4>Número de Lojas por Operador</h4>
+    <p formGroupName="loja_p_operador">
+            
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Operador</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="operador" type="text">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Quantidade</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+        </mat-form-field>
+
+        <button mat-raised-button (click)="addShopByOperator()" layout-align="center" color="warn">Adicionar Equipamento</button>
+    </p>
+    <p *ngFor="let shopByOperator of getShopsByOperator()">
+        {{ shopByOperator[0]}} {{ shopByOperator[1] }}
+    </p>
+    <h4>Cobertura na Região</h4>
+    <p formGroupName="cobertura_regiao">
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Latitude</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Longitude</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="long" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Operador</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="operador" type="text">
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Cobertura</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="cobertura" type="number">
+        </mat-form-field>
+
+        <button mat-raised-button (click)="addOperatorCoverageByLocation()" layout-align="center" color="warn">Adicionar Equipamento</button>
+    </p>
+    <p *ngFor="let coverageByOperator of getOperatorCoverageByLocation()">
+        {{ coverageByOperator.latitude }} {{ coverageByOperator.longitude }} {{ coverageByOperator.region }}
+    </p>
+
+    <form [hidden]="currentCommunication() != 'telefone'" [formGroup]="telephoneForm">
+        <h4>Número de Postos de Telefone</h4>
+        <p formGroupName="num_postos">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Tipo</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addNumberOfPost()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let numberOfPost of getNumberOfPost()">
+            {{ numberOfPost[0].latitude }} {{ numberOfPost[0].longitude }} {{ numberOfPost[1].type }}
+            {{ numberOfPost[1].numPosts }}
+        </p>
+        
+        <h4>Número de Acessos</h4>
+        <p formGroupName="num_acessos">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Tipo</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addNumberOfAccesses()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let numberOfAccess of getNumberOfAccesses()">
+            {{ numberOfAccess[0].latitude }} {{ numberOfAccess[0].longitude }} {{ numberOfAccess[1].type }}
+            {{ numberOfAccess[1].numAccess }}
+        </p>
+
+        <h4>Número de Acessos Por 100 mil</h4>
+        <p formGroupName="num_acessos_p_100">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addNumberOfAccessesBy100()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let numberOfAccess of getNumberOfAccessesBy100()">
+            {{ numberOfAccess[0].latitude }} {{ numberOfAccess[0].longitude }} {{ numberOfAccess[1] }}
+        </p>
+
+        <h4>Número de Postos Públicos</h4>
+        <p formGroupName="num_postos_publicos">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addNumberOfPublicPosts()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let numberOfPublicPosts of getNumberOfPublicPosts()">
+            {{ numberOfPublicPosts[0].latitude }} {{ numberOfPublicPosts[0].longitude }} {{ numberOfPublicPosts[1] }}
+        </p>
+
+
+        <h4>Número de Clientes</h4>
+        <p formGroupName="num_clientes">
+            
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Tipo</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addNumberOfClients()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let numberOfClients of getNumberOfClients()">
+            {{ numberOfClients[0].latitude }} {{ numberOfClients[0].longitude }} {{ numberOfClients[1].type }}
+            {{ numberOfClients[1].num }}
+        </p>
+
+    </form>
+</form>

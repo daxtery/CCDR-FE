@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
+import { CommunicationFormComponent } from '../../components/infrastructure-form/communication-form/communication-form.component';
 import { EnergyFormComponent } from '../../components/infrastructure-form/energy-form/energy-form.component';
 
 @Component({
@@ -12,6 +13,7 @@ import { EnergyFormComponent } from '../../components/infrastructure-form/energy
 export class AddInfraestructureComponent implements OnInit {
 
   @ViewChild(EnergyFormComponent, { static: true }) energyForm: EnergyFormComponent;
+  @ViewChild(CommunicationFormComponent, { static: true }) communicationForm: CommunicationFormComponent;
 
   infrastructureFormGroup: FormGroup;
 
@@ -25,11 +27,12 @@ export class AddInfraestructureComponent implements OnInit {
       name: [''],
       area: [''],
       type: [''],
-      energia: this.energyForm.createGroup()
-    
+      energia: this.energyForm.createGroup(),
+      comunicacao: this.communicationForm.createGroup()
+
     })
 
-    this.forms = {'energia': this.energyForm}
+    this.forms = { 'energia': this.energyForm, 'comunicacao': this.communicationForm }
 
   }
 
