@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Access } from 'src/app/shared/models/access';
 import { ClientNumber } from 'src/app/shared/models/client-number';
+import { Company } from 'src/app/shared/models/company';
 import { ActivityConsumption, ElectricConsumption } from 'src/app/shared/models/consumption';
 import { Location } from 'src/app/shared/models/location';
 import { Post } from 'src/app/shared/models/post';
@@ -35,6 +36,10 @@ export class CommunicationFormComponent implements OnInit {
   number_access_free_band_100: Map<string, number> = new Map<string, number>();
   number_access_free_band: Map<Location, Access> = new Map<Location, Access>();
 
+  information_by_company: Map<Location, Company> = new Map<Location, Company>();
+  number_mail_stations: Map<string, number> = new Map<string, number>();
+  number_mail_posts: Map<string, number> = new Map<string, number>();
+
   constructor(private formbuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -57,7 +62,8 @@ export class CommunicationFormComponent implements OnInit {
         cobertura: ['']
       }),
       telefone: this.createTelephoneGroup(),
-      internet: this.createInternetGroup()
+      internet: this.createInternetGroup(),
+      correio: this.createMailGroup(),
 
     })
 
@@ -127,6 +133,58 @@ export class CommunicationFormComponent implements OnInit {
     })
   }
 
+  createMailGroup() {
+
+    this.mailForm = this.formbuilder.group({
+
+      informacao_empresa: this.formbuilder.group({
+
+        lat: [''],
+        long: [''],
+      }),
+
+      num_estacoes: this.formbuilder.group({
+
+        tipo: [''],
+        quantidade: ['']
+      }),
+
+      num_postos: this.formbuilder.group({
+
+        tipo: [''],
+        quantidade: ['']
+      })
+    })
+  }
+
+  addMailStation() {
+
+    const { tipo, quantidade } = this.mailForm.get('num_estacoes').value;
+
+    this.number_mail_stations.set(tipo, quantidade);
+  }
+
+  addMailPost() {
+
+    const { tipo, quantidade } = this.mailForm.get('num_postos').value;
+
+    this.number_mail_posts.set(tipo, quantidade);
+  }
+
+  addMailInformation() {
+
+    const { lat, long } = this.mailForm.value;
+
+    const location: Location = { latitude: lat, longitude: long };
+
+    const company: Company = { numPosts: this.number_mail_posts, numStations: this.number_mail_stations };
+
+    this.information_by_company.set(location, company);
+
+    this.number_mail_posts.clear();
+    this.number_mail_stations.clear();
+  }
+
   addFreeBandClients() {
 
     const { operador, quantidade } = this.internetForm.get('num_clientes_banda_larga').value;
@@ -145,9 +203,9 @@ export class CommunicationFormComponent implements OnInit {
 
     const { lat, long, tipo, quantidade } = this.internetForm.get('num_acessos_banda_larga').value;
 
-    const location: Location = {latitude: lat, longitude: long};
+    const location: Location = { latitude: lat, longitude: long };
 
-    const access: Access = {type: tipo, numAccess: quantidade};
+    const access: Access = { type: tipo, numAccess: quantidade };
 
     this.number_access_free_band.set(location, access);
   }
@@ -231,7 +289,7 @@ export class CommunicationFormComponent implements OnInit {
 
     const location: Location = { latitude: lat, longitude: long };
 
-    const numClients : ClientNumber = {type: tipo, num: quantidade};
+    const numClients: ClientNumber = { type: tipo, num: quantidade };
 
     this.number_clients.set(location, numClients);
   }
@@ -301,6 +359,16 @@ export class CommunicationFormComponent implements OnInit {
     return mappedCoberture
   }
 
+  getMailStation() {
+
+    return Array.from(this.number_mail_stations);
+  }
+
+  getMailPost() {
+
+    return Array.from(this.number_mail_posts);
+  }
+
   getTelephoneFormData() {
 
     let formData = this.telephoneForm.value;
@@ -345,6 +413,17 @@ export class CommunicationFormComponent implements OnInit {
     return formData
   }
 
+  getMailFormData() {
+
+    let formData = this.mailForm.value;
+
+    formData = Array.from(this.information_by_company);
+
+    this.information_by_company.clear();
+
+    return formData;
+  }
+
   getFormData() {
 
     let formData = this.communicationFormGroup.value;
@@ -364,6 +443,10 @@ export class CommunicationFormComponent implements OnInit {
 
         details = this.getInternetFormData();
         break;
+
+      case 'correio':
+
+        details = this.getMailFormData();
 
       default:
         break;

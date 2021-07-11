@@ -280,4 +280,58 @@
         </mat-form-field>
     </form>
     
+    <form [hidden]="currentCommunication() != 'correio'" [formGroup]="mailForm">
+
+        <h4>Informação Correio</h4>
+        <p formGroupName="informacao_empresa">
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+    
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addMailInformation()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+
+        <h4>Número de Estações</h4>
+            <p formGroupName="num_estacoes">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Tipo</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
+                </mat-form-field>
+        
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Quantidade</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+                </mat-form-field>
+        
+                <button mat-raised-button (click)="addMailStation()" layout-align="center" color="warn">Adicionar Equipamento</button>
+            </p>
+            <p *ngFor="let mailStation of getMailStation()">
+                {{ mailStation[0] }} {{ mailStation[1] }}
+            </p>
+
+            <h4>Número de Postos</h4>
+            <p formGroupName="num_postos">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Tipo</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
+                </mat-form-field>
+        
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Quantidade</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+                </mat-form-field>
+        
+                <button mat-raised-button (click)="addMailPost()" layout-align="center" color="warn">Adicionar Equipamento</button>
+            </p>
+            <p *ngFor="let mailPost of getMailPost()">
+                {{ mailPost[0] }} {{ mailPost[1] }}
+            </p>
+    </form>
 </form>
