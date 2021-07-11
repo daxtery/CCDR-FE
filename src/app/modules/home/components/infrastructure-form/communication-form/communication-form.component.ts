@@ -14,9 +14,8 @@ import { Post } from 'src/app/shared/models/post';
 })
 export class CommunicationFormComponent implements OnInit {
 
-  energyFormGroup: FormGroup;
-
   communicationFormGroup: FormGroup;
+
   telephoneForm: FormGroup;
   internetForm: FormGroup;
   mailForm: FormGroup;
@@ -39,6 +38,9 @@ export class CommunicationFormComponent implements OnInit {
   information_by_company: Map<Location, Company> = new Map<Location, Company>();
   number_mail_stations: Map<string, number> = new Map<string, number>();
   number_mail_posts: Map<string, number> = new Map<string, number>();
+
+  number_subscriptions: Map<Location, number> = new Map<Location, number>();
+  number_tv_clients: Map<string, number> = new Map<string, number>();
 
   constructor(private formbuilder: FormBuilder) { }
 
@@ -64,10 +66,10 @@ export class CommunicationFormComponent implements OnInit {
       telefone: this.createTelephoneGroup(),
       internet: this.createInternetGroup(),
       correio: this.createMailGroup(),
-
+      televisao: this.createTVGroup(),
     })
 
-    return this.energyFormGroup
+    return this.communicationFormGroup
   }
 
   createTelephoneGroup() {
@@ -155,6 +157,40 @@ export class CommunicationFormComponent implements OnInit {
         quantidade: ['']
       })
     })
+  }
+
+  createTVGroup() {
+
+    this.televisionForm = this.formbuilder.group({
+
+      num_subscricoes: this.formbuilder.group({
+
+        lat: [''],
+        long: [''],
+        quantidade: ['']
+      }),
+      num_clientes: this.formbuilder.group({
+
+        operador: [''],
+        quantidade: ['']
+      })
+    })
+  }
+
+  addTVSubscription() {
+
+    const { lat, long, quantidade } = this.televisionForm.get('num_subscricoes').value;
+
+    const location: Location = { latitude: lat, longitude: long };
+
+    this.number_subscriptions.set(location, quantidade);
+  }
+
+  addTVClient() {
+
+    const { operador, quantidade } = this.televisionForm.get('num_clientes').value;
+
+    this.number_tv_clients.set(operador, quantidade);
   }
 
   addMailStation() {
@@ -294,6 +330,16 @@ export class CommunicationFormComponent implements OnInit {
     this.number_clients.set(location, numClients);
   }
 
+  getTVClient() {
+
+    return Array.from(this.number_tv_clients);
+  }
+
+  getTVSubscription() {
+
+    return Array.from(this.number_subscriptions);
+  }
+
   getFreeBandClients() {
 
     return Array.from(this.number_clients_free_band);
@@ -424,6 +470,19 @@ export class CommunicationFormComponent implements OnInit {
     return formData;
   }
 
+  getTVFormData() {
+
+    let formData = this.televisionForm.value;
+
+    formData['num_subscricoes'] = this.getTVSubscription();
+    formData['num_clientes'] = this.getTVClient();
+
+    this.number_subscriptions.clear();
+    this.number_tv_clients.clear();
+
+    return formData;
+  }
+
   getFormData() {
 
     let formData = this.communicationFormGroup.value;
@@ -447,6 +506,11 @@ export class CommunicationFormComponent implements OnInit {
       case 'correio':
 
         details = this.getMailFormData();
+        break;
+
+      case 'televisao':
+        details = this.getTVFormData();
+        break;
 
       default:
         break;

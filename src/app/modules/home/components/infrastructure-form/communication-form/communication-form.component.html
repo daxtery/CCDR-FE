@@ -334,4 +334,51 @@
                 {{ mailPost[0] }} {{ mailPost[1] }}
             </p>
     </form>
+
+    <form [hidden]="currentCommunication() != 'televisao'" [formGroup]="televisionForm">
+
+        <h4>Número de Subscrições</h4>
+        <p formGroupName="num_subscricoes">
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
+            </mat-form-field>
+    
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="long" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addTVSubscription()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let subscription of getTVSubscription()">
+            {{ subscription[0].latitude }} {{ subscription[0].longitude }} {{ subscription[1] }}
+        </p>
+
+        <h4>Número de Subscrições</h4>
+        <p formGroupName="num_clientes">
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Operador</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="operador" type="text">
+            </mat-form-field>
+    
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Quantidade</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
+            </mat-form-field>
+
+            <button mat-raised-button (click)="addTVClient()" layout-align="center" color="warn">Adicionar Equipamento</button>
+        </p>
+        <p *ngFor="let subscription of getTVClient()">
+            {{ subscription[0] }} {{ subscription[1] }}
+        </p>
+        
+    </form>
 </form>
