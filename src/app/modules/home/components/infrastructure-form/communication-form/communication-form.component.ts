@@ -462,13 +462,19 @@ export class CommunicationFormComponent implements OnInit {
 
   getMailFormData() {
 
-    let formData = this.mailForm.value;
+    const changedFormData = Array.from(this.information_by_company).map((instance) => {
+      const location = instance[0];
+      const company = instance[1];
 
-    formData = Array.from(this.information_by_company);
+      const numPostsAsArray = Array.from(company.numPosts);
+      const numStationsAsArray = Array.from(company.numStations);
+
+      return [location, { numPosts: numPostsAsArray, numStations: numStationsAsArray }] as const;
+    });
 
     this.information_by_company.clear();
 
-    return formData;
+    return changedFormData;
   }
 
   getTVFormData() {
