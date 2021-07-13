@@ -209,7 +209,7 @@ export class CommunicationFormComponent implements OnInit {
 
   addMailInformation() {
 
-    const { lat, long } = this.mailForm.value;
+    const { lat, long } = this.mailForm.value["informacao_empresa"];
 
     const location: Location = { latitude: lat, longitude: long };
 
