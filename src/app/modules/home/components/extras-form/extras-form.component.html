@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+
+    <div formArrayName="extras">
+        <div *ngFor="let extra of form.controls.extras.controls; let i=index" [formGroupName]="i" layout-align="center">
+            <mat-form-field appearance="fill">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Nome" type="text" [formControl]="extra.controls.name">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Valor</mat-label>
+                <textarea matInput placeholder="Valor" type="text" [formControl]="extra.controls.value">
+                </textarea>
+            </mat-form-field>
+
+            <button mat-raised-button (click)="deleteExtraControl(i)" color="warn">
+                <mat-icon aria-hidden="false" aria-label="Apagar">delete</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <button mat-raised-button (click)="newExtraControl()" layout-align="center" color="warn">Adicionar nova
+        propriedade</button>
+</form>

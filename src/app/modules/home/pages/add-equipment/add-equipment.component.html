@@ -34,6 +34,9 @@
                 <app-health-form [hidden]="currentArea() != 'saude'"></app-health-form>
                 <app-education-form [hidden]="currentArea() != 'educacao'"></app-education-form>
 
+                <h4>Outros</h4>
+                <app-extras-form></app-extras-form>
+
                 <button mat-raised-button type="submit" layout-align="center" color="warn">Add Equipment</button>
             </form>
         </mat-card>

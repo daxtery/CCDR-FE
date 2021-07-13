@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 
@@ -8,6 +8,9 @@ import { EducationFormComponent } from '../../components/equipment-forms/educati
 import { HealthFormComponent } from '../../components/equipment-forms//health-form/health-form.component';
 import { SocialFormComponent } from '../../components/equipment-forms/social-form/social-form.component';
 import { SportFormComponent } from '../../components/equipment-forms/sport-form/sport-form.component';
+import { ExtrasFormComponent } from '../../components/extras-form/extras-form.component';
+
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-equipment',
@@ -21,6 +24,7 @@ export class AddEquipmentComponent implements OnInit {
   @ViewChild(SportFormComponent, { static: true }) sportForm: SportFormComponent;
   @ViewChild(HealthFormComponent, { static: true }) healthForm: HealthFormComponent;
   @ViewChild(EducationFormComponent, { static: true }) educationForm: EducationFormComponent;
+  @ViewChild(ExtrasFormComponent, { static: true }) extrasForm: ExtrasFormComponent;
 
   equipmentFormGroup: FormGroup;
 
@@ -29,7 +33,6 @@ export class AddEquipmentComponent implements OnInit {
   constructor(private equipmentService: EquipmentService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-
     this.equipmentFormGroup = this.formBuilder.group({
       name: [''],
       area: [''],
@@ -38,10 +41,11 @@ export class AddEquipmentComponent implements OnInit {
       cultura: this.cultureForm.createGroup(),
       desporto: this.sportForm.createGroup(),
       saude: this.healthForm.createGroup(),
-      educacao: this.educationForm.createGroup()
+      educacao: this.educationForm.createGroup(),
+      extras: this.extrasForm.createGroup(),
     })
 
-    this.forms = {'educacao': this.educationForm, 'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm, 'saude': this.healthForm }
+    this.forms = { 'educacao': this.educationForm, 'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm, 'saude': this.healthForm }
 
   }
 
@@ -52,6 +56,8 @@ export class AddEquipmentComponent implements OnInit {
 
   formSubmit() {
 
+    console.log(this.extrasForm);
+
     const details = this.forms[this.currentArea()].getFormData()
 
     const name = this.equipmentFormGroup.value['name']
@@ -60,7 +66,9 @@ export class AddEquipmentComponent implements OnInit {
     const type = this.equipmentFormGroup.value['type']
     const group: String = 'equipment';
 
-    // TODO: add extras
+    const extras = this.extrasForm.getFormData();
+
+    // TODO: send extras
 
     let equipment: CreateEquipmentDto = { area, group, type, name, equipmentDetails: details, extras: {} }
 
