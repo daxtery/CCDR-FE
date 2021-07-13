@@ -397,11 +397,12 @@ export class CommunicationFormComponent implements OnInit {
 
     const mappedCoberture = cobertura.map((instance) => {
 
-      let { latitude, longitude } = instance[0]
-      let region = instance[1]
+      return [
+        instance[0],
+        { region: Array.from(instance[1]) }
+      ] as const;
 
-      return { latitude: latitude, longitude: longitude, region: Array.from(region) }
-    })
+    });
 
     return mappedCoberture
   }

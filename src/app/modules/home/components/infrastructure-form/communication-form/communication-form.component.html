@@ -59,7 +59,7 @@
         <button mat-raised-button (click)="addOperatorCoverageByLocation()" layout-align="center" color="warn">Adicionar Equipamento</button>
     </p>
     <p *ngFor="let coverageByOperator of getOperatorCoverageByLocation()">
-        {{ coverageByOperator.latitude }} {{ coverageByOperator.longitude }} {{ coverageByOperator.region }}
+        {{ coverageByOperator[0].latitude }} {{ coverageByOperator[0].longitude }} {{ coverageByOperator[1].region }}
     </p>
 
     <form [hidden]="currentCommunication() != 'telefone'" [formGroup]="telephoneForm">
