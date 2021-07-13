@@ -421,7 +421,7 @@ export class CommunicationFormComponent implements OnInit {
 
     const num_postos = this.getNumberOfPost();
     const num_acessos = this.getNumberOfAccesses();
-    const num_acessos_p_100 = this.getFreeBandAccessesBy100();
+    const num_acessos_p_100 = this.getNumberOfAccessesBy100();
     const num_postos_publicos = this.getNumberOfPublicPosts();
     const num_clientes = this.getNumberOfClients();
 
