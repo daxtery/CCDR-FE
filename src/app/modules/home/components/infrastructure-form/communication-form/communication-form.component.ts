@@ -213,7 +213,8 @@ export class CommunicationFormComponent implements OnInit {
 
     const location: Location = { latitude: lat, longitude: long };
 
-    const company: Company = { numPosts: this.number_mail_posts, numStations: this.number_mail_stations };
+    // NOTE: Have to copy the maps because we are clearing them below.
+    const company: Company = { numPosts: new Map(this.number_mail_posts), numStations: new Map(this.number_mail_stations) };
 
     this.information_by_company.set(location, company);
 
