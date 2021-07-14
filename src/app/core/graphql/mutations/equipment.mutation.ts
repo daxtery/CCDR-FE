@@ -8,7 +8,7 @@ createEquipment($equipment: CreateEquipmentDto!) {
       name
       area
       group
-      type
+      description
       equipmentDetails
       extras {
         name

@@ -34,7 +34,7 @@ export class AddEquipmentComponent implements OnInit {
     this.equipmentFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
       area: ['', Validators.required],
-      type: ['', Validators.required],
+      description: ['', Validators.required],
       social: this.socialForm.createGroup(),
       cultura: this.cultureForm.createGroup(),
       desporto: this.sportForm.createGroup(),
@@ -58,12 +58,12 @@ export class AddEquipmentComponent implements OnInit {
     const name = this.equipmentFormGroup.value['name']
 
     const area = this.equipmentFormGroup.value['area']
-    const type = this.equipmentFormGroup.value['type']
+    const description = this.equipmentFormGroup.value['description']
     const group: String = 'equipment';
 
     const extras = this.extrasForm.getFormData();
 
-    let equipment: CreateEquipmentDto = { area, group, type, name, equipmentDetails: details, extras };
+    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, extras };
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

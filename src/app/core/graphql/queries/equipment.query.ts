@@ -9,7 +9,7 @@ queryEquipments($query: String!) {
         _id
         name
         area
-        type
+        description
       }
       score
     }

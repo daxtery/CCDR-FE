@@ -4,7 +4,12 @@ export interface EquipmentPreview {
     _id: string;
     area: Area;
     name: string;
-    type: string;
+    description: string;
+}
+
+export interface Extra {
+    name: string;
+    value: string;
 }
 
 

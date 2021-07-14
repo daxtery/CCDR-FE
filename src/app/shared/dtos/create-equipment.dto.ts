@@ -1,10 +1,12 @@
+import { Extra } from "../types";
+
 export class CreateEquipmentDto {
 
     name: String;
     group: String;
     area: String;
-    type: String;
+    description: String;
 
-    extras: Object;
+    extras: Extra[];
     equipmentDetails: Object;
 }

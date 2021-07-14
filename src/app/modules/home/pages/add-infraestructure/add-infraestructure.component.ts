@@ -26,7 +26,7 @@ export class AddInfraestructureComponent implements OnInit {
     this.infrastructureFormGroup = this.formBuilder.group({
       name: [''],
       area: [''],
-      type: [''],
+      description: [''],
       energia: this.energyForm.createGroup(),
       comunicacao: this.communicationForm.createGroup()
 
@@ -48,11 +48,11 @@ export class AddInfraestructureComponent implements OnInit {
     const name = this.infrastructureFormGroup.value['name']
 
     const area = this.infrastructureFormGroup.value['area']
-    const type = this.infrastructureFormGroup.value['type']
+    const description = this.infrastructureFormGroup.value['description']
 
     const group = 'infra';
 
-    let equipment: CreateEquipmentDto = { area, group, type, name, equipmentDetails: details, extras: {} }
+    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, extras: [] }
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

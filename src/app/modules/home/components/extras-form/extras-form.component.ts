@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Extra } from 'src/app/shared/types';
 
 
-interface Extra {
-  name: string;
-  value: string;
-}
+
 
 
 interface IExtraFormGroup extends FormGroup {
