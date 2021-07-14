@@ -9,7 +9,10 @@ queryById($id: String!) {
       name
       area
       description
-      extras
+      extras {
+        name
+        value
+      }
       equipmentDetails
     }
   }
