@@ -1,11 +1,23 @@
-export type Area = "social" | "cultura" | "educacao" | "desporto" | "saude";
+import { ActivityConsumption, ElectricConsumption } from "./models/consumption";
 
-export interface EquipmentPreview {
-    _id: string;
-    area: Area;
-    name: string;
-    description: string;
+export type EquipmentArea = "social" | "cultura" | "educacao" | "desporto" | "saude";
+export type InfrastructureArea = "energia" | "comunicacao";
+export type Group = "equipment" | "infra";
+
+export type EquipmentPreview<G extends Group = Group> =
+    {
+        _id: string;
+        name: string;
+        description: string;
+    } & GroupAndArea<G>;
+
+export type AreaOfGroup<G extends Group> = G extends "equipment" ? EquipmentArea : InfrastructureArea;
+
+export type GroupAndArea<G extends Group> = {
+    group: G;
+    area: AreaOfGroup<G>;
 }
+
 
 export interface Extra {
     name: string;
@@ -21,10 +33,9 @@ export interface Horario {
 export interface Localizacao {
 };
 
-export interface EquipmentNonPreviewDetails {
-    equipmentDetails: object;
+export interface EquipmentNonPreviewDetails<T = unknown> {
+    equipmentDetails: T;
     extras: object;
-    group: string;
 
     // TODO: Add these to the query
     horario?: Horario,
@@ -32,8 +43,8 @@ export interface EquipmentNonPreviewDetails {
     localizacao?: Localizacao;
 }
 
-export interface Equipment extends EquipmentPreview, EquipmentNonPreviewDetails {
-}
+
+export type Equipment<G extends Group = Group, T = unknown> = EquipmentPreview<G> & EquipmentNonPreviewDetails<T>;
 
 export interface EquipmentAndScore {
     equipment: EquipmentPreview;

@@ -6,7 +6,7 @@
 
 <h2>Detalhes</h2>
 
-<div *ngIf="equipment.group === 'equipment'; else second">
+<div *ngIf="isEquipment(equipment); else second">
     <container-element [ngSwitch]="equipment.area">
         <app-culture-details [details]="equipment.equipmentDetails" *ngSwitchCase="'cultura'"></app-culture-details>
         <app-sport-details [details]="equipment.equipmentDetails" *ngSwitchCase="'desporto'"></app-sport-details>
@@ -19,10 +19,9 @@
 </div>
 
 <ng-template #second>
-    <div *ngIf="equipment.group == 'infra'; else elseBlock">
-        <container-element [ngSwitch]="equipment.area">
-            <p *ngSwitchDefault>...</p>
-        </container-element>
+    <div *ngIf="isInfra(equipment); else elseBlock">
+        <app-energy-details *ngIf="isEnergy(equipment)" [details]="equipment.equipmentDetails">
+        </app-energy-details>
     </div>
 </ng-template>
 
