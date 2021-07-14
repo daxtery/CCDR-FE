@@ -7,6 +7,7 @@ queryById($id: String!) {
   queryById(id: $id) {
       _id
       name
+      group
       area
       description
       extras {

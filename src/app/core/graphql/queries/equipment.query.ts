@@ -8,6 +8,7 @@ queryEquipments($query: String!) {
       equipment {
         _id
         name
+        group
         area
         description
       }

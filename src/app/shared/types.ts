@@ -24,6 +24,7 @@ export interface Localizacao {
 export interface EquipmentNonPreviewDetails {
     equipmentDetails: object;
     extras: object;
+    group: string;
 
     // TODO: Add these to the query
     horario?: Horario,
