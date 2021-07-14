@@ -93,3 +93,24 @@ export interface SchoolDetails {
 export interface EducationDetails {
     escolas?: SchoolDetails[];
 };
+
+export interface EnergyDetails<T = unknown> {
+    num_operadores: number;
+    tipo_energia: string;
+    lojas_por_operador: [string, number][];
+    agentes_por_operador: [string, number][];
+    energy_details: T;
+};
+
+export interface GasDetails {
+    num_consumo_gas: [Location, number][];
+    consumo_gas: [Location, number][];
+    pontos_acesso: [Location, number][];
+};
+
+export interface ElectricityDetails {
+    num_consumo_elec_p_atividade: [Location, ActivityConsumption][];
+    consumo_elec_p_atividade: [Location, ElectricConsumption][];
+};
+
+export interface CommunicationDetails { };
