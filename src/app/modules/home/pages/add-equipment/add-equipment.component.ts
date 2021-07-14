@@ -10,8 +10,6 @@ import { SocialFormComponent } from '../../components/equipment-forms/social-for
 import { SportFormComponent } from '../../components/equipment-forms/sport-form/sport-form.component';
 import { ExtrasFormComponent } from '../../components/extras-form/extras-form.component';
 
-import { NgForm } from '@angular/forms';
-
 @Component({
   selector: 'app-add-equipment',
   templateUrl: './add-equipment.component.html',
