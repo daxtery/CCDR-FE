@@ -42,17 +42,33 @@
 
 <ng-template #third>
     <div *ngIf="isMail(details); else fourth">
-        <li *ngFor="let item of this.details.communication_details">
-            {{ item[0] | location }}
-            <div>
-                <ul *ngFor="let item of item[1].numPosts | keyvalue">
-                    {{ item.key }}: {{ item.value }}
+        Detalhes:
+        <ul>
+            <li *ngFor="let item of this.details.communication_details">
+                {{ item[0] | location }}
+                <ul>
+                    <li>
+                        numPosts
+                        <ul>
+                            <li *ngFor="let item of item[1].numPosts">
+                                {{ item[0] }}: {{ item[1] }}
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <li>
+                        numStations
+                        <ul>
+                            <li *ngFor="let item of item[1].numStations">
+                                {{ item[0] }}: {{ item[1] }}
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
-                <ul *ngFor="let item of item[1].numStations| keyvalue">
-                    {{ item.key }}: {{ item.value }}
-                </ul>
-            </div>
-        </li>
+            </li>
+        </ul>
     </div>
 </ng-template>
 
