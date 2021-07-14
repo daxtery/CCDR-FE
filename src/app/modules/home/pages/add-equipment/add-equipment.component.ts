@@ -56,7 +56,6 @@ export class AddEquipmentComponent implements OnInit {
 
   formSubmit() {
 
-    console.log(this.extrasForm);
 
     const details = this.forms[this.currentArea()].getFormData()
 
@@ -68,9 +67,7 @@ export class AddEquipmentComponent implements OnInit {
 
     const extras = this.extrasForm.getFormData();
 
-    // TODO: send extras
-
-    let equipment: CreateEquipmentDto = { area, group, type, name, equipmentDetails: details, extras: {} }
+    let equipment: CreateEquipmentDto = { area, group, type, name, equipmentDetails: details, extras };
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

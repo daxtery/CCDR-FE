@@ -10,7 +10,10 @@ createEquipment($equipment: CreateEquipmentDto!) {
       group
       type
       equipmentDetails
-      extras
+      extras {
+        name
+        value
+      }
     }
   }
 `
