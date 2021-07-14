@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 
 import { EquipmentService } from '../../../../core/services/equipment.service';
@@ -34,9 +34,9 @@ export class AddEquipmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.equipmentFormGroup = this.formBuilder.group({
-      name: [''],
-      area: [''],
-      type: [''],
+      name: ['', Validators.required],
+      area: ['', Validators.required],
+      type: ['', Validators.required],
       social: this.socialForm.createGroup(),
       cultura: this.cultureForm.createGroup(),
       desporto: this.sportForm.createGroup(),
@@ -54,9 +54,7 @@ export class AddEquipmentComponent implements OnInit {
     return this.equipmentFormGroup.get('area').value
   }
 
-  formSubmit() {
-
-
+  formSubmit(formDirective: FormGroupDirective) {
     const details = this.forms[this.currentArea()].getFormData()
 
     const name = this.equipmentFormGroup.value['name']
@@ -71,6 +69,9 @@ export class AddEquipmentComponent implements OnInit {
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 
+      // NOTE: We do this because the validators from the form don't get reset when we reset the form. This fixes it.
+      // https://stackoverflow.com/questions/48216330/angular-5-formgroup-reset-doesnt-reset-validators
+      formDirective.resetForm();
       this.equipmentFormGroup.reset();
 
     }, (error) => {

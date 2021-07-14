@@ -1,18 +1,18 @@
 <mat-grid-list cols="1" rowHeight="1:1">
     <mat-grid-tile>
         <mat-card>
-            <form [formGroup]="equipmentFormGroup" (ngSubmit)="formSubmit()">
+            <form [formGroup]="equipmentFormGroup" #formDirective="ngForm"  (ngSubmit)="formSubmit(formDirective)">
                 <p>
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Denominação</mat-label>
-                        <input matInput placeholder="Denominação do equipamento" formControlName="name">
+                        <input matInput required placeholder="Denominação do equipamento" formControlName="name">
                     </mat-form-field>
                 </p>
 
                 <p>
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Área do Equipamento</mat-label>
-                        <mat-select formControlName="area">
+                        <mat-select required formControlName="area">
                             <mat-option value="social">Social</mat-option>
                             <mat-option value="cultura">Cultura</mat-option>
                             <mat-option value="educacao">Educação</mat-option>
@@ -24,7 +24,7 @@
                 <p>
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Descrição</mat-label>
-                        <input matInput placeholder="Descrição do equipamento a inserir" formControlName="type">
+                        <input required matInput placeholder="Descrição do equipamento a inserir" formControlName="type">
                     </mat-form-field>
                 </p>
 
