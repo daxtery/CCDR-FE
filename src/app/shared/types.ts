@@ -21,7 +21,7 @@ export interface Horario {
 export interface Localizacao {
 };
 
-export interface EquipmentExtraDetails {
+export interface EquipmentNonPreviewDetails {
     equipmentDetails: object;
     extras: object;
 
@@ -31,7 +31,7 @@ export interface EquipmentExtraDetails {
     localizacao?: Localizacao;
 }
 
-export interface Equipment extends EquipmentPreview, EquipmentExtraDetails {
+export interface Equipment extends EquipmentPreview, EquipmentNonPreviewDetails {
 }
 
 export interface EquipmentAndScore {

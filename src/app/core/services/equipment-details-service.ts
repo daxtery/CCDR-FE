@@ -16,7 +16,7 @@ export class EquipmentDetailsService {
     constructor(private equipmentService: EquipmentService) { }
 
     set_equipment(equipment: EquipmentPreview) {
-        this.equipment$ = this.equipmentService.queryByIdExtraDetails(equipment._id)
+        this.equipment$ = this.equipmentService.queryByIdNonPreviewDetails(equipment._id)
             .pipe(
                 map(response =>
                     this.equipment = { ...equipment, ...response.data.queryById }

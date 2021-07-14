@@ -6,7 +6,7 @@ import { createEquipment } from '../graphql/mutations/equipment.mutation';
 import { queryEquipments } from '../graphql/queries/equipment.query';
 import { queryById } from '../graphql/queries/by_id.query';
 import { queryByIdExtraDetails } from '../graphql/queries/by_id_extras_details.query';
-import { Equipment, EquipmentAndScore, EquipmentExtraDetails } from 'src/app/shared/types';
+import { Equipment, EquipmentAndScore, EquipmentNonPreviewDetails } from 'src/app/shared/types';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +23,9 @@ export class EquipmentService {
     })
   }
 
-  queryByIdExtraDetails(id: string) {
+  queryByIdNonPreviewDetails(id: string) {
 
-    return this.apollo.query<{ queryById: EquipmentExtraDetails }>({
+    return this.apollo.query<{ queryById: EquipmentNonPreviewDetails }>({
       query: queryByIdExtraDetails,
       variables: { id: id },
       fetchPolicy: 'no-cache'
