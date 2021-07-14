@@ -33,6 +33,7 @@ import { EnergyFormComponent } from './components/infrastructure-form/energy-for
 import { CommunicationFormComponent } from './components/infrastructure-form/communication-form/communication-form.component';
 import { ExtrasFormComponent } from './components/extras-form/extras-form.component';
 import { EnergyDetailsComponent } from './components/equipment-details/infrastructure-energy-details/infrastructure-energy-details.component';
+import { CommunicationDetailsComponent } from './components/equipment-details/infrastructure-communication-details/infrastructure-communication-details.component';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { EnergyDetailsComponent } from './components/equipment-details/infrastru
     CommunicationFormComponent,
     ExtrasFormComponent,
     EnergyDetailsComponent,
+    CommunicationDetailsComponent,
   ]
 })
 export class HomePageModule { }

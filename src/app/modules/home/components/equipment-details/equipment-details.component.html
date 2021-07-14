@@ -19,14 +19,18 @@
 </div>
 
 <ng-template #second>
-    <div *ngIf="isInfra(equipment); else elseBlock">
-        <app-energy-details *ngIf="isEnergy(equipment)" [details]="equipment.equipmentDetails">
+    <div *ngIf="isInfra(equipment)">
+        <app-energy-details *ngIf="isEnergy(equipment); else secondsecond" [details]="equipment.equipmentDetails">
         </app-energy-details>
+
+        <ng-template #secondsecond>
+            <app-communication-details *ngIf="isCommunication(equipment)" [details]="equipment.equipmentDetails">
+            </app-communication-details>
+        </ng-template>
+
     </div>
 </ng-template>
 
-<ng-template #elseBlock>
-</ng-template>
 
 
 

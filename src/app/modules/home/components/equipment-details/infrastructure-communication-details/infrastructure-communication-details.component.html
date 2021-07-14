@@ -1,0 +1,68 @@
+<p *ngIf="details.num_operadores !== null">num_operadores: {{details.num_operadores }}</p>
+<p *ngIf="details.tipo_comunicacao !== null">tipo_comunicacao: {{details.tipo_comunicacao }}</p>
+<p *ngIf="details.lojas_por_operador !== null">lojas_por_operador: {{details.lojas_por_operador }}</p>
+<p *ngIf="details.cobertura_por_operador !== null">cobertura_por_operador: {{details.cobertura_por_operador }}</p>
+
+
+<div *ngIf="isTelephone(details); else second">
+    <p *ngIf="details.communication_details.num_postos !== null">num_postos:
+        {{details.communication_details.num_postos}}
+    </p>
+
+    <p *ngIf="details.communication_details.num_acessos !== null">num_acessos:
+        {{details.communication_details.num_acessos}}
+    </p>
+
+    <p *ngIf="details.communication_details.num_acessos_p_100 !== null">num_acessos_p_100:
+        {{details.communication_details.num_acessos_p_100}}
+    </p>
+
+    <p *ngIf="details.communication_details.num_postos_publicos !== null">num_postos_publicos:
+        {{details.communication_details.num_postos_publicos}}
+    </p>
+
+    <p *ngIf="details.communication_details.num_clientes !== null">num_clientes:
+        {{details.communication_details.num_clientes}}
+    </p>
+</div>
+
+<ng-template #second>
+    <div *ngIf="isInternet(details); else third">
+        <p *ngIf="details.communication_details.num_clientes_banda_larga !== null">num_clientes_banda_larga:
+            {{details.communication_details.num_clientes_banda_larga}}
+        </p>
+        <p *ngIf="details.communication_details.num_acessos_banda_larga_100 !== null">num_acessos_banda_larga_100:
+            {{details.communication_details.num_acessos_banda_larga_100}}
+        </p>
+        <p *ngIf="details.communication_details.num_acessos_banda_larga !== null">num_acessos_banda_larga:
+            {{details.communication_details.num_acessos_banda_larga}}
+        </p>
+    </div>
+</ng-template>
+
+<ng-template #third>
+    <div *ngIf="isMail(details); else fourth">
+        <li *ngFor="let item of this.details.communication_details">
+            {{ item[0] | location }}
+            <div>
+                <ul *ngFor="let item of item[1].numPosts | keyvalue">
+                    {{ item.key }}: {{ item.value }}
+                </ul>
+                <ul *ngFor="let item of item[1].numStations| keyvalue">
+                    {{ item.key }}: {{ item.value }}
+                </ul>
+            </div>
+        </li>
+    </div>
+</ng-template>
+
+<ng-template #fourth>
+    <div *ngIf="isTV(details)">
+        <p *ngIf="details.communication_details.num_subscricoes !== null">num_subscricoes:
+            {{details.communication_details.num_subscricoes}}
+        </p>
+        <p *ngIf="details.communication_details.num_clientes !== null">num_clientes:
+            {{details.communication_details.num_clientes}}
+        </p>
+    </div>
+</ng-template>

@@ -1,4 +1,8 @@
+import { Access } from "./models/access";
+import { ClientNumber } from "./models/client-number";
 import { ActivityConsumption, ElectricConsumption } from "./models/consumption";
+import { Location } from "./models/location";
+import { Post } from "./models/post";
 
 export type EquipmentArea = "social" | "cultura" | "educacao" | "desporto" | "saude";
 export type InfrastructureArea = "energia" | "comunicacao";
@@ -107,7 +111,7 @@ export interface EducationDetails {
 
 export interface EnergyDetails<T = unknown> {
     num_operadores: number;
-    tipo_energia: string;
+    tipo_energia: "gas" | "luz";
     lojas_por_operador: [string, number][];
     agentes_por_operador: [string, number][];
     energy_details: T;
@@ -124,4 +128,31 @@ export interface ElectricityDetails {
     consumo_elec_p_atividade: [Location, ElectricConsumption][];
 };
 
-export interface CommunicationDetails { };
+export interface CommunicationDetails<T = unknown> {
+    num_operadores: number;
+    tipo_comunicacao: "telefone" | "internet" | "correio" | "televisao";
+    lojas_por_operador: [string, number][];
+    cobertura_por_operador: [Location, { region: [string, number][]; }][];
+    communication_details: T;
+};
+
+export interface TelephoneDetails {
+    num_postos: [Location, Post][];
+    num_acessos: [Location, Access][];
+    num_acessos_p_100: [Location, number][];
+    num_postos_publicos: [Location, number][];
+    num_clientes: [Location, ClientNumber][];
+};
+
+export interface InternetDetails {
+    num_clientes_banda_larga: [string, number][];
+    num_acessos_banda_larga_100: [string, number][];
+    num_acessos_banda_larga: [Location, Access][];
+};
+
+export type MailDetails = [Location, { numPosts: [string, number][]; numStations: [string, number][]; }][]
+
+export interface TVDetails {
+    num_subscricoes: [Location, number][];
+    num_clientes: [string, number][];
+};
