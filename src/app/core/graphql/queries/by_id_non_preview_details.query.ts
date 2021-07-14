@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const queryByIdExtraDetails =
+export const queryByIdNonPreviewDetails =
   gql`
 query 
 queryById($id: String!) {
