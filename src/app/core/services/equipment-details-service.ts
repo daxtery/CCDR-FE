@@ -16,7 +16,7 @@ export class EquipmentDetailsService {
     constructor(private equipmentService: EquipmentService) { }
 
     set_equipment(equipment: EquipmentPreview) {
-        this.equipment$ = this.equipmentService.queryByIdNonPreviewDetails(equipment._id)
+        this.equipment$ = this.equipmentService.getByIdNonPreviewDetails(equipment._id)
             .pipe(
                 map(response =>
                     this.equipment = { ...equipment, ...response.data.queryById }
@@ -32,7 +32,7 @@ export class EquipmentDetailsService {
             return this.equipment$;
         }
 
-        return this.equipmentService.queryById(id).pipe(map(response => response.data.queryById));
+        return this.equipmentService.getById(id).pipe(map(response => response.data.queryById));
     }
 
 

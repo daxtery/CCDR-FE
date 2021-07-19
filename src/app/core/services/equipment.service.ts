@@ -23,7 +23,7 @@ export class EquipmentService {
     })
   }
 
-  queryByIdNonPreviewDetails(id: string) {
+  getByIdNonPreviewDetails(id: string) {
 
     return this.apollo.query<{ queryById: EquipmentNonPreviewDetails }>({
       query: queryByIdNonPreviewDetails,
@@ -32,7 +32,7 @@ export class EquipmentService {
     })
   }
 
-  queryById(id: string) {
+  getById(id: string) {
 
     return this.apollo.query<{ queryById: Equipment }>({
       query: queryById,
