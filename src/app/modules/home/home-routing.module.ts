@@ -7,6 +7,8 @@ import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.
 import { AddInfraestructureComponent } from './pages/add-infraestructure/add-infraestructure.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginGuard } from 'src/app/core/guards/login.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { LoggedGuard } from 'src/app/core/guards/logged.guard';
 
 const routes: Routes = [
   {
@@ -25,7 +27,13 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [LoggedGuard]
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [LoginGuard]
       },
       {
         path: 'search',

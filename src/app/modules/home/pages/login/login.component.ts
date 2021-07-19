@@ -9,7 +9,7 @@ import { AuthResult } from '../../../../shared/dtos/auth-results.dto';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent implements OnInit {
 

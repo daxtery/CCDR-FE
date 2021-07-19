@@ -1,15 +1,21 @@
-<div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="input-group">
-            <label class="common-font" for="email" >Email</label>
-            <input class="box" id="email" type="email" formControlName="email"/>
-        </div>
-        <div class="input-group">
-            <label class="common-font" for="pass">Password</label>
-            <input class="box" id="pass" type="password" formControlName="password"/>
-        </div>
-        <button type="submit" class="box common-font" id="form-submit-button">
-            LOGIN
-        </button>
-    </form>
-</div>
+<mat-grid-list cols="1" rowHeight="1:1">
+    <mat-grid-tile>
+        <mat-card>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <p>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput required placeholder="Email" formControlName="email">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput required placeholder="Password" type="password" formControlName="password">
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button type="submit" layout-align="center" color="warn">Login</button>
+            </form>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

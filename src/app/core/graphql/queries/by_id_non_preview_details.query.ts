@@ -6,7 +6,10 @@ query
 queryById($id: String!) {
   queryById(id: $id) {
       _id
-      extras
+      extras {
+        name
+        value
+      }
       equipmentDetails
     }
   }
