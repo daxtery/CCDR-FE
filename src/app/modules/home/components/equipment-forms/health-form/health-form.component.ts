@@ -116,9 +116,6 @@ export class HealthFormComponent implements OnInit {
     formData['valencias'] = this.valencias
     formData['especialidades'] = this.especialidades
 
-    // TODO: agrupamento_saude
-    // TODO: centro_hospitalar 
-
     this.equipmentos_por_especialidade.clear()
     this.unidades = []
     this.valencias = []
