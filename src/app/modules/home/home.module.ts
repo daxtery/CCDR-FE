@@ -34,6 +34,7 @@ import { CommunicationFormComponent } from './components/infrastructure-form/com
 import { ExtrasFormComponent } from './components/extras-form/extras-form.component';
 import { EnergyDetailsComponent } from './components/equipment-details/infrastructure-energy-details/infrastructure-energy-details.component';
 import { CommunicationDetailsComponent } from './components/equipment-details/infrastructure-communication-details/infrastructure-communication-details.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   imports: [
@@ -69,6 +70,7 @@ import { CommunicationDetailsComponent } from './components/equipment-details/in
     ExtrasFormComponent,
     EnergyDetailsComponent,
     CommunicationDetailsComponent,
+    LoginComponent,
   ]
 })
 export class HomePageModule { }

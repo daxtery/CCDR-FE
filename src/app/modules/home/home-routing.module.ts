@@ -5,6 +5,8 @@ import { AddEquipmentComponent } from './pages/add-equipment/add-equipment.compo
 import { SearchEquipmentComponent } from './pages/search-equipment/search-equipment.component';
 import { EquipmentDetailsPageComponent } from './pages/equipment/equipment-page.component';
 import { AddInfraestructureComponent } from './pages/add-infraestructure/add-infraestructure.component';
+import { LoginComponent } from './pages/login/login.component';
+import { LoginGuard } from 'src/app/core/guards/login.guard';
 
 const routes: Routes = [
   {
@@ -14,10 +16,16 @@ const routes: Routes = [
       {
         path: 'add_equipment',
         component: AddEquipmentComponent,
+        canActivate: [LoginGuard]
       },
       {
         path: 'add_infrastructure',
         component: AddInfraestructureComponent,
+        canActivate: [LoginGuard]
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       },
       {
         path: 'search',
