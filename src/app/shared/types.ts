@@ -39,7 +39,7 @@ export interface Localizacao {
 
 export interface EquipmentNonPreviewDetails<T = unknown> {
     equipmentDetails: T;
-    extras: object;
+    extras: Extra[];
 
     // TODO: Add these to the query
     horario?: Horario,
