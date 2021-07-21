@@ -1,10 +1,5 @@
-<h1>{{equipment.name}}</h1>
-
-<p>Area: {{equipment.area}}</p>
-<p>Descrição: {{equipment.description}}</p>
-
-
-<h2>Detalhes</h2>
+<mat-icon [svgIcon]="groupAreaIconsProvider.getIconName(equipment)"> </mat-icon>{{equipment.name}}
+<p>{{equipment.description}}</p>
 
 <div *ngIf="isEquipment(equipment); else second">
     <container-element [ngSwitch]="equipment.area">

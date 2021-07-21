@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { GroupAreaIconsProvider } from 'src/app/core/services/group-area-icons-provider.service';
 import { AreaOfGroup, CommunicationDetails, EnergyDetails, Equipment } from 'src/app/shared/types';
 
 @Component({
@@ -10,7 +11,7 @@ export class EquipmentDetailsComponent {
 
   @Input() equipment!: Equipment;
 
-  constructor() { }
+  constructor(readonly groupAreaIconsProvider: GroupAreaIconsProvider) { }
 
   isEquipment(equipment: Equipment): equipment is Equipment<"equipment"> {
     return equipment.group === "equipment";
