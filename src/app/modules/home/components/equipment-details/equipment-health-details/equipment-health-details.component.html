@@ -1,34 +1,40 @@
-<p *ngIf="details.num_utentes !== null">Número de utentes: {{details.num_utentes }}</p>
+<p *ngIf="details.num_utentes !== null"><b>Número de utentes</b>: {{details.num_utentes }}</p>
 
 
 <div *ngIf="isHospital(details); else second">
-    <p *ngIf="details.healh_details.num_equipamentos_por_especialidade !== null">Equipamentos por especialidade:
-        {{details.healh_details.num_equipamentos_por_especialidade}}
-    </p>
-    <p *ngIf="details.healh_details.tipo_unidades !== null">Unidades: {{details.healh_details.tipo_unidades}}
+    <p *ngIf="details.healh_details.especialidades !== null"><b>Número de Especialidades</b>:
+        {{details.healh_details.especialidades.length}}
     </p>
 
-    <p *ngIf="details.healh_details.agrupamento_saude !== null">Agrupamento de saude:
+    <p *ngIf="details.healh_details.num_equipamentos_por_especialidade !== null"><b>Equipamentos por especialidade</b>:
+        {{details.healh_details.num_equipamentos_por_especialidade}}
+    </p>
+
+    <p *ngIf="details.healh_details.tipo_unidades !== null"><b>Unidades</b>: {{details.healh_details.tipo_unidades}}
+    </p>
+
+    <p *ngIf="details.healh_details.agrupamento_saude !== null"><b>Agrupamento de saude</b>:
         {{details.healh_details.agrupamento_saude}}
     </p>
 
-    <p *ngIf="details.healh_details.centro_hospitalar !== null">Centro Hospitalar:
+    <p *ngIf="details.healh_details.centro_hospitalar !== null"><b>Centro Hospitalar</b>:
         {{details.healh_details.centro_hospitalar}}
     </p>
 
-    <p *ngIf="details.healh_details.valencias !== null">Valencias: {{details.healh_details.valencias}}
+    <p *ngIf="details.healh_details.valencias !== null"><b>Valencias</b>: {{details.healh_details.valencias}}
     </p>
 
-    <p *ngIf="details.healh_details.especialidades !== null">Especialidades: {{details.healh_details.especialidades}}
+    <p *ngIf="details.healh_details.especialidades !== null"><b>Especialidades</b>:
+        {{details.healh_details.especialidades}}
     </p>
 
 </div>
 
 <ng-template #second>
     <div *ngIf="isGeneral(details); else elseBlock">
-        <p *ngIf="details.healh_details.capacidade !== null">Capacidade: {{details.healh_details.capacidade}}
+        <p *ngIf="details.healh_details.capacidade !== null"><b>Capacidade</b>: {{details.healh_details.capacidade}}
         </p>
-        <p *ngIf="details.healh_details.num_centros_saude !== null">Número de centros de saúde:
+        <p *ngIf="details.healh_details.num_centros_saude !== null"><b>Número de centros de saúde</b>:
             {{details.healh_details.num_centros_saude}}
         </p>
     </div>
