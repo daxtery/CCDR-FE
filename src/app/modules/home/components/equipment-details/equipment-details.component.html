@@ -1,6 +1,14 @@
 <mat-icon [svgIcon]="groupAreaIconsProvider.getIconName(equipment)"> </mat-icon>{{equipment.name}}
 <p>{{equipment.description}}</p>
 
+<p *ngIf="equipment.numero_de_equipamentos"><b>Número de equipamentos</b>: {{ equipment.numero_de_equipamentos }} </p>
+
+<h1>Contactos</h1>
+<mat-icon> location_on</mat-icon><span *ngIf="equipment.localizacao !== null">Localizacao: {{ equipment.localizacao |
+    location }}</span>
+
+<h1>Horário</h1>
+
 <div *ngIf="isEquipment(equipment); else second">
     <container-element [ngSwitch]="equipment.area">
         <app-culture-details [details]="equipment.equipmentDetails" *ngSwitchCase="'cultura'"></app-culture-details>
