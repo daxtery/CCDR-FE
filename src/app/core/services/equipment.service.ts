@@ -7,6 +7,7 @@ import { updateEquipment } from '../graphql/mutations/update-equipment.mutation'
 import { removeEquipment } from '../graphql/mutations/remove-equipment.mutation';
 
 import { queryEquipments } from '../graphql/queries/equipment.query';
+import { lastNQueries } from '../graphql/queries/last-n-queries.query';
 import { queryById } from '../graphql/queries/by_id.query';
 import { queryByIdNonPreviewDetails } from '../graphql/queries/by_id_non_preview_details.query';
 import { Equipment, EquipmentAndScore, EquipmentNonPreviewDetails } from 'src/app/shared/types';
@@ -67,6 +68,15 @@ export class EquipmentService {
     return this.apollo.query<{ queryEquipments: EquipmentAndScore[] }>({
       query: queryEquipments,
       variables: { query: query },
+      fetchPolicy: 'no-cache'
+    })
+  }
+
+  getLastNQueries(n: number) {
+
+    return this.apollo.query<{ lastNUniqueQueries: string[] }>({
+      query: lastNQueries,
+      variables: { n: n },
       fetchPolicy: 'no-cache'
     })
   }
