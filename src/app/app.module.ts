@@ -9,10 +9,6 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { APOLLO_OPTIONS } from "apollo-angular";
-import { HttpLink } from "apollo-angular/http";
-import { InMemoryCache } from "@apollo/client/core";
-
 import {MatNativeDateModule} from '@angular/material/core';
 import {MaterialModule} from './material.module';
 
@@ -31,20 +27,7 @@ import {MaterialModule} from './material.module';
     MaterialModule,
     ReactiveFormsModule
   ],
-  providers: [
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
-        return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: "http://localhost:3000/graphql"
-          })
-        }
-      },
-      deps: [HttpLink]
-    }
-  ],
+  providers: [],
   exports: [],
   bootstrap: [AppComponent]
 })
