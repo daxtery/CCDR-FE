@@ -44,7 +44,6 @@ export class GroupAreaIconsProvider {
                 const icon: IconInfo = this.database[group][area];
                 // @ts-ignore
                 const name = this.getIconName({ group, area });
-                console.log(name, icon.url);
                 matIconRegistry.addSvgIcon(name, domSanitizer.bypassSecurityTrustResourceUrl(icon.url));
             });
         });
