@@ -33,6 +33,14 @@ export interface Extra {
 export interface Horario {
 };
 
+export class EquipmentLocation {
+
+    state: string;
+    city: string;
+    street: string;
+    zipCode: string;
+}
+
 export interface EquipmentNonPreviewDetails<T = unknown> {
     equipmentDetails: T;
     extras: Extra[];
@@ -40,7 +48,7 @@ export interface EquipmentNonPreviewDetails<T = unknown> {
     // TODO: Add these to the query
     horario?: Horario,
     numero_de_equipamentos?: number;
-    localizacao?: Location;
+    localizacao?: EquipmentLocation;
 }
 
 

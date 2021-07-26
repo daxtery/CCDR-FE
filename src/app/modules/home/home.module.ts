@@ -45,7 +45,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ReactiveFormsModule,
     SharedModule,
     HomePageRoutingModule,
-    MaterialModule
+    MaterialModule,
   ],
   declarations: [
     HomePageComponent,

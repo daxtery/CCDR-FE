@@ -1,7 +1,7 @@
 <mat-grid-list cols="1" rowHeight="1:1">
     <mat-grid-tile>
         <mat-card>
-            <form [formGroup]="equipmentFormGroup" #formDirective="ngForm"  (ngSubmit)="formSubmit(formDirective)">
+            <form [formGroup]="equipmentFormGroup" #formDirective="ngForm" (ngSubmit)="formSubmit(formDirective)">
                 <p>
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Denominação</mat-label>
@@ -24,10 +24,31 @@
                 <p>
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Descrição</mat-label>
-                        <input required matInput placeholder="Descrição do equipamento a inserir" formControlName="description">
+                        <input required matInput placeholder="Descrição do equipamento a inserir"
+                            formControlName="description">
                     </mat-form-field>
                 </p>
+                <p formGroupName="location">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Distrito</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="state" type="text">
+                    </mat-form-field>
+        
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Cidade</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="city" type="text">
+                    </mat-form-field>
 
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Rua</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="street" type="text">
+                    </mat-form-field>
+                    
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Código Postal</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="zipCode" type="text" pattern="[0-9]{4}-[0-9]{3}">
+                    </mat-form-field>
+                </p>
                 <app-social-form [hidden]="currentArea() != 'social'"></app-social-form>
                 <app-culture-form [hidden]="currentArea() != 'cultura'"></app-culture-form>
                 <app-sport-form [hidden]="currentArea() != 'desporto'"></app-sport-form>
