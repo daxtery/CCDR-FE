@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupAreaIconsProvider } from 'src/app/core/services/group-area-icons-provider.service';
-import { AreaOfGroup, CommunicationDetails, EnergyDetails, Equipment } from 'src/app/shared/types';
+import { CommunicationDetails, EnergyDetails, Equipment, EquipmentOfArea, EquipmentOfGroup } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-equipment-details',
@@ -13,19 +13,39 @@ export class EquipmentDetailsComponent {
 
   constructor(readonly groupAreaIconsProvider: GroupAreaIconsProvider) { }
 
-  isEquipment(equipment: Equipment): equipment is Equipment<"equipment"> {
+  isEquipment(equipment: Equipment): equipment is EquipmentOfGroup<"equipment"> {
     return equipment.group === "equipment";
   }
 
-  isInfra(equipment: Equipment): equipment is Equipment<"infra"> {
+  isCulture(equipment: EquipmentOfGroup<"equipment">): equipment is EquipmentOfArea<"cultura"> {
+    return equipment.area === "cultura";
+  }
+
+  isSport(equipment: EquipmentOfGroup<"equipment">): equipment is EquipmentOfArea<"desporto"> {
+    return equipment.area === "desporto";
+  }
+
+  isSocial(equipment: EquipmentOfGroup<"equipment">): equipment is EquipmentOfArea<"social"> {
+    return equipment.area === "social";
+  }
+
+  isHealth(equipment: EquipmentOfGroup<"equipment">): equipment is EquipmentOfArea<"saude"> {
+    return equipment.area === "saude";
+  }
+
+  isEducation(equipment: EquipmentOfGroup<"equipment">): equipment is EquipmentOfArea<"educacao"> {
+    return equipment.area === "educacao";
+  }
+
+  isInfra(equipment: Equipment): equipment is EquipmentOfGroup<"infra"> {
     return equipment.group === "infra";
   }
 
-  isEnergy(equipment: Equipment<"infra">): equipment is Equipment<"infra", EnergyDetails> {
+  isEnergy(equipment: EquipmentOfGroup<"infra">): equipment is EquipmentOfArea<"energia"> {
     return equipment.area === "energia";
   }
 
-  isCommunication(equipment: Equipment<"infra">): equipment is Equipment<"infra", CommunicationDetails> {
+  isCommunication(equipment: EquipmentOfGroup<"infra">): equipment is EquipmentOfArea<"comunicacao"> {
     return equipment.area === "comunicacao";
   }
 

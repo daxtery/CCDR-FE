@@ -8,21 +8,6 @@ export type EquipmentArea = "social" | "cultura" | "educacao" | "desporto" | "sa
 export type InfrastructureArea = "energia" | "comunicacao";
 export type Group = "equipment" | "infra";
 
-export type EquipmentPreview<G extends Group = Group> =
-    {
-        _id: string;
-        name: string;
-        description: string;
-    } & GroupAndArea<G>;
-
-export type AreaOfGroup<G extends Group> = G extends "equipment" ? EquipmentArea : InfrastructureArea;
-
-export type GroupAndArea<G extends Group> = {
-    group: G;
-    area: AreaOfGroup<G>;
-}
-
-
 export interface Extra {
     name: string;
     value: string;
@@ -41,18 +26,35 @@ export class EquipmentLocation {
     zipCode: string;
 }
 
-export interface EquipmentNonPreviewDetails<T = unknown> {
-    equipmentDetails: T;
+export type Equipment = {
+    _id: string;
+    name: string;
+    description: string;
+    group: Group;
+    area: EquipmentArea | InfrastructureArea;
+
+    equipmentDetails: unknown;
     extras: Extra[];
 
     // TODO: Add these to the query
     horario?: Horario,
     numero_de_equipamentos?: number;
     localizacao?: EquipmentLocation;
-}
+} & (
+        { area: "social", group: "equipment", equipmentDetails: SocialDetails; } |
+        { area: "cultura", group: "equipment", equipmentDetails: CultureDetails; } |
+        { area: "educacao", group: "equipment", equipmentDetails: EducationDetails; } |
+        { area: "desporto", group: "equipment", equipmentDetails: SportDetails; } |
+        { area: "saude", group: "equipment", equipmentDetails: HealthDetails; } |
+        { area: "energia", group: "infra", equipmentDetails: EnergyDetails; } |
+        { area: "comunicacao", group: "infra", equipmentDetails: CommunicationDetails; }
+    );
 
+export type EquipmentOfGroup<G extends Equipment["group"]> = Equipment & { group: G; };
+export type EquipmentOfArea<A extends Equipment["area"]> = Equipment & { area: A; };
 
-export type Equipment<G extends Group = Group, T = unknown> = EquipmentPreview<G> & EquipmentNonPreviewDetails<T>;
+export type EquipmentPreview = Pick<Equipment, "group" | "area" | "_id" | "description" | "name">
+export type EquipmentNonPreviewDetails = Pick<Equipment, "equipmentDetails" | "extras" | "horario" | "numero_de_equipamentos" | "localizacao">
 
 export interface EquipmentAndScore {
     equipment: EquipmentPreview;
@@ -83,11 +85,16 @@ export interface SportDetails {
     instalacoes_apoio?: string[];
 };
 
-export interface HealthDetails<T extends HospitalHealthDetails | GeneralHealthDetails = unknown> {
+export type HealthDetails = {
     num_utentes?: number;
     tipo_saude?: "saude_geral" | "saude_hospitalar";
-    healh_details?: T;
-};
+    healh_details?: unknown;
+} & (
+        { tipo_saude: "saude_geral", healh_details: GeneralHealthDetails } |
+        { tipo_saude: "saude_hospitalar", healh_details: HospitalHealthDetails }
+    );
+
+export type HealthDetailsOfType<T extends HealthDetails["healh_details"]> = HealthDetails & { healh_details: T; };
 
 export interface HospitalHealthDetails {
     num_equipamentos_por_especialidade?: [string, number][];
@@ -113,13 +120,20 @@ export interface EducationDetails {
     escolas?: SchoolDetails[];
 };
 
-export interface EnergyDetails<T = unknown> {
+export type EnergyDetails = {
     num_operadores: number;
     tipo_energia: "gas" | "luz";
     lojas_por_operador: [string, number][];
     agentes_por_operador: [string, number][];
-    energy_details: T;
-};
+    energy_details: unknown;
+} & (
+        { tipo_energia: "gas", energy_details: GasDetails } |
+        { tipo_energia: "luz", energy_details: ElectricityDetails }
+    );
+
+
+export type EnergyDetailsOfType<T extends EnergyDetails["energy_details"]> = EnergyDetails & { energy_details: T; };
+
 
 export interface GasDetails {
     num_consumo_gas: [Location, number][];
@@ -132,13 +146,20 @@ export interface ElectricityDetails {
     consumo_elec_p_atividade: [Location, ElectricConsumption][];
 };
 
-export interface CommunicationDetails<T = unknown> {
+export type CommunicationDetails = {
     num_operadores: number;
     tipo_comunicacao: "telefone" | "internet" | "correio" | "televisao";
     lojas_por_operador: [string, number][];
     cobertura_por_operador: [Location, { region: [string, number][]; }][];
-    communication_details: T;
-};
+    communication_details: unknown;
+} & (
+        { tipo_comunicacao: "telefone", communication_details: TelephoneDetails } |
+        { tipo_comunicacao: "internet", communication_details: InternetDetails } |
+        { tipo_comunicacao: "correio", communication_details: MailDetails } |
+        { tipo_comunicacao: "televisao", communication_details: TVDetails }
+    );
+
+export type CommunicationDetailsOfType<T extends CommunicationDetails["communication_details"]> = CommunicationDetails & { communication_details: T; };
 
 export interface TelephoneDetails {
     num_postos: [Location, Post][];

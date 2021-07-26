@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SportDetails, Equipment, EnergyDetails, GasDetails, ElectricityDetails } from 'src/app/shared/types';
+import { SportDetails, Equipment, EnergyDetails, GasDetails, ElectricityDetails, EnergyDetailsOfType } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-energy-details',
@@ -10,11 +10,11 @@ export class EnergyDetailsComponent {
 
   @Input() details!: EnergyDetails;
 
-  isGas(obj: EnergyDetails): obj is EnergyDetails<GasDetails> {
+  isGas(obj: EnergyDetails): obj is EnergyDetailsOfType<GasDetails> {
     return obj.tipo_energia === "gas";
   }
 
-  isElectricity(obj: EnergyDetails): obj is EnergyDetails<ElectricityDetails> {
+  isElectricity(obj: EnergyDetails): obj is EnergyDetailsOfType<ElectricityDetails> {
     return obj.tipo_energia === "luz";
   }
 

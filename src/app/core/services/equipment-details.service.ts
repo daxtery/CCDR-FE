@@ -16,9 +16,11 @@ export class EquipmentDetailsService {
     constructor(private equipmentService: EquipmentService) { }
 
     set_equipment(equipment: EquipmentPreview) {
+        // @ts-ignore
         this.equipment$ = this.equipmentService.getByIdNonPreviewDetails(equipment._id)
             .pipe(
                 map(response =>
+                    // @ts-ignore
                     this.equipment = { ...equipment, ...response.data.queryById }
                 ));
     }

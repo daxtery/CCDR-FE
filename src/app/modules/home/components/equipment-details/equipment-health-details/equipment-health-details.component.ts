@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HealthDetails, Equipment, GeneralHealthDetails, HospitalHealthDetails } from 'src/app/shared/types';
+import { HealthDetails, Equipment, GeneralHealthDetails, HospitalHealthDetails, HealthDetailsOfType } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-health-details',
@@ -15,11 +15,11 @@ export class HealthDetailsComponent implements OnInit {
   ngOnInit(): void { }
 
 
-  isHospital(obj: HealthDetails): obj is HealthDetails<HospitalHealthDetails> {
+  isHospital(obj: HealthDetails): obj is HealthDetailsOfType<HospitalHealthDetails> {
     return obj.tipo_saude === "saude_hospitalar";
   }
 
-  isGeneral(obj: HealthDetails): obj is HealthDetails<GeneralHealthDetails> {
+  isGeneral(obj: HealthDetails): obj is HealthDetailsOfType<GeneralHealthDetails> {
     return obj.tipo_saude === "saude_geral";
   }
 
