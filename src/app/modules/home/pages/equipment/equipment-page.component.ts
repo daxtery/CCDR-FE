@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { EquipmentDetailsService } from 'src/app/core/services/equipment-details-service';
+import { EquipmentDetailsService } from 'src/app/core/services/equipment-details.service';
 
 import { Equipment } from 'src/app/shared/types';
 

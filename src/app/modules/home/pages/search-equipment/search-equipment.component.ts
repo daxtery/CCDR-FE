@@ -1,6 +1,6 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { EquipmentDetailsService } from 'src/app/core/services/equipment-details-service';
+import { EquipmentDetailsService } from 'src/app/core/services/equipment-details.service';
 import { FeedbackService } from 'src/app/core/services/feedback.service';
 import { FeedBack, QueryFeedBackDto } from 'src/app/shared/dtos/send-feedback.dto';
 import { Equipment, EquipmentAndScore, EquipmentPreview } from 'src/app/shared/types';
