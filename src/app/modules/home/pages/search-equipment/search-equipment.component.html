@@ -1,13 +1,25 @@
 <mat-grid-list cols="1" rowHeight="4:1">
     <mat-grid-tile>
-        <mat-form-field (keydown.enter)="search()" class="full-width" appearance="fill">
-            <mat-label>Search</mat-label>
-            <mat-icon matPrefix>search</mat-icon>
-            <input matInput placeholder="Search for Equipments" [(ngModel)]="searchValue">
-            <button mat-icon-button matSuffix (click)="search()">
-                <mat-icon>send</mat-icon>
-            </button>
-        </mat-form-field>
+
+        <form>
+            <mat-form-field (keydown.enter)="search()" class="full-width" appearance="fill">
+                <mat-label>Search</mat-label>
+                <mat-icon matPrefix>search</mat-icon>
+
+                <input type="text" placeholder="Search for Equipments" aria-label="Number" matInput
+                    [matAutocomplete]="auto" [formControl]="control">
+
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let suggestion of suggestions$ | async" [value]="suggestion">
+                        {{suggestion}}
+                    </mat-option>
+                </mat-autocomplete>
+
+                <button mat-icon-button matSuffix (click)="search()">
+                    <mat-icon>send</mat-icon>
+                </button>
+            </mat-form-field>
+        </form>
 
     </mat-grid-tile>
     <mat-grid-tile>

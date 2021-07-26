@@ -22,12 +22,8 @@ export class SearchService {
 
     constructor(private apollo: Apollo) { }
 
-    queryEquipments(query: string) {
-        this.apollo.query<{ queryEquipments: EquipmentAndScore[] }>({
-            query: queryEquipments,
-            variables: { query: query },
-            fetchPolicy: 'no-cache'
-        }).pipe(map(result => result.data.queryEquipments))
+    searchEquipments(query: string) {
+        this.queryEquipments(query)
             .subscribe({
                 next: (data) => {
                     this.searches.next({ query, results: data })
@@ -38,20 +34,20 @@ export class SearchService {
             });
     }
 
-    equipmentSugestions(query: string) {
+    queryEquipments(query: string, limit?: number) {
         return this.apollo.query<{ queryEquipments: EquipmentAndScore[] }>({
             query: queryEquipments,
-            variables: { query: query },
+            variables: { options: { query, limit } },
             fetchPolicy: 'no-cache'
-        })
+        }).pipe(map(result => result.data.queryEquipments));
     }
 
-    getLastNQueries(n: number) {
+    getLastNUniqueQueries(n: number) {
         return this.apollo.query<{ lastNUniqueQueries: string[] }>({
             query: lastNQueries,
             variables: { n: n },
             fetchPolicy: 'no-cache'
-        })
+        }).pipe(map(result => result.data.lastNUniqueQueries));
     }
 
 }
