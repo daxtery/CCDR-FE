@@ -152,3 +152,9 @@ export interface TVDetails {
     num_subscricoes: [Location, number][];
     num_clientes: [string, number][];
 };
+
+
+export interface SearchResults {
+    query: string;
+    results: EquipmentAndScore[];
+}

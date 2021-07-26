@@ -12,8 +12,9 @@
     </mat-grid-tile>
     <mat-grid-tile>
         <mat-action-list>
-            <a mat-list-item *ngFor="let equipment of $queryResults" (click)="markAsClicked(equipment)"
-                routerLinkActive="active" [routerLink]="['/home/equipment', equipment._id]">
+            <a mat-list-item *ngFor="let equipment of queryResults" (click)="markAsClicked(equipment)"
+                (auxclick)="$event.button === 1 ? markAsClicked(equipment) : 0" routerLinkActive="active"
+                [routerLink]="['/home/equipment', equipment._id]">
                 <app-equipment-preview [equipment]="equipment">
                 </app-equipment-preview>
             </a>
