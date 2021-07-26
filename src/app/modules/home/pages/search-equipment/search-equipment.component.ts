@@ -30,6 +30,9 @@ export class SearchEquipmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.equipmentService.getLastNQueries(5).subscribe(({ data }) => {
+      console.log(data.lastNUniqueQueries);
+    })
   }
 
   ngOnDestroy(): void {

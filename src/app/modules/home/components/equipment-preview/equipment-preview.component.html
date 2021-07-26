@@ -1,1 +1,26 @@
-<p>{{equipment.name}}: {{equipment.area}}, {{equipment.description}}</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{equipment.name}} <mat-icon mat-card-avatar
+                [svgIcon]="groupAreaIconsProvider.getIconName(equipment)"> </mat-icon>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <!-- TODO: put correct location -->
+        <p>Localizacação: Évora</p>
+        <p> {{ (equipment.description.length>textCharacterLimit) ? (equipment.description |
+            slice:0:textCharacterLimit)+'...':(equipment.description) }} </p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <!-- TODO: Should we put this here?-->
+        <!-- <button mat-button>
+            Editar
+        </button>
+        <button mat-button>
+            Apagar
+        </button> -->
+        <button mat-icon-button>
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

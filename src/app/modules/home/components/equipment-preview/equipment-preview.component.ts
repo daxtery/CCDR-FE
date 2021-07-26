@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { GroupAreaIconsProvider } from 'src/app/core/services/group-area-icons-provider.service';
 import type { Equipment, EquipmentPreview } from "../../../../shared/types";
 
 @Component({
@@ -8,9 +9,11 @@ import type { Equipment, EquipmentPreview } from "../../../../shared/types";
 })
 export class EquipmentPreviewComponent {
 
+  readonly textCharacterLimit = 360;
+
   @Input() equipment!: EquipmentPreview;
 
-  constructor() { }
+  constructor(readonly groupAreaIconsProvider: GroupAreaIconsProvider) { }
 
 
 }
