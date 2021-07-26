@@ -9,6 +9,7 @@ import { HealthFormComponent } from '../../components/equipment-forms//health-fo
 import { SocialFormComponent } from '../../components/equipment-forms/social-form/social-form.component';
 import { SportFormComponent } from '../../components/equipment-forms/sport-form/sport-form.component';
 import { ExtrasFormComponent } from '../../components/extras-form/extras-form.component';
+import { EquipmentLocation } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-add-equipment',
@@ -16,7 +17,7 @@ import { ExtrasFormComponent } from '../../components/extras-form/extras-form.co
   styleUrls: ['./add-equipment.component.sass']
 })
 export class AddEquipmentComponent implements OnInit {
-
+  
   @ViewChild(SocialFormComponent, { static: true }) socialForm: SocialFormComponent;
   @ViewChild(CultureFormComponent, { static: true }) cultureForm: CultureFormComponent;
   @ViewChild(SportFormComponent, { static: true }) sportForm: SportFormComponent;
@@ -35,6 +36,12 @@ export class AddEquipmentComponent implements OnInit {
       name: ['', Validators.required],
       area: ['', Validators.required],
       description: ['', Validators.required],
+      location: this.formBuilder.group({
+        state: [''],
+        city: [''],
+        street: [''],
+        zipCode: [''],
+      }),
       social: this.socialForm.createGroup(),
       cultura: this.cultureForm.createGroup(),
       desporto: this.sportForm.createGroup(),
@@ -52,6 +59,15 @@ export class AddEquipmentComponent implements OnInit {
     return this.equipmentFormGroup.get('area').value
   }
 
+  onAutocompleteSelected(result) {
+    console.log('onAutocompleteSelected: ', result);
+  }
+
+  onLocationSelected(location: Location) {
+    console.log('onLocationSelected: ', location);
+    
+  }
+
   formSubmit(formDirective: FormGroupDirective) {
     const details = this.forms[this.currentArea()].getFormData()
 
@@ -60,10 +76,11 @@ export class AddEquipmentComponent implements OnInit {
     const area = this.equipmentFormGroup.value['area']
     const description = this.equipmentFormGroup.value['description']
     const group: String = 'equipment';
+    const location: EquipmentLocation = this.equipmentFormGroup.value['location'];
 
     const extras = this.extrasForm.getFormData();
 
-    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, extras };
+    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, location: location, extras };
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

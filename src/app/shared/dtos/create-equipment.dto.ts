@@ -1,4 +1,4 @@
-import { Extra } from "../types";
+import { EquipmentLocation, Extra } from "../types";
 
 export class CreateEquipmentDto {
 
@@ -9,4 +9,5 @@ export class CreateEquipmentDto {
 
     extras: Extra[];
     equipmentDetails: Object;
+    location: EquipmentLocation;
 }
