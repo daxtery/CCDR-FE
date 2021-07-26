@@ -47,10 +47,16 @@ export class GroupAreaIconsProvider {
                 matIconRegistry.addSvgIcon(name, domSanitizer.bypassSecurityTrustResourceUrl(icon.url));
             });
         });
+
+
+        // TODO: remove this when we have the icons
+        matIconRegistry.addSvgIcon("placeholder", domSanitizer.bypassSecurityTrustResourceUrl("https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg"));
     }
 
     getIconName<G extends Group>(groupAndArea: GroupAndArea<G>) {
-        return `${groupAndArea.group}-${groupAndArea.area}` as const;
+        return "placeholder";
+        // TODO: uncomment this when we have the icons
+        // return `${groupAndArea.group}-${groupAndArea.area}` as const;
     }
 
 }
