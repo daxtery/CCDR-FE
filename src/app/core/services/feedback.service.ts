@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { EquipmentAndScore, SearchResults } from 'src/app/shared/types';
 
 import { giveQueryFeedback } from '../graphql/mutations/feedback.mutation';
-import { SearchService } from './search.service';
+import { SearchResults, SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root'

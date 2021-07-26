@@ -2,9 +2,15 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EquipmentAndScore, SearchResults } from 'src/app/shared/types';
+import { EquipmentAndScore } from 'src/app/shared/types';
 import { queryEquipments } from '../graphql/queries/equipment.query';
 import { lastNQueries } from '../graphql/queries/last-n-queries.query';
+
+
+export interface SearchResults {
+    query: string;
+    results: EquipmentAndScore[];
+}
 
 @Injectable({
     providedIn: 'root'
