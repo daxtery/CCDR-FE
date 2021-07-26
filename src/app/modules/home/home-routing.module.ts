@@ -9,12 +9,24 @@ import { LoginComponent } from './pages/login/login.component';
 import { LoginGuard } from 'src/app/core/guards/login.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoggedGuard } from 'src/app/core/guards/logged.guard';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomePageComponent,
     children: [
+      {
+        path: '',
+        component: LandingPageComponent,
+        children: [
+          {
+            path: 'login',
+            component: LoginComponent,
+          },
+        ],
+        canActivate: [LoggedGuard]
+      },
       {
         path: 'add_equipment',
         component: AddEquipmentComponent,
@@ -25,11 +37,7 @@ const routes: Routes = [
         component: AddInfraestructureComponent,
         canActivate: [LoginGuard]
       },
-      {
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [LoggedGuard]
-      },
+      
       {
         path: 'profile',
         component: ProfileComponent,

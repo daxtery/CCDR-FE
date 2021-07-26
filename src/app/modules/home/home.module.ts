@@ -36,6 +36,7 @@ import { EnergyDetailsComponent } from './components/equipment-details/infrastru
 import { CommunicationDetailsComponent } from './components/equipment-details/infrastructure-communication-details/infrastructure-communication-details.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 @NgModule({
   imports: [
@@ -73,6 +74,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     CommunicationDetailsComponent,
     LoginComponent,
     ProfileComponent,
+    LandingPageComponent,
   ]
 })
 export class HomePageModule { }

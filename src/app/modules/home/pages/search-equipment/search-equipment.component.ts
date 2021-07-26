@@ -1,4 +1,5 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EquipmentDetailsService } from 'src/app/core/services/equipment-details-service';
 import { FeedbackService } from 'src/app/core/services/feedback.service';
@@ -15,7 +16,6 @@ import { EquipmentService } from '../../../../core/services/equipment.service';
 })
 export class SearchEquipmentComponent implements OnInit {
 
-  searchValue = ''
   previousSearch = ''
 
   clickedMap = new Map<string, boolean>();
@@ -23,13 +23,22 @@ export class SearchEquipmentComponent implements OnInit {
 
   $queryResults: EquipmentPreview[] = [];
 
+  searchFormGroup: FormGroup;
+
   constructor(
     private equipmentService: EquipmentService,
     private feedbackService: FeedbackService,
     private equipmentDetailsService: EquipmentDetailsService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
+
+    this.searchFormGroup = this.formBuilder.group({
+
+      searchValue: ['']
+    })
+
     this.equipmentService.getLastNQueries(5).subscribe(({ data }) => {
       console.log(data.lastNUniqueQueries);
     })
@@ -44,13 +53,15 @@ export class SearchEquipmentComponent implements OnInit {
 
     this.sendQueriesFeedback();
 
-    if (this.searchValue != '') {
+    const searchValue = this.searchFormGroup.get('searchValue').value
+
+    if (searchValue != '') {
 
       this.scoresMap.clear();
       this.clickedMap.clear();
       this.$queryResults = []
 
-      this.equipmentService.queryEquipments(this.searchValue).subscribe(({ data }) => {
+      this.equipmentService.queryEquipments(searchValue).subscribe(({ data }) => {
 
         data['queryEquipments'].forEach((value) => {
           this.scoresMap.set(value.equipment._id, value.score);
@@ -58,8 +69,8 @@ export class SearchEquipmentComponent implements OnInit {
           this.$queryResults.push(value.equipment);
         })
 
-        this.previousSearch = this.searchValue;
-        this.searchValue = '';
+        this.previousSearch = searchValue;
+        this.searchFormGroup.get('searchValue').reset();
 
       }, (error) => {
         console.log('there was an error sending the query', error);
