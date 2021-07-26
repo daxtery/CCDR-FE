@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
+import { EquipmentLocation } from 'src/app/shared/types';
 import { CommunicationFormComponent } from '../../components/infrastructure-form/communication-form/communication-form.component';
 import { EnergyFormComponent } from '../../components/infrastructure-form/energy-form/energy-form.component';
 
@@ -27,6 +28,12 @@ export class AddInfraestructureComponent implements OnInit {
       name: [''],
       area: [''],
       description: [''],
+      location: this.formBuilder.group({
+        state: [''],
+        city: [''],
+        street: [''],
+        zipCode: [''],
+      }),
       energia: this.energyForm.createGroup(),
       comunicacao: this.communicationForm.createGroup()
 
@@ -49,10 +56,11 @@ export class AddInfraestructureComponent implements OnInit {
 
     const area = this.infrastructureFormGroup.value['area']
     const description = this.infrastructureFormGroup.value['description']
+    const location: EquipmentLocation = this.infrastructureFormGroup.value['location']
 
     const group = 'infra';
 
-    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, extras: [] }
+    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, location, extras: [] }
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 
