@@ -34,9 +34,10 @@ import { CommunicationFormComponent } from './components/infrastructure-form/com
 import { ExtrasFormComponent } from './components/extras-form/extras-form.component';
 import { EnergyDetailsComponent } from './components/equipment-details/infrastructure-energy-details/infrastructure-energy-details.component';
 import { CommunicationDetailsComponent } from './components/equipment-details/infrastructure-communication-details/infrastructure-communication-details.component';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   imports: [
@@ -75,6 +76,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
     LoginComponent,
     ProfileComponent,
     LandingPageComponent,
+    SearchComponent,
   ]
 })
 export class HomePageModule { }

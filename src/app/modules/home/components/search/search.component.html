@@ -1,0 +1,15 @@
+<form [formGroup]="searchFormGroup" (keydown.enter)="search()" class="full-width" appearance="fill">
+    <div>
+        <div class="input-field">
+            <a id="search-icon">
+            </a>
+            <input placeholder="Pesquise aqui" formControlName="searchValue">
+            <a id="search-btn" (click)="search()">
+            </a>
+        </div>
+        
+    </div>
+</form>
+
+   
+        
