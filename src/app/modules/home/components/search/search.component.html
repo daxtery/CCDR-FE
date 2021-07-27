@@ -1,15 +1,26 @@
 <form [formGroup]="searchFormGroup" (keydown.enter)="search()" class="full-width" appearance="fill">
-    <div>
+    <div [ngClass]="{'dropped': dropdownVisible }">
         <div class="input-field">
             <a id="search-icon">
             </a>
-            <input placeholder="Pesquise aqui" formControlName="searchValue">
+            <input (focus)="onFocus()" (focusout)="onFocusOut()" placeholder="Pesquise aqui"
+                formControlName="searchValue">
             <a id="search-btn" (click)="search()">
             </a>
         </div>
         
-    </div>
-</form>
 
-   
-        
+    </div>
+
+    <div id="top-5" [hidden]="!dropdownVisible">
+        <ul>
+            <li class="last-search" *ngFor="let item of lastSearch">
+                <a class="last-search-icon">
+                </a>
+                {{item}}
+            </li>
+        </ul>
+    </div>
+
+
+</form>
