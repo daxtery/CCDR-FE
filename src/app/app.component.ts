@@ -9,25 +9,36 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'iGA';
 
-  dayColor = 'linear-gradient(0deg, rgba(255, 255, 255, 1) 12.98%, rgba(144, 169, 245, 1) 84.86%)';
-  noonColor = 'linear-gradient(0deg, rgba(255, 116, 68, 1) 6.39%, rgba(249, 133, 82, 1) 11.55%, rgba(241, 157, 100, 1) 20.42%, rgba(236, 171, 111, 1) 28.69%, rgba(234, 176, 115, 1) 35.72%, rgba(207, 168, 143, 1) 47.17%, rgba(140, 148, 213, 1) 71.74%, rgba(127, 144, 226, 1) 76.12%)'
+  background = ''
+
+  morningBackground = 'url(../../assets/background/background-morning.svg) no-repeat'
+  dayBackground = 'url(../../assets/background/background-day.svg) no-repeat'
+  noonBackground = 'url(../../assets/background/background-noon.svg) no-repeat'
+  nightBackground = 'url(../../assets/background/background-night.svg) no-repeat'
 
   constructor(private elementRef: ElementRef) {
 
+  }
 
+  ngOnInit(): void {
+    
+    const hour = new Date().getHours();
+
+    if (hour >= 5 && hour < 11) this.background = this.morningBackground;
+    if (hour >= 11 && hour < 17) this.background = this.dayBackground;
+    if (hour >= 17 && hour < 23) this.background = this.noonBackground;
+    if (hour >= 0 && hour < 5) this.background = this.nightBackground;
   }
 
   ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument
-      .body.style.background = this.noonColor;
 
     this.elementRef.nativeElement.ownerDocument
-      .body.style.backgroundSize = "100% 100%";
+      .body.style.background = this.background;
 
     this.elementRef.nativeElement.ownerDocument
-      .body.style.backgroundRepeat = "no-repeat";
+      .body.style.backgroundSize = "cover";
 
-    /* this.elementRef.nativeElement.ownerDocument
-      .body.style.backgroundImage = "" */
+    this.elementRef.nativeElement.ownerDocument
+      .body.style.backgroundPosistion ='center center';
   }
 }

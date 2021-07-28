@@ -8,8 +8,6 @@
             <a id="search-btn" (click)="search()">
             </a>
         </div>
-        
-
     </div>
 
     <div id="top-5" [hidden]="!dropdownVisible">
@@ -17,10 +15,8 @@
             <li class="last-search" *ngFor="let item of lastSearch">
                 <a class="last-search-icon">
                 </a>
-                {{item}}
+                <span class="truncate left-align">{{item}}</span>
             </li>
         </ul>
     </div>
-
-
 </form>
