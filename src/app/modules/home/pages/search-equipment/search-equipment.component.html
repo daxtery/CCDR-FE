@@ -1,27 +1,30 @@
+<div class="wrapper">
+    <div class="row" id="search">
 
-<div class="row" id="search">
+        <div class="col s10 offset-s1">
 
-    <div class="col s10 offset-s1">
+            <form [formGroup]="searchFormGroup" (keydown.enter)="search()" class="full-width" appearance="fill">
+                <div class="input-field">
+                    <a id="search-icon">
+                    </a>
+                    <input placeholder="Pesquise aqui" formControlName="searchValue">
+                    <a id="search-btn" (click)="search()">
+                    </a>
+                </div>
+            </form>
 
-        <form [formGroup]="searchFormGroup" (keydown.enter)="search()" class="full-width" appearance="fill">
-            <div>
-                <input placeholder="Search for Equipments" formControlName="searchValue">
-                <button mat-icon-button matSuffix (click)="search()">
-                    <mat-icon>send</mat-icon>
-                </button>
-            </div>
-        </form>
+        </div>
 
     </div>
-        
-</div>
+    <div class="row">
 
-<div class="row" id="search-results">
+        <div class="col s4" *ngFor="let equipment of $queryResults">
+            <a (click)="markAsClicked(equipment)" [routerLink]="['/home/equipment', equipment._id]">
+            <app-equipment-preview [equipment]="equipment">
+            </app-equipment-preview>
+            </a>
+        </div>
 
-    <div class="col s4" *ngFor="let equipment of $queryResults">
-        <app-equipment-preview [equipment]="equipment">
-        </app-equipment-preview>
     </div>
 
 </div>
-

@@ -1,2 +1,66 @@
-.spacer 
-    flex: 1 1 auto
+@import "/src/styles.sass"
+    
+div.card
+    color: #333333 !important
+    font-family: $main-font
+    background-color: #F2F2F2
+    border-radius: 25px
+    box-shadow: none
+
+    div.card-content
+        
+        height: auto
+
+        div.title-wrapper
+
+            width: 100%
+            height: auto
+            position: relative
+
+            span.card-title
+                font-size: 20pt
+                max-width: 250px
+                height: 70px
+                overflow: hidden
+
+            a.equipment-icon
+                width: 60px
+                height: 60px
+                position: absolute
+                top: 5%
+                right: 1%
+                background-repeat: no-repeat
+                background-position: center center
+                background-size: 60px 60px
+
+        hr
+            background-color:#333333
+            border: none
+            height: 1px
+            margin-bottom: 20px
+
+        p.location
+            font-size: 15pt
+
+        p.description
+            margin-top: 10px
+            font-size: 12pt
+            height: 100px
+            overflow: hidden
+
+        div.actions
+            border: none !important
+            padding: 0 !important
+            height: auto
+            width: 100%
+            display: flex
+            justify-content: flex-end
+
+            a.more-btn
+                
+                height: 40px
+                width: 40px
+                
+                background: url(\src\assets\icons\more-btn.svg) no-repeat
+                background-size: 30px 30px
+                background-position: center center

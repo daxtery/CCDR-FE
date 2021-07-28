@@ -36,7 +36,7 @@ export class AppComponent {
       .body.style.background = this.background;
 
     this.elementRef.nativeElement.ownerDocument
-      .body.style.backgroundSize = "cover";
+      .body.style.backgroundSize = "100%";
 
     this.elementRef.nativeElement.ownerDocument
       .body.style.backgroundPosistion ='center center';

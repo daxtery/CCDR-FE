@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GroupAreaIconsProvider } from 'src/app/core/services/group-area-icons-provider.service';
-import type { Equipment, EquipmentPreview } from "../../../../shared/types";
+import { Component, Input } from '@angular/core';
+import type { EquipmentPreview } from "../../../../shared/types";
 
 @Component({
   selector: 'app-equipment-preview',
@@ -9,11 +8,14 @@ import type { Equipment, EquipmentPreview } from "../../../../shared/types";
 })
 export class EquipmentPreviewComponent {
 
-  readonly textCharacterLimit = 360;
-
   @Input() equipment!: EquipmentPreview;
 
-  constructor(readonly groupAreaIconsProvider: GroupAreaIconsProvider) { }
+  icon = '';
 
+  constructor() { }
 
+  ngOnInit(): void {
+    
+    this.icon = `url(../../../assets/icons/${this.equipment.group}/${this.equipment.area}.svg)`
+  }
 }
