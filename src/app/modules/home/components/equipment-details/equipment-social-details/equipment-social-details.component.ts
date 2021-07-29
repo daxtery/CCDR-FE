@@ -8,7 +8,7 @@ import { SocialDetails, Equipment } from 'src/app/shared/types';
 })
 export class SocialDetailsComponent {
 
-  @Input() details;
+  @Input() details!: SocialDetails;
 
   constructor() { }
 
