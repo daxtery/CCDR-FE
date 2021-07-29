@@ -1,27 +1,27 @@
-<p *ngIf="details.num_operadores !== null">num_operadores: {{details.num_operadores }}</p>
-<p *ngIf="details.tipo_energia !== null">tipo_energia: {{details.tipo_energia }}</p>
-<p *ngIf="details.lojas_por_operador !== null">lojas_por_operador: {{details.lojas_por_operador }}</p>
-<p *ngIf="details.agentes_por_operador !== null">agentes_por_operador: {{details.agentes_por_operador }}</p>
+<p *ngIf="details.num_operadores !== null"><b>num_operadores</b>: {{details.num_operadores }}</p>
+<p *ngIf="details.tipo_energia !== null"><b>tipo_energia</b>: {{details.tipo_energia }}</p>
+<p *ngIf="details.lojas_por_operador !== null"><b>lojas_por_operador</b>: {{details.lojas_por_operador }}</p>
+<p *ngIf="details.agentes_por_operador !== null"><b>agentes_por_operador</b>: {{details.agentes_por_operador }}</p>
 
 
 <div *ngIf="isGas(details); else second">
-    <p *ngIf="details.energy_details.num_consumo_gas !== null">num_consumo_gas:
+    <p *ngIf="details.energy_details.num_consumo_gas !== null"><b>num_consumo_gas</b>:
         {{details.energy_details.num_consumo_gas}}
     </p>
 
-    <p *ngIf="details.energy_details.consumo_gas !== null">consumo_gas: {{details.energy_details.consumo_gas}}
+    <p *ngIf="details.energy_details.consumo_gas !== null"><b>consumo_gas</b>: {{details.energy_details.consumo_gas}}
     </p>
 
-    <p *ngIf="details.energy_details.pontos_acesso !== null">pontos_acesso: {{details.energy_details.pontos_acesso}}
+    <p *ngIf="details.energy_details.pontos_acesso !== null"><b>pontos_acesso</b>: {{details.energy_details.pontos_acesso}}
     </p>
 </div>
 
 <ng-template #second>
     <div *ngIf="isElectricity(details); else elseBlock">
-        <p *ngIf="details.energy_details.num_consumo_elec_p_atividade !== null">num_consumo_elec_p_atividade:
+        <p *ngIf="details.energy_details.num_consumo_elec_p_atividade !== null"><b>num_consumo_elec_p_atividade</b>:
             {{details.energy_details.num_consumo_elec_p_atividade}}
         </p>
-        <p *ngIf="details.energy_details.consumo_elec_p_atividade !== null">consumo_elec_p_atividade:
+        <p *ngIf="details.energy_details.consumo_elec_p_atividade !== null"><b>consumo_elec_p_atividade</b>:
             {{details.energy_details.consumo_elec_p_atividade}}
         </p>
     </div>
