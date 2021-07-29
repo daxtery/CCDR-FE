@@ -67,7 +67,7 @@ export class EquipmentService {
 
     return this.apollo.query<{ queryEquipments: EquipmentAndScore[] }>({
       query: queryEquipments,
-      variables: { query: query },
+      variables: { options: { query } },
       fetchPolicy: 'no-cache'
     })
   }
