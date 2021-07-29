@@ -9,8 +9,12 @@ import { FeedbackService } from './core/services/feedback.service';
 export class AppComponent {
   title = 'iGA';
 
-  constructor() {
+  constructor(private feedbackService: FeedbackService) { }
 
+  // Note: This is so we give feedback to the user when they close the window.
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(_event) {
+    this.feedbackService.sendFeedBack();
   }
 
   ngOnInit(): void {
