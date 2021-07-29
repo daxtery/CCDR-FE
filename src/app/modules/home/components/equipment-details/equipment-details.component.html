@@ -1,44 +1,115 @@
 <div class="wrapper">
 
-    {{equipment.name}}
-    <p>{{equipment.description}}</p>
-
-    <p *ngIf="equipment.numero_de_equipamentos"><b>Número de equipamentos</b>: {{ equipment.numero_de_equipamentos }}
+    <!-- <p *ngIf="equipment.numero_de_equipamentos"><b>Número de equipamentos</b>: {{ equipment.numero_de_equipamentos }}
     </p>
+ -->
+    <div class="row" id="search">
 
-    <h1>Contactos</h1>
-    <mat-icon> location_on</mat-icon><span *ngIf="equipment.localizacao !== undefined">Localizacao: {{
-        equipment.localizacao }}</span>
+        <div class="col s10 offset-s1">
 
-    <h1>Horário</h1>
-
-    <div *ngIf="isEquipment(equipment); else second">
-        <container-element [ngSwitch]="equipment.area">
-            <app-culture-details [details]="equipment.equipmentDetails" *ngSwitchCase="'cultura'"></app-culture-details>
-            <app-sport-details [details]="equipment.equipmentDetails" *ngSwitchCase="'desporto'"></app-sport-details>
-            <app-social-details [details]="equipment.equipmentDetails" *ngSwitchCase="'social'"></app-social-details>
-            <app-health-details [details]="equipment.equipmentDetails" *ngSwitchCase="'saude'"></app-health-details>
-            <app-education-details [details]="equipment.equipmentDetails" *ngSwitchCase="'educacao'">
-            </app-education-details>
-            <p *ngSwitchDefault>...</p>
-        </container-element>
-    </div>
-
-    <ng-template #second>
-        <div *ngIf="isInfra(equipment)">
-            <app-energy-details *ngIf="isEnergy(equipment); else secondsecond" [details]="equipment.equipmentDetails">
-            </app-energy-details>
-
-            <ng-template #secondsecond>
-                <app-communication-details *ngIf="isCommunication(equipment)" [details]="equipment.equipmentDetails">
-                </app-communication-details>
-            </ng-template>
+            <form class="full-width" appearance="fill">
+                <div class="input-field">
+                    <a id="search-icon">
+                    </a>
+                    <input placeholder="Pesquise aqui" formControlName="searchValue">
+                    <a id="search-btn">
+                    </a>
+                </div>
+            </form>
 
         </div>
-    </ng-template>
+
+    </div>
+
+    <div class="row">
+
+        <div class="title-wrapper">
+            <a [ngStyle]="{'background-image': icon}" class="equipment-icon"></a>
+            <span class="card-title">{{equipment.name}}</span>
+        </div>
+
+        <hr class="main-info">
+
+        <div class="col s8 details">
+
+            <p class="description">{{equipment.description}}</p>
+
+            <hr class="main-info">
+
+            <div *ngIf="isEquipment(equipment); else second">
+                <container-element [ngSwitch]="equipment.area">
+                    <app-culture-details [details]="equipment.equipmentDetails" *ngSwitchCase="'cultura'">
+                    </app-culture-details>
+                    <app-sport-details [details]="equipment.equipmentDetails" *ngSwitchCase="'desporto'">
+                    </app-sport-details>
+                    <app-social-details [details]="equipment.equipmentDetails" *ngSwitchCase="'social'">
+                    </app-social-details>
+                    <app-health-details [details]="equipment.equipmentDetails" *ngSwitchCase="'saude'">
+                    </app-health-details>
+                    <app-education-details [details]="equipment.equipmentDetails" *ngSwitchCase="'educacao'">
+                    </app-education-details>
+                    <p *ngSwitchDefault>...</p>
+                </container-element>
+            </div>
+
+            <ng-template #second>
+                <div *ngIf="isInfra(equipment)">
+                    <app-energy-details *ngIf="isEnergy(equipment); else secondsecond"
+                        [details]="equipment.equipmentDetails">
+                    </app-energy-details>
+
+                    <ng-template #secondsecond>
+                        <app-communication-details *ngIf="isCommunication(equipment)"
+                            [details]="equipment.equipmentDetails">
+                        </app-communication-details>
+                    </ng-template>
+
+                </div>
+            </ng-template>
 
 
-    <p *ngFor="let item of equipment.extras">
-        <b>{{item.name}}</b>: {{item.value}}
-    </p>
+            <p *ngFor="let item of equipment.extras">
+                <b>{{item.name}}</b>: {{item.value}}
+            </p>
+
+        </div>
+        <div class="col s4 aux-info">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title-wrapper">
+                        Contactos
+                    </div>
+                    <hr>
+
+                    <div class="icon-wrapper">
+                        <a class="icon-a" id="location"></a>
+                        Localização: {{ equipment.localizacao }}
+                    </div>
+                    <div class="icon-wrapper">
+                        <a class="icon-a" id="address"></a>
+                        Morada:
+                    </div>
+                    <div class="icon-wrapper">
+                        <a class="icon-a" id="phone"></a>
+                        Telefone:
+                    </div>
+                    <div class="icon-wrapper">
+                        <a class="icon-a" id="mail"></a>
+                        E-mail:
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="title-wrapper">
+                        Horário
+                    </div>
+                    <hr>
+                    <p>Aberto:</p>
+                    <p>Fechado:</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

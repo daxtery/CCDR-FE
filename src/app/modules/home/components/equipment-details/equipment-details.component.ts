@@ -10,7 +10,14 @@ export class EquipmentDetailsComponent {
 
   @Input() equipment!: Equipment;
 
+  icon = '';
+
   constructor() { }
+
+  ngOnInit(): void {
+    
+    this.icon = `url(../../../assets/icons/${this.equipment.group}/${this.equipment.area}.svg)`
+  }
 
   isEquipment(equipment: Equipment): equipment is EquipmentOfGroup<"equipment"> {
     return equipment.group === "equipment";
