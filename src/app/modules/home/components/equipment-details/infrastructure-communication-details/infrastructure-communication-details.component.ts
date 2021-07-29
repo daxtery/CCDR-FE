@@ -8,7 +8,7 @@ import { SportDetails, Equipment, CommunicationDetails, InternetDetails, MailDet
 })
 export class CommunicationDetailsComponent {
 
-  @Input() details!: CommunicationDetails;
+  @Input() details;
 
   constructor() { }
 
