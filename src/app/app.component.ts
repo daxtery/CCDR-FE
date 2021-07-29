@@ -1,4 +1,3 @@
-import { ElementRef } from '@angular/core';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,16 +8,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'iGA';
 
-
-  constructor(private elementRef: ElementRef) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
     
-  }
-
-  ngAfterViewInit() {
-
   }
 }
