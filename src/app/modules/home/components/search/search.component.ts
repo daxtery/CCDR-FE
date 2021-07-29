@@ -10,10 +10,6 @@ import { SearchService } from 'src/app/core/services/search.service';
 })
 export class SearchComponent implements OnInit {
 
-  previousSearch = ''
-
-  clickedMap = new Map<string, boolean>();
-  scoresMap = new Map<string, number>();
   lastSearch: Array<string>;
   dropdownVisible: boolean = false;
 
@@ -31,7 +27,7 @@ export class SearchComponent implements OnInit {
       searchValue: ['']
     })
 
-    this.equipmentService.getLastNUniqueQueries(5).subscribe(( data ) => {
+    this.equipmentService.getLastNUniqueQueries(5).subscribe((data) => {
 
       this.lastSearch = data;
     })
