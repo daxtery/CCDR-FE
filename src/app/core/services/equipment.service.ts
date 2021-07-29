@@ -9,7 +9,8 @@ import { removeEquipment } from '../graphql/mutations/remove-equipment.mutation'
 
 import { queryById } from '../graphql/queries/by_id.query';
 import { queryByIdNonPreviewDetails } from '../graphql/queries/by_id_non_preview_details.query';
-import { Equipment, EquipmentNonPreviewDetails } from 'src/app/shared/types';
+import { queryEquipments } from '../graphql/queries/equipment.query';
+import { Equipment, EquipmentAndScore, EquipmentNonPreviewDetails } from 'src/app/shared/types';
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +63,13 @@ export class EquipmentService {
     })
   }
 
+  queryEquipments(query: string) {
+
+    return this.apollo.query<{ queryEquipments: EquipmentAndScore[] }>({
+      query: queryEquipments,
+      variables: { options: { query } },
+      fetchPolicy: 'no-cache'
+    })
+  }
 
 }
