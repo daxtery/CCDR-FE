@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private equipmentService: SearchService,
+    private searchService: SearchService,
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
       searchValue: ['']
     })
 
-    this.equipmentService.getLastNUniqueQueries(5).subscribe((data) => {
+    this.searchService.getLastNUniqueQueries(5).subscribe((data) => {
 
       this.lastSearch = data;
     })
