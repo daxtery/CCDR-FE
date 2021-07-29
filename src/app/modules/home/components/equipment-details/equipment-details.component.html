@@ -13,15 +13,30 @@
     <h1>Horário</h1>
 
     <div *ngIf="isEquipment(equipment); else second">
-        <container-element [ngSwitch]="equipment.area">
-            <app-culture-details [details]="equipment.equipmentDetails" *ngSwitchCase="'cultura'"></app-culture-details>
-            <app-sport-details [details]="equipment.equipmentDetails" *ngSwitchCase="'desporto'"></app-sport-details>
-            <app-social-details [details]="equipment.equipmentDetails" *ngSwitchCase="'social'"></app-social-details>
-            <app-health-details [details]="equipment.equipmentDetails" *ngSwitchCase="'saude'"></app-health-details>
-            <app-education-details [details]="equipment.equipmentDetails" *ngSwitchCase="'educacao'">
+
+        <app-culture-details *ngIf="isCulture(equipment); else firstsecond" [details]="equipment.equipmentDetails">
+        </app-culture-details>
+
+        <ng-template #firstsecond>
+            <app-sport-details *ngIf="isSport(equipment); else firstthird" [details]="equipment.equipmentDetails">
+            </app-sport-details>
+        </ng-template>
+
+        <ng-template #firstthird>
+            <app-social-details *ngIf="isSocial(equipment); else firstfourth" [details]="equipment.equipmentDetails">
+            </app-social-details>
+        </ng-template>
+
+        <ng-template #firstfourth>
+            <app-health-details *ngIf="isHealth(equipment); else firstfifth" [details]="equipment.equipmentDetails">
+            </app-health-details>
+        </ng-template>
+
+        <ng-template #firstfifth>
+            <app-education-details *ngIf="isEducation(equipment)" [details]="equipment.equipmentDetails">
             </app-education-details>
-            <p *ngSwitchDefault>...</p>
-        </container-element>
+        </ng-template>
+
     </div>
 
     <ng-template #second>
