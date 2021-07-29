@@ -1,35 +1,30 @@
-<mat-grid-list cols="1" rowHeight="4:1">
-    <mat-grid-tile>
+<div class="wrapper">
+    <div class="row" id="search">
 
-        <form>
-            <mat-form-field (keydown.enter)="search()" class="full-width" appearance="fill">
-                <mat-label>Search</mat-label>
-                <mat-icon matPrefix>search</mat-icon>
+        <div class="col s10 offset-s1">
 
-                <input type="text" placeholder="Search for Equipments" aria-label="Number" matInput
-                    [matAutocomplete]="auto" [formControl]="control">
+            <form [formGroup]="searchFormGroup" (keydown.enter)="search()" class="full-width" appearance="fill">
+                <div class="input-field">
+                    <a id="search-icon">
+                    </a>
+                    <input placeholder="Pesquise aqui" formControlName="searchValue">
+                    <a id="search-btn" (click)="search()">
+                    </a>
+                </div>
+            </form>
 
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let suggestion of suggestions$ | async" [value]="suggestion">
-                        {{suggestion}}
-                    </mat-option>
-                </mat-autocomplete>
+        </div>
 
-                <button mat-icon-button matSuffix (click)="search()">
-                    <mat-icon>send</mat-icon>
-                </button>
-            </mat-form-field>
-        </form>
+    </div>
+    <div class="row">
 
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-action-list>
-            <a mat-list-item *ngFor="let equipment of queryResults" (click)="markAsClicked(equipment)"
-                (auxclick)="$event.button === 1 ? markAsClicked(equipment) : 0" routerLinkActive="active"
-                [routerLink]="['/home/equipment', equipment._id]">
-                <app-equipment-preview [equipment]="equipment">
-                </app-equipment-preview>
+        <div class="col s4" *ngFor="let equipment of $queryResults">
+            <a (click)="markAsClicked(equipment)" [routerLink]="['/home/equipment', equipment._id]">
+            <app-equipment-preview [equipment]="equipment">
+            </app-equipment-preview>
             </a>
-        </mat-action-list>
-    </mat-grid-tile>
-</mat-grid-list>
+        </div>
+
+    </div>
+
+</div>

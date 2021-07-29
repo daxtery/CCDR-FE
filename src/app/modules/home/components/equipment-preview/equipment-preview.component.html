@@ -1,1 +1,14 @@
-<p>{{equipment.name}}: {{equipment.area}}, {{equipment.description}}</p>
+<div class="card">
+    <div class="card-content">
+        <div class="title-wrapper">
+            <span class="card-title">{{equipment.name}}</span>
+            <a [ngStyle]="{'background-image': icon}" class="equipment-icon"></a>
+        </div>
+        <hr>
+        <p class="location">Localizacação: Évora</p>
+        <p class="description"> {{ equipment.description }} </p>
+        <div class="actions">
+            <a class="more-btn"></a>
+        </div>
+    </div>
+</div>

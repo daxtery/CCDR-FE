@@ -1,15 +1,15 @@
-<mat-toolbar>
-    <a mat-button routerLinkActive="active" routerLink='/home/search'>CCDR</a>
-    <span class="spacer"></span>
+<nav [ngStyle]="{'background': background}">
+    <a mat-button routerLinkActive="active" routerLink='/home/'>CCDR</a>
+    
     <a routerLink='/home/search' routerLinkActive="active" mat-button class="icon search-icon"
         aria-label="icon-button with search icon">
         <mat-icon>search</mat-icon>
     </a>
-    <a routerLink='/home/login' *ngIf="!isLoggedIn()" routerLinkActive="active" mat-button class="icon login-icon"
-        aria-label="icon-button with search icon">
-        <mat-icon>login</mat-icon>
+    <a id="login" routerLink='/home/login' *ngIf="!isLoggedIn()" routerLinkActive="active" mat-button
+        class="icon login-icon" aria-label="icon-button with search icon">
+        Login
     </a>
-    <a routerLink="/home/add_equipment" *ngIf="isLoggedIn()" routerLinkActive="active" mat-button class="icon add-icon"
+    <!-- <a routerLink="/home/add_equipment" *ngIf="isLoggedIn()" routerLinkActive="active" mat-button class="icon add-icon"
         aria-label="icon-button with add icon">
         <mat-icon>add</mat-icon>
     </a>
@@ -20,5 +20,5 @@
     <a routerLink='/home/profile' *ngIf="isLoggedIn()" routerLinkActive="active" mat-button class="icon person-icon"
         aria-label="icon-button with search icon">
         <mat-icon>person</mat-icon>
-    </a>
-</mat-toolbar>
+    </a> -->
+</nav>

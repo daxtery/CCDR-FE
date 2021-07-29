@@ -1,0 +1,14 @@
+<div class="card-panel">
+    <h2>Bem-Vindo ao iGA </h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="input-field">
+            <input required placeholder="E-mail Institucional" formControlName="email">
+        </div>
+        <div class="input-field">
+            <input required placeholder="Password" type="password" formControlName="password">
+        </div>
+        <div id="login-btn">
+            <button type="submit" layout-align="center" color="warn">Login</button>
+        </div>
+    </form>
+</div>

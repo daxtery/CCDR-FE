@@ -1,11 +1,9 @@
-import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { startWith, map, debounce, debounceTime } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { EquipmentDetailsService } from 'src/app/core/services/equipment-details.service';
 import { FeedbackService } from 'src/app/core/services/feedback.service';
 import { SearchService } from 'src/app/core/services/search.service';
-import { Equipment, EquipmentAndScore, EquipmentPreview, Group } from 'src/app/shared/types';
+import {  EquipmentPreview } from 'src/app/shared/types';
 
 
 @Component({
@@ -15,54 +13,39 @@ import { Equipment, EquipmentAndScore, EquipmentPreview, Group } from 'src/app/s
 })
 export class SearchEquipmentComponent implements OnInit {
 
-  control = new FormControl();
-  suggestions$: Observable<string[]>;
+  previousSearch = ''
 
-  queryResults: EquipmentPreview[];
+  $queryResults: EquipmentPreview[];
 
   readonly suggestionCount = 5;
   readonly debounceMs = 200;
+
+  searchFormGroup: FormGroup;
 
   constructor(
     private searchService: SearchService,
     private feedbackService: FeedbackService,
     private equipmentDetailsService: EquipmentDetailsService,
-  ) {
-    searchService.searchesObservable.subscribe({
-      next: (data) => {
-        this.queryResults = data.results.map(v => v.equipment);
-      }
-    })
-
-    this.control.valueChanges.pipe(
-      startWith(""),
-      debounceTime(this.debounceMs),
-    ).subscribe({
-      next: (value) => { this.suggestions$ = this.getQuerySuggestions(value); }
-    });
-  }
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit(): void {
-  }
 
-  getQuerySuggestions(searchValue: string) {
-    if (searchValue === "") {
-      return this.searchService.getLastNUniqueQueries(this.suggestionCount);
-    }
+    this.searchFormGroup = this.formBuilder.group({
 
-    return this.searchService.queryEquipments(searchValue, this.suggestionCount).pipe(map(r => r.map(v => v.equipment.name)));
-  }
-
-  ngOnDestroy(): void {
-    this.feedbackService.sendFeedBack();
+      searchValue: ['']
+    })
   }
 
   search() {
-    if (this.control.value === '') {
+
+    const searchValue = this.searchFormGroup.get('searhcValue').value;
+
+    if (searchValue === '') {
       return;
     }
 
-    this.searchService.searchEquipments(this.control.value);
+    this.searchService.searchEquipments(searchValue);
   }
 
   markAsClicked(equipment: EquipmentPreview) {

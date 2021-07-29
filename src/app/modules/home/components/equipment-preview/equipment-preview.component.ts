@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import type { Equipment, EquipmentPreview } from "../../../../shared/types";
+import { Component, Input } from '@angular/core';
+import type { EquipmentPreview } from "../../../../shared/types";
 
 @Component({
   selector: 'app-equipment-preview',
@@ -10,7 +10,12 @@ export class EquipmentPreviewComponent {
 
   @Input() equipment!: EquipmentPreview;
 
+  icon = '';
+
   constructor() { }
 
-
+  ngOnInit(): void {
+    
+    this.icon = `url(../../../assets/icons/${this.equipment.group}/${this.equipment.area}.svg)`
+  }
 }
