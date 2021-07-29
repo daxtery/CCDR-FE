@@ -8,7 +8,7 @@ import { CultureDetails, Equipment } from 'src/app/shared/types';
 })
 export class CultureDetailsComponent {
 
-  @Input() details!: CultureDetails;
+  @Input() details;
 
   constructor() { }
 

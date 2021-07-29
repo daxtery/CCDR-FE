@@ -8,7 +8,7 @@ import { SportDetails, Equipment } from 'src/app/shared/types';
 })
 export class SportDetailsComponent {
 
-  @Input() details!: SportDetails;
+  @Input() details;
 
   constructor() { }
 

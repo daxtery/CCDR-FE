@@ -1,10 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import { GroupAreaIconsProvider } from 'src/app/core/services/group-area-icons-provider.service';
-import { CommunicationDetails, EnergyDetails, Equipment, EquipmentOfArea, EquipmentOfGroup } from 'src/app/shared/types';
-=======
-import { AreaOfGroup, CommunicationDetails, EnergyDetails, Equipment } from 'src/app/shared/types';
->>>>>>> UI
+import { Equipment, EquipmentOfArea, EquipmentOfGroup } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-equipment-details',

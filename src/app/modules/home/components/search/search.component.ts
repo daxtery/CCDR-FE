@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
-import { EquipmentPreview } from 'src/app/shared/types';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-search',
@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private equipmentService: EquipmentService,
+    private equipmentService: SearchService,
   ) { }
 
   ngOnInit(): void {
@@ -31,9 +31,9 @@ export class SearchComponent implements OnInit {
       searchValue: ['']
     })
 
-    this.equipmentService.getLastNQueries(5).subscribe(({ data }) => {
+    this.equipmentService.getLastNUniqueQueries(5).subscribe(( data ) => {
 
-      this.lastSearch = data.lastNUniqueQueries;
+      this.lastSearch = data;
     })
 
   }
