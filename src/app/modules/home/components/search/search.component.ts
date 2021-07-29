@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, ReplaySubject } from 'rxjs';
-import { debounceTime, map, mergeAll, startWith } from 'rxjs/operators';
+import { concatAll, concatMap, debounceTime, map, startWith } from 'rxjs/operators';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
 import { SearchService } from 'src/app/core/services/search.service';
 import { EquipmentPreview } from 'src/app/shared/types';
@@ -37,8 +37,7 @@ export class SearchComponent implements OnInit {
     this.searchFormGroup.controls['searchValue'].valueChanges.pipe(
       startWith(""),
       debounceTime(this.debounceMs),
-      map(value => this.getQuerySuggestions(value)),
-      mergeAll()
+      concatMap((value) => this.getQuerySuggestions(value))
     ).subscribe(this.suggestions$);
 
   }

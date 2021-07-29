@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from '@apollo/client/utilities';
 import { EquipmentDetailsService } from 'src/app/core/services/equipment-details.service';
@@ -12,7 +12,7 @@ import {  EquipmentPreview } from 'src/app/shared/types';
   templateUrl: './search-equipment.component.html',
   styleUrls: ['./search-equipment.component.sass']
 })
-export class SearchEquipmentComponent implements OnInit {
+export class SearchEquipmentComponent implements OnInit, OnDestroy {
 
   previousSearch = ''
 
@@ -50,6 +50,10 @@ export class SearchEquipmentComponent implements OnInit {
     }
 
     this.searchService.searchEquipments(searchValue);
+  }
+
+  ngOnDestroy(): void {
+    this.feedbackService.sendFeedBack();
   }
 
   markAsClicked(equipment: EquipmentPreview) {
