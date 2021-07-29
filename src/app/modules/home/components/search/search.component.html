@@ -12,7 +12,7 @@
 
     <div id="top-5" [hidden]="!dropdownVisible">
         <ul>
-            <li class="last-search" *ngFor="let item of lastSearch">
+            <li class="last-search" *ngFor="let item of suggestions$ | async">
                 <a class="last-search-icon">
                 </a>
                 <span class="truncate left-align">{{item}}</span>

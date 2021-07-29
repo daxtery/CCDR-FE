@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable, ReplaySubject } from 'rxjs';
+import { debounceTime, map, mergeAll, startWith } from 'rxjs/operators';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
 import { SearchService } from 'src/app/core/services/search.service';
+import { EquipmentPreview } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-search',
@@ -10,18 +13,18 @@ import { SearchService } from 'src/app/core/services/search.service';
 })
 export class SearchComponent implements OnInit {
 
-  previousSearch = ''
-
-  clickedMap = new Map<string, boolean>();
-  scoresMap = new Map<string, number>();
-  lastSearch: Array<string>;
   dropdownVisible: boolean = false;
 
   searchFormGroup: FormGroup;
 
+  readonly debounceMs = 200;
+  readonly suggestionCount = 5;
+
+  suggestions$: ReplaySubject<Array<string>> = new ReplaySubject(this.suggestionCount);
+
   constructor(
     private formBuilder: FormBuilder,
-    private equipmentService: SearchService,
+    private searchService: SearchService,
   ) { }
 
   ngOnInit(): void {
@@ -31,10 +34,12 @@ export class SearchComponent implements OnInit {
       searchValue: ['']
     })
 
-    this.equipmentService.getLastNUniqueQueries(5).subscribe(( data ) => {
-
-      this.lastSearch = data;
-    })
+    this.searchFormGroup.controls['searchValue'].valueChanges.pipe(
+      startWith(""),
+      debounceTime(this.debounceMs),
+      map(value => this.getQuerySuggestions(value)),
+      mergeAll()
+    ).subscribe(this.suggestions$);
 
   }
 
@@ -51,5 +56,13 @@ export class SearchComponent implements OnInit {
   search() {
     console.log("Goooo")
 
+  }
+
+  getQuerySuggestions(searchValue: string) {
+    if (searchValue === "") {
+      return this.searchService.getLastNUniqueQueries(this.suggestionCount);
+    }
+
+    return this.searchService.queryEquipments(searchValue, this.suggestionCount).pipe(map(r => r.map(v => v.equipment.name)));
   }
 }
