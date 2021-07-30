@@ -23,10 +23,10 @@ export class LandingPageComponent implements OnInit {
     
     const hour = new Date().getHours();
 
-    if (hour >= 5 && hour < 11) this.background = this.morningBackground;
-    if (hour >= 11 && hour < 17) this.background = this.dayBackground;
-    if (hour >= 17 && hour < 23) this.background = this.noonBackground;
-    if (hour >= 0 && hour < 5) this.background = this.nightBackground;
+    if (hour >= 5 && hour < 12) this.background = this.morningBackground;
+    if (hour >= 12 && hour < 17) this.background = this.dayBackground;
+    if (hour >= 17 && hour < 22) this.background = this.noonBackground;
+    if (hour >= 22 && hour < 5) this.background = this.nightBackground;
   }
 
   ngAfterViewInit() {

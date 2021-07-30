@@ -8,7 +8,7 @@ import { HealthDetails, Equipment, GeneralHealthDetails, HospitalHealthDetails, 
 })
 export class HealthDetailsComponent implements OnInit {
 
-  @Input() details!: HealthDetails;
+  @Input() details;
 
   constructor() { }
 

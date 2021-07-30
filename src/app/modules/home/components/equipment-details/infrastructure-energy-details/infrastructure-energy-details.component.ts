@@ -8,7 +8,7 @@ import { SportDetails, Equipment, EnergyDetails, GasDetails, ElectricityDetails,
 })
 export class EnergyDetailsComponent {
 
-  @Input() details!: EnergyDetails;
+  @Input() details;
 
   isGas(obj: EnergyDetails): obj is EnergyDetailsOfType<GasDetails> {
     return obj.tipo_energia === "gas";
