@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from '@apollo/client/utilities';
 import { EquipmentDetailsService } from 'src/app/core/services/equipment-details.service';
@@ -10,7 +10,7 @@ import {  EquipmentPreview } from 'src/app/shared/types';
 @Component({
   selector: 'app-search-equipment',
   templateUrl: './search-equipment.component.html',
-  styleUrls: ['./search-equipment.component.sass']
+  styleUrls: ['./search-equipment.component.sass'],
 })
 export class SearchEquipmentComponent implements OnInit, OnDestroy {
 
@@ -39,17 +39,6 @@ export class SearchEquipmentComponent implements OnInit, OnDestroy {
         this.$queryResults = data.results.map(v => v.equipment);
       }
     })
-  }
-
-  search() {
-
-    const searchValue = this.searchFormGroup.get('searchValue').value;
-
-    if (searchValue === '') {
-      return;
-    }
-
-    this.searchService.searchEquipments(searchValue);
   }
 
   ngOnDestroy(): void {

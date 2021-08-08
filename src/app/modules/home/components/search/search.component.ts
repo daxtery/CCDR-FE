@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, ReplaySubject } from 'rxjs';
-import { concatAll, concatMap, debounceTime, map, startWith } from 'rxjs/operators';
-import { EquipmentService } from 'src/app/core/services/equipment.service';
+import { Router } from '@angular/router';
+import { ReplaySubject } from 'rxjs';
+import { concatMap, debounceTime, map, startWith } from 'rxjs/operators';
 import { SearchService } from 'src/app/core/services/search.service';
-import { EquipmentPreview } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-search',
@@ -25,6 +24,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private searchService: SearchService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
 
   onFocus() {
 
-    this.dropdownVisible = true;
+    this.dropdownVisible = (true && (this.router.url === '/home'));
   }
 
   onFocusOut() {
@@ -52,9 +52,25 @@ export class SearchComponent implements OnInit {
     this.dropdownVisible = false;
   }
 
-  search() {
-    console.log("Goooo")
+  applyBorder() {
 
+    return this.router.url !== '/home';
+  }
+
+  search() {
+
+    const searchValue = this.searchFormGroup.get('searchValue').value;
+
+    if (searchValue === '') {
+      return;
+    }
+
+    this.searchService.searchEquipments(searchValue);
+
+    if (this.router.url === '/home' || this.router.url.match('/home/equipment/*') != []) {
+
+      this.router.navigate(['/home/search'])
+    }
   }
 
   getQuerySuggestions(searchValue: string) {

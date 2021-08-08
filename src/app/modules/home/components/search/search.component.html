@@ -1,9 +1,9 @@
 <form [formGroup]="searchFormGroup" (keydown.enter)="search()" class="full-width" appearance="fill">
-    <div [ngClass]="{'dropped': dropdownVisible }">
-        <div class="input-field">
+    <div [ngClass]="{'dropped': dropdownVisible }" id="search-form">
+        <div [ngClass]="{'outer-border': applyBorder() }" class="input-field">
             <a id="search-icon">
             </a>
-            <input (focus)="onFocus()" (focusout)="onFocusOut()" placeholder="Pesquise aqui"
+            <input  (focus)="onFocus()" (focusout)="onFocusOut()" placeholder="Pesquise aqui"
                 formControlName="searchValue">
             <a id="search-btn" (click)="search()">
             </a>
