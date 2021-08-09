@@ -1,10 +1,56 @@
+@import "/src/styles.sass"
 .full-width
     width: 100%
 
-mat-card
-    margin: 0 auto
-    width: 60%
+div.wrapper-row
+    margin: 80px auto
+    width: 80%
 
+    h5
+        font-family: $main-font
+        font-size: 25pt
+        margin-bottom: 40px
+    
+    hr
+        margin-bottom: 35px
+
+    div.label
+        font-family: $main-font
+        font-size: 15pt
+
+    .text-area
+        height: 100px !important
+        border-radius: 15px !important
+        padding: 10px 0px !important
+
+    .input-field
+        height: 40px
+        width: 100%
+        display: flex
+        align-items: center
+        margin: 30px auto
+        margin-top: 10px
+        background-color: #F2F2F2
+        border-radius: 25px
+        input
+            width: 90%
+            display: block
+            margin: 0 auto
+            text-decoration: none
+            border-bottom: none
+
+        input:focus
+            box-shadow: none
+
+    textarea
+        border: none
+        overflow: auto
+        outline: none
+        resize: none
+        height: 95%
+        background-color: transparent
+        margin: 0px auto
+        width: 95%
 button
     margin: 0 auto
     height: 60px

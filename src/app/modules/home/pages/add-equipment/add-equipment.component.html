@@ -1,17 +1,19 @@
-<mat-grid-list cols="1" rowHeight="1:1">
-    <mat-grid-tile>
-        <mat-card>
-            <form [formGroup]="equipmentFormGroup" #formDirective="ngForm" (ngSubmit)="formSubmit(formDirective)">
-                <p>
+<div class="row wrapper-row">
+    
+    <form [formGroup]="equipmentFormGroup" #formDirective="ngForm" (ngSubmit)="formSubmit(formDirective)">
+        <h5>Formulário de Registo</h5>
+        <hr>
+        <div class="row">
+            <div class="col s6">
+                <div class="label">Denominação do Serviço/Equipamento</div>
+                <div class="input-field">
+                    <input  required placeholder="Denominação do equipamento" formControlName="name">
+                </div>
+            </div>
+            <div class="col s6">
+                <div class="label">Área do Equipamento</div>
                     <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Denominação</mat-label>
-                        <input matInput required placeholder="Denominação do equipamento" formControlName="name">
-                    </mat-form-field>
-                </p>
-
-                <p>
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Área do Equipamento</mat-label>
+                        
                         <mat-select required formControlName="area">
                             <mat-option value="social">Social</mat-option>
                             <mat-option value="cultura">Cultura</mat-option>
@@ -20,46 +22,75 @@
                             <mat-option value="saude">Saúde</mat-option>
                         </mat-select>
                     </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Descrição</mat-label>
-                        <input required matInput placeholder="Descrição do equipamento a inserir"
-                            formControlName="description">
-                    </mat-form-field>
-                </p>
-                <p formGroupName="location">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Distrito</mat-label>
-                        <input matInput placeholder="Placeholder" formControlName="state" type="text">
-                    </mat-form-field>
-        
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Cidade</mat-label>
-                        <input matInput placeholder="Placeholder" formControlName="city" type="text">
-                    </mat-form-field>
+                
+            </div>
+        </div>
 
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Rua</mat-label>
-                        <input matInput placeholder="Placeholder" formControlName="street" type="text">
-                    </mat-form-field>
-                    
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Código Postal</mat-label>
-                        <input matInput placeholder="Placeholder" formControlName="zipCode" type="text" pattern="[0-9]{4}-[0-9]{3}">
-                    </mat-form-field>
-                </p>
-                <app-social-form [hidden]="currentArea() != 'social'"></app-social-form>
-                <app-culture-form [hidden]="currentArea() != 'cultura'"></app-culture-form>
-                <app-sport-form [hidden]="currentArea() != 'desporto'"></app-sport-form>
-                <app-health-form [hidden]="currentArea() != 'saude'"></app-health-form>
-                <app-education-form [hidden]="currentArea() != 'educacao'"></app-education-form>
+        <div class="row">
+            <div class="col s12">
+                <div class="label">Descrição</div>
+                <div class="input-field text-area">
+                   <textarea formControlName="description" placeholder="Descrição do equipamento a inserir" name="description" cols="20" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
 
-                <h4>Outros</h4>
-                <app-extras-form></app-extras-form>
 
-                <button mat-raised-button type="submit" layout-align="center" color="warn">Add Equipment</button>
-            </form>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+        <div class="row" formGroupName="location">
+
+            <div class="row">
+                <div class="col s6">
+                    <div class="label">Distrito</div>
+                    <div class="input-field">
+                        
+                        <input  placeholder="Placeholder" formControlName="state" type="text">
+                    </div>
+                </div>
+
+                <div class="col s6">
+                    <div class="label">Cidade</div>
+                    <div class="input-field">
+                        
+                        <input  placeholder="Placeholder" formControlName="city" type="text">
+                    </div>
+                  
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col s6">
+                    <div class="label">Rua</div>
+                    <div class="input-field">
+                        
+                        <input  placeholder="Placeholder" formControlName="street" type="text">
+                    </div>
+                </div>
+
+                <div class="col s6">
+                    <div class="label">Código Postal</div>
+                    <div class="input-field">
+                        
+                        <input  placeholder="Placeholder" formControlName="zipCode" type="text"
+                            pattern="[0-9]{4}-[0-9]{3}">
+                    </div>
+                  
+                </div>
+
+            </div>
+        </div>
+
+        <app-social-form [hidden]="currentArea() != 'social'"></app-social-form>
+        <app-culture-form [hidden]="currentArea() != 'cultura'"></app-culture-form>
+        <app-sport-form [hidden]="currentArea() != 'desporto'"></app-sport-form>
+        <app-health-form [hidden]="currentArea() != 'saude'"></app-health-form>
+        <app-education-form [hidden]="currentArea() != 'educacao'"></app-education-form>
+
+        <h4>Outros</h4>
+        <app-extras-form></app-extras-form>
+
+        <button mat-raised-button type="submit" layout-align="center" color="warn">Add Equipment</button>
+    </form>
+
+</div>
+<br>
