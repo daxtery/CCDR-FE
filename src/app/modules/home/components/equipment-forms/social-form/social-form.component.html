@@ -1,27 +1,37 @@
 <form [formGroup]="socialFormGroup">
-    <p>
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Número de utentes</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="num_utentes" type="number">
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Capacidade</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="capacidade" type="number">
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Fins lucrativos</mat-label>
-            <mat-select formControlName="fins_lucrativos">
-                <mat-option [value]="true">Sim</mat-option>
-                <mat-option [value]="false">Não</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Organização</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="organizacao">
-        </mat-form-field>
-    </p>
+    <h4>Social</h4>
+    <hr>
+    <div class="row">
+        <div class="col s6">
+            <div class="label">Número de utentes</div>
+            <div class="input-field">
+                <input placeholder="Placeholder" formControlName="num_utentes" type="number">
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="label">Capacidade</div>
+            <div class="input-field">
+                <input placeholder="Placeholder" formControlName="capacidade" type="number">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <div class="label">Fins lucrativos</div>
+            <div class="input-field">
+                <select class="browser-default" required formControlName="fins_lucrativos" name="fins_lucrativos"
+                    id="fins_lucrativos">
+                    <option value="" selected disabled>Selecionar</option>
+                    <option [value]="true">Sim</option>
+                    <option [value]="false">Não</option>
+                </select>
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="label">Organização</div>
+            <div class="input-field">
+                <input matInput placeholder="Placeholder" formControlName="organizacao">
+            </div>
+        </div>
+    </div>
 </form>

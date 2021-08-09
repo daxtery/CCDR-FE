@@ -1,9 +1,7 @@
 <nav [ngStyle]="{'background': background}">
-    <a mat-button routerLinkActive="active" routerLink='/home/'>CCDR</a>
-    
-    <a routerLink='/home/search' routerLinkActive="active" mat-button class="icon search-icon"
-        aria-label="icon-button with search icon">
-        <mat-icon>search</mat-icon>
+
+    <a id="logo" routerLinkActive="active" routerLink='/home'>
+     
     </a>
     <a id="login" routerLink='/home/login' *ngIf="!isLoggedIn()" routerLinkActive="active" mat-button
         class="icon login-icon" aria-label="icon-button with search icon">
@@ -20,5 +18,9 @@
     <a routerLink='/home/profile' *ngIf="isLoggedIn()" routerLinkActive="active" mat-button class="icon person-icon"
         aria-label="icon-button with search icon">
         <mat-icon>person</mat-icon>
+    </a>
+    <a id="login" (click)="logout()" routerLink='/home/login' *ngIf="isLoggedIn()" routerLinkActive="active" mat-button
+        class="icon login-icon" aria-label="icon-button with search icon">
+        Logout
     </a>
 </nav>

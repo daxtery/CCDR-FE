@@ -33,6 +33,11 @@ export class NavigationComponent implements OnInit {
     return this.authService.is_logged_in();
   }
 
+  logout() {
+
+    this.authService.logout()
+  }
+
   applyBackground(url: string) {
 
     this.background = 'none'

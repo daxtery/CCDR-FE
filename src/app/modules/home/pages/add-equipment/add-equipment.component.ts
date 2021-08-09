@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 
@@ -11,10 +11,13 @@ import { SportFormComponent } from '../../components/equipment-forms/sport-form/
 import { ExtrasFormComponent } from '../../components/extras-form/extras-form.component';
 import { EquipmentLocation } from 'src/app/shared/types';
 
+import * as M from 'materialize-css'
+
 @Component({
   selector: 'app-add-equipment',
   templateUrl: './add-equipment.component.html',
-  styleUrls: ['./add-equipment.component.sass']
+  styleUrls: ['./add-equipment.component.sass'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddEquipmentComponent implements OnInit {
   
@@ -32,6 +35,9 @@ export class AddEquipmentComponent implements OnInit {
   constructor(private equipmentService: EquipmentService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+
+    M.AutoInit()
+
     this.equipmentFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
       area: ['', Validators.required],
@@ -51,9 +57,9 @@ export class AddEquipmentComponent implements OnInit {
     })
 
     this.forms = { 'educacao': this.educationForm, 'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm, 'saude': this.healthForm }
-
+   
   }
-
+  
   currentArea() {
 
     return this.equipmentFormGroup.get('area').value

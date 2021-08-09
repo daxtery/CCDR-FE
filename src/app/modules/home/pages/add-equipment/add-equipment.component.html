@@ -12,17 +12,16 @@
             </div>
             <div class="col s6">
                 <div class="label">Área do Equipamento</div>
-                    <mat-form-field class="full-width" appearance="fill">
-                        
-                        <mat-select required formControlName="area">
-                            <mat-option value="social">Social</mat-option>
-                            <mat-option value="cultura">Cultura</mat-option>
-                            <mat-option value="educacao">Educação</mat-option>
-                            <mat-option value="desporto">Desporto</mat-option>
-                            <mat-option value="saude">Saúde</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                
+                <div class="input-field">
+                    <select class="browser-default" required formControlName="area" name="area" id="area">
+                        <option value="" selected disabled>Selecionar</option>
+                        <option value="social">Social</option>
+                        <option value="cultura">Cultura</option>
+                        <option value="educacao">Educação</option>
+                        <option value="desporto">Desporto</option>
+                        <option value="saude">Saúde</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -89,7 +88,7 @@
         <h4>Outros</h4>
         <app-extras-form></app-extras-form>
 
-        <button mat-raised-button type="submit" layout-align="center" color="warn">Add Equipment</button>
+        <button type="submit" id="submit-equipment">Adicionar Serviço</button>
     </form>
 
 </div>

@@ -11,12 +11,30 @@ div.wrapper-row
         font-size: 25pt
         margin-bottom: 40px
     
+    h4
+        font-family: $main-font
+        font-size: 20pt
+        margin-bottom: 20px   
+    
     hr
         margin-bottom: 35px
 
     div.label
         font-family: $main-font
         font-size: 15pt
+
+    #submit-equipment
+        width: 300px
+        height: 50px
+       
+        font-size: 15pt
+
+    div.form-row
+
+        div.col
+            
+            button
+                margin-top: 40px
 
     .text-area
         height: 100px !important
@@ -32,6 +50,14 @@ div.wrapper-row
         margin-top: 10px
         background-color: #F2F2F2
         border-radius: 25px
+
+        select
+            background-color: #F2F2F2
+            border-radius: 25px
+            outline: none
+            height: 40px
+            padding: 0px 25px
+
         input
             width: 90%
             display: block
@@ -52,9 +78,28 @@ div.wrapper-row
         margin: 0px auto
         width: 95%
 button
-    margin: 0 auto
-    height: 60px
-    width: 200px
+    background: #7AC943
+    border: none
+    height: 40px
+    width: 100%
+    border-radius: 25px
+    color: white
+    font-family: $main-font
+    
+span.badge
+    background: #F2F2F2 !important
+    border-radius: 25px !important
+    display: inline-flex !important
+    align-items: center !important
+    padding: 15px 10px !important
+
+    i
+        padding-right: 5px
+
+div.badge-container
+    col
+        display: flex !important
+        justify-items: flex-start
 
 .pac-container
     z-index: 9999999
