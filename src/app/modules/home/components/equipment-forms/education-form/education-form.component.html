@@ -1,29 +1,44 @@
 <form [formGroup]="educationFormGroup">
-    <p formGroupName="escolas">
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Número de Alunos</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="num_alunos" type="number">
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Capacidade</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="capacidade" type="number">
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Grau de Ensino</mat-label>
-            <mat-select formControlName="grau_ensino">
-                <mat-option [value]="'1_ciclo'">1º Ciclo</mat-option>
-                <mat-option [value]="'2_ciclo'">2º Ciclo</mat-option>
-                <mat-option [value]="'3_ciclo'">3º Ciclo</mat-option>
-                <mat-option [value]="'secundario'">Secundário</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <button mat-raised-button (click)="addSchool()" layout-align="center" color="warn">Adicionar Escola</button>
-    </p>
-    <p *ngFor="let school of schools">
-        {{ school.num_alunos }}{{ school.capacidade }}{{ school.grau_ensino }}
-    </p>
-    
+    <h4>Educação</h4>
+    <hr>
+    <div formGroupName="escolas">
+        <div class="row form-row">
+            <div class="col s3">
+                <div class="label">Número de Alunos</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="num_alunos" type="number">
+                </div>
+            </div>
+            <div class="col s3">
+                <div class="label">Capacidade</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="capacidade" type="number">
+                </div>
+            </div>
+            <div class="col s3">
+                <div class="label">Grau de Ensino</div>
+                <div class="input-field">
+                    <select class="browser-default" required formControlName="grau_ensino" name="grau_ensino" id="grau_ensino">
+                        <option value="" selected disabled>Selecionar</option>
+                        <option [value]="'1_ciclo'">1º Ciclo</option>
+                        <option [value]="'2_ciclo'">2º Ciclo</option>
+                        <option [value]="'3_ciclo'">3º Ciclo</option>
+                        <option [value]="'secundario'">Secundário</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col s2">
+                <button (click)="addSchool()">Adicionar Escola</button>
+            </div>
+        </div>
+    </div>
+    <div class="row bagde-wrapper">
+        <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let school of schools">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                        cancel
+                        </span></i> Alunos: {{ school.num_alunos }} Capacidade: {{ school.capacidade }} Grau de Ensino: {{ school.grau_ensino }} 
+                </span>
+        </div>
+    </div>
 </form>

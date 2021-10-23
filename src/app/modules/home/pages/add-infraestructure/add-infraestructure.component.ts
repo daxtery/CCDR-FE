@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 import { EquipmentLocation } from 'src/app/shared/types';
@@ -9,7 +9,8 @@ import { EnergyFormComponent } from '../../components/infrastructure-form/energy
 @Component({
   selector: 'app-add-infraestructure',
   templateUrl: './add-infraestructure.component.html',
-  styleUrls: ['./add-infraestructure.component.sass']
+  styleUrls: ['./add-infraestructure.component.sass'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddInfraestructureComponent implements OnInit {
 
@@ -48,7 +49,7 @@ export class AddInfraestructureComponent implements OnInit {
     return this.infrastructureFormGroup.get('area').value
   }
 
-  formSubmit() {
+  formSubmit(formDirective: FormGroupDirective) {
 
     const details = this.forms[this.currentArea()].getFormData()
 

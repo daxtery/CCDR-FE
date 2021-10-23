@@ -2,23 +2,37 @@
 
     <div formArrayName="extras">
         <div *ngFor="let extra of form.controls.extras.controls; let i=index" [formGroupName]="i" layout-align="center">
-            <mat-form-field appearance="fill">
-                <mat-label>Nome</mat-label>
-                <input matInput placeholder="Nome" type="text" [formControl]="extra.controls.name">
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-                <mat-label>Valor</mat-label>
-                <textarea matInput placeholder="Valor" type="text" [formControl]="extra.controls.value">
-                </textarea>
-            </mat-form-field>
-
-            <button mat-raised-button (click)="deleteExtraControl(i)" color="warn">
-                <mat-icon aria-hidden="false" aria-label="Apagar">delete</mat-icon>
-            </button>
+            <div class="row form-row">
+                <div class="col s5">
+                    <div class="label">
+                        Nome
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="Nome" formControlName="extra.controls.name" type="text">
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="label">
+                        Valor
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="Nome" formControlName="extra.controls.value" type="text">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="deleteExtraControl(i)">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s3">
+                <button (click)="newExtraControl()" layout-align="center">Adicionar nova
+                    propriedade</button>
+            </div>
         </div>
     </div>
 
-    <button mat-raised-button (click)="newExtraControl()" layout-align="center" color="warn">Adicionar nova
-        propriedade</button>
+
 </form>

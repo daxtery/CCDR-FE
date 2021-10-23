@@ -28,9 +28,9 @@ const routes: Routes = [
           {
             path: 'login',
             component: LoginComponent,
-          },
-        ],
-        canActivate: [LoggedGuard]
+            canActivate: [LoggedGuard]
+          }
+        ]
       },
       {
         path: 'add_equipment',

@@ -64,7 +64,9 @@
                 <div class="row bagde-wrapper">
                     <div class="col s12">
                             <span class="badge valign-wrapper" *ngFor="let num_equi of getMapAsArray()">
-                                <i class="material-icons">cancel</i> {{ num_equi[0] }} {{ num_equi[1] }} 
+                                <i class="material-icons"><span class="material-icons material-icons-outlined">
+                                    cancel
+                                    </span></i> {{ num_equi[0] }} {{ num_equi[1] }} 
                             </span>
                     </div>
                     
@@ -72,7 +74,7 @@
             </div>
         </div>
         <hr>
-        <div class="row">
+        <div class="row ">
             <div class="col s6">
                 <div class="label">Agrupamento de Saúde</div>
                 <div class="input-field">
@@ -88,8 +90,8 @@
         </div>
 
 
-        <div class="row">
-            <div class="col s5">
+        <div class="row form-row">
+            <div class="col s6">
                 <div class="label">
                     Especialidades
                 </div>
@@ -104,13 +106,13 @@
             <div class="row bagde-wrapper">
                 <div class="col s12">
                     <span class="badge valign-wrapper" *ngFor="let specialty of especialidades">
-                        <i class="material-icons">cancel</i> {{ specialty }} 
+                        <i class="material-icons material-icons-outlined">cancel</i> {{ specialty }} 
                     </span>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col s5">
+        <div class="row form-row">
+            <div class="col s6">
                 <div class="label">
                     Valências
                 </div>
@@ -119,32 +121,32 @@
                 </div>
             </div>
             <div class="col s2">
-                <button (click)="addValency()" layout-align="center" color="warn">Adicionar
+                <button (click)="addValency()">Adicionar
                     Valência</button>
             </div>
             <div class="row bagde-wrapper">
                 <div class="col s12">
                     <span class="badge valign-wrapper" *ngFor="let valency of valencias">
-                        <i class="material-icons">cancel</i> {{ valency }}
+                        <i class="material-icons material-icons-outlined">cancel</i> {{ valency }}
                     </span>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col s5">
+        <div class="row form-row">
+            <div class="col s6">
                 <div class="label">Unidades</div>
                 <div class="input-field">
                     <input placeholder="Placeholder" formControlName="tipo_unidades" type="text">
                 </div>
             </div>
             <div class="col s2">
-                <button (click)="addUnitType()" layout-align="center" color="warn">Adicionar
+                <button (click)="addUnitType()">Adicionar
                     Unidade</button>
             </div>
             <div class="row bagde-wrapper">
                 <div class="col s12">
                     <span class="badge valign-wrapper" *ngFor="let unit of unidades">
-                        <i class="material-icons">cancel</i> {{ unit }}
+                        <i class="material-icons material-icons-outlined">cancel</i> {{ unit }}
                     </span>
                 </div>
             </div>

@@ -1,384 +1,601 @@
 <form [formGroup]="communicationFormGroup">
-    <p>
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Número de Operadores</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="num_operadores" type="number">
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Tipo de Comunicação</mat-label>
-            <mat-select formControlName="tipo_comunicacao">
-                <mat-option [value]="'telefone'">Telefone</mat-option>
-                <mat-option [value]="'internet'">Internet</mat-option>
-                <mat-option [value]="'correio'">Correio</mat-option>
-                <mat-option [value]="'televisao'">Televisão</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </p>
+    <h4>Comunicação</h4>
+    <hr>
+    <div class="row">
+        <div class="col s6">
+            <div class="label">Número de Operadores</div>
+            <div class="input-field">
+                <input placeholder="Placeholder" formControlName="num_operadores" type="number">
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="label">Tipo de Comunicação</div>
+            <div class="input-field">
+                <select class="browser-default" required formControlName="tipo_comunicacao" name="tipo_comunicacao"
+                    id="tipo_comunicacao">
+                    <option value="" selected disabled>Tipo de Comunicação</option>
+                    <option [value]="'telefone'">Telefone</option>
+                    <option [value]="'internet'">Internet</option>
+                    <option [value]="'correio'">Correio</option>
+                    <option [value]="'televisao'">Televisão</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <h4>Número de Lojas por Operador</h4>
-    <p formGroupName="loja_p_operador">
-            
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Operador</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="operador" type="text">
-        </mat-form-field>
+    <hr>
+    <div formGroupName="loja_p_operador">
+        <div class="row form-row">
+            <div class="col s5">
+                <div class="label">Operador</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="operador" type="text">
+                </div>
+            </div>
+            <div class="col s5">
+                <div class="label">Quantidade</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                </div>
+            </div>
+            <div class="col s2">
+                <button (click)="addShopByOperator()" layout-align="center">Adicionar Operador</button>
+            </div>
+        </div>
 
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Quantidade</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-        </mat-form-field>
+    </div>
+    <div class="row bagde-wrapper">
+        <div class="col s12">
+            <span class="badge valign-wrapper" *ngFor="let shopByOperator of getShopsByOperator()">
+                <i class="material-icons"><span class="material-icons material-icons-outlined">
+                        cancel
+                    </span></i> {{ shopByOperator[0]}} {{ shopByOperator[1] }}
+            </span>
+        </div>
 
-        <button mat-raised-button (click)="addShopByOperator()" layout-align="center" color="warn">Adicionar Equipamento</button>
-    </p>
-    <p *ngFor="let shopByOperator of getShopsByOperator()">
-        {{ shopByOperator[0]}} {{ shopByOperator[1] }}
-    </p>
+    </div>
     <h4>Cobertura na Região</h4>
-    <p formGroupName="cobertura_regiao">
+    <hr>
+    <div formGroupName="cobertura_regiao">
+        <div class="row form-row">
+            <div class="col s3">
+                <div class="label">Operador</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="operador" type="text">
+                </div>
+            </div>
+            <div class="col s3">
+                <div class="label">Cobertura</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="cobertura" type="number">
+                </div>
+            </div>
+            <div class="col s2">
+                <div class="label">Latitude</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="lat" type="number">
+                </div>
+            </div>
+            <div class="col s2">
+                <div class="label">Longitude</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="long" type="number">
+                </div>
+            </div>
+            <div class="col s2">
+                <button (click)="addOperatorCoverageByLocation()" layout-align="center">Adicionar Cobertura</button>
+            </div>
+        </div>
 
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Latitude</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Longitude</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="long" type="number">
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Operador</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="operador" type="text">
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Cobertura</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="cobertura" type="number">
-        </mat-form-field>
-
-        <button mat-raised-button (click)="addOperatorCoverageByLocation()" layout-align="center" color="warn">Adicionar Equipamento</button>
-    </p>
-    <p *ngFor="let coverageByOperator of getOperatorCoverageByLocation()">
-        {{ coverageByOperator[0].latitude }} {{ coverageByOperator[0].longitude }} {{ coverageByOperator[1].region }}
-    </p>
-
+    </div>
+    <div class="row bagde-wrapper">
+        <div class="col s12">
+            <span class="badge valign-wrapper" *ngFor="let coverageByOperator of getOperatorCoverageByLocation()">
+                <i class="material-icons"><span class="material-icons material-icons-outlined">
+                        cancel
+                    </span></i> {{ coverageByOperator[0].latitude }} {{ coverageByOperator[0].longitude }} {{
+                coverageByOperator[1].region }}
+            </span>
+        </div>
+    </div>
     <form [hidden]="currentCommunication() != 'telefone'" [formGroup]="telephoneForm">
         <h4>Número de Postos de Telefone</h4>
-        <p formGroupName="num_postos">
-            
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-            </mat-form-field>
+        <hr>
+        <div formGroupName="num_postos">
+            <div class="row form-row">
+                <div class="col s3">
+                    <div class="label">Tipo</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="tipo" type="text">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <div class="label">Latitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="lat" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <div class="label">Longitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="long" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addNumberOfPost()" layout-align="center">Adicionar Número de Postos</button>
+                </div>
+            </div>
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="long" type="number">
-            </mat-form-field>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let numberOfPost of getNumberOfPost()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i> {{ numberOfPost[0].latitude }} {{ numberOfPost[0].longitude }} {{
+                    numberOfPost[1].type }}
+                    {{ numberOfPost[1].numPosts }}
+                </span>
+            </div>
+        </div>
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Tipo</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
-            </mat-form-field>
-
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addNumberOfPost()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let numberOfPost of getNumberOfPost()">
-            {{ numberOfPost[0].latitude }} {{ numberOfPost[0].longitude }} {{ numberOfPost[1].type }}
-            {{ numberOfPost[1].numPosts }}
-        </p>
-        
         <h4>Número de Acessos</h4>
-        <p formGroupName="num_acessos">
-            
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-            </mat-form-field>
+        <hr>
+        <div formGroupName="num_acessos">
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="long" type="number">
-            </mat-form-field>
+            <div class="row form-row">
+                <div class="col s3">
+                    <div class="label">Tipo</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="tipo" type="text">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <div class="label">Latitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="lat" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <div class="label">Longitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="long" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addNumberOfAccesses()" layout-align="center">Adicionar Número de Acessos</button>
+                </div>
+            </div>
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Tipo</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
-            </mat-form-field>
-
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addNumberOfAccesses()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let numberOfAccess of getNumberOfAccesses()">
-            {{ numberOfAccess[0].latitude }} {{ numberOfAccess[0].longitude }} {{ numberOfAccess[1].type }}
-            {{ numberOfAccess[1].numAccess }}
-        </p>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let numberOfAccess of getNumberOfAccesses()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i> {{ numberOfAccess[0].latitude }} {{ numberOfAccess[0].longitude }} {{
+                    numberOfAccess[1].type }}
+                    {{ numberOfAccess[1].numAccess }}
+                </span>
+            </div>
+        </div>
 
         <h4>Número de Acessos Por 100 mil</h4>
-        <p formGroupName="num_acessos_p_100">
-            
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-            </mat-form-field>
+        <hr>
+        <div formGroupName="num_acessos_p_100">
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="long" type="number">
-            </mat-form-field>
+            <div class="row form-row">
+                <div class="col s3">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Latitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="lat" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Longitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="long" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <button (click)="addNumberOfAccessesBy100()" layout-align="center">Adicionar Número de
+                        Acessos</button>
+                </div>
+            </div>
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let numberOfAccess of getNumberOfAccessesBy100()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i> {{ numberOfAccess[0].latitude }} {{ numberOfAccess[0].longitude }} {{
+                    numberOfAccess[1] }}
+                </span>
+            </div>
+        </div>
 
-            <button mat-raised-button (click)="addNumberOfAccessesBy100()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let numberOfAccess of getNumberOfAccessesBy100()">
-            {{ numberOfAccess[0].latitude }} {{ numberOfAccess[0].longitude }} {{ numberOfAccess[1] }}
-        </p>
 
         <h4>Número de Postos Públicos</h4>
-        <p formGroupName="num_postos_publicos">
-            
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-            </mat-form-field>
+        <hr>
+        <div formGroupName="num_postos_publicos">
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="long" type="number">
-            </mat-form-field>
+            <div class="row form-row">
+                <div class="col s3">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Latitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="lat" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Longitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="long" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <button (click)="addNumberOfPublicPosts()" layout-align="center">Adicionar Número Postos
+                        Públicos</button>
+                </div>
+            </div>
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addNumberOfPublicPosts()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let numberOfPublicPosts of getNumberOfPublicPosts()">
-            {{ numberOfPublicPosts[0].latitude }} {{ numberOfPublicPosts[0].longitude }} {{ numberOfPublicPosts[1] }}
-        </p>
-
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let numberOfPublicPosts of getNumberOfPublicPosts()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i> {{ numberOfPublicPosts[0].latitude }} {{ numberOfPublicPosts[0].longitude }} {{
+                    numberOfPublicPosts[1] }}
+                </span>
+            </div>
+        </div>
 
         <h4>Número de Clientes</h4>
-        <p formGroupName="num_clientes">
-            
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-            </mat-form-field>
+        <div formGroupName="num_clientes">
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="long" type="number">
-            </mat-form-field>
+            <div class="row form-row">
+                <div class="col s3">
+                    <div class="label">Tipo</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="tipo" type="text">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <div class="label">Latitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="lat" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <div class="label">Longitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="long" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addNumberOfClients()" layout-align="center">Adicionar Número de Clientes</button>
+                </div>
+            </div>
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Tipo</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
-            </mat-form-field>
-
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addNumberOfClients()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let numberOfClients of getNumberOfClients()">
-            {{ numberOfClients[0].latitude }} {{ numberOfClients[0].longitude }} {{ numberOfClients[1].type }}
-            {{ numberOfClients[1].num }}
-        </p>
-
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let numberOfClients of getNumberOfClients()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i> {{ numberOfClients[0].latitude }} {{ numberOfClients[0].longitude }} {{
+                    numberOfClients[1].type }}
+                    {{ numberOfClients[1].num }}
+                </span>
+            </div>
+        </div>
     </form>
 
     <form [hidden]="currentCommunication() != 'internet'" [formGroup]="internetForm">
         <h4>Número de Clientes com Banda Larga</h4>
-        <p formGroupName="num_clientes_banda_larga">
-            
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Operador</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="operador" type="text">
-            </mat-form-field>
+        <hr>
+        <div formGroupName="num_clientes_banda_larga">
+            <div class="row form-row">
+                <div class="col s5">
+                    <div class="label">Operador</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="operador" type="text">
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addFreeBandClients()" layout-align="center">Adicionar Cliente</button>
+                </div>
+            </div>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let freeBandClients of getFreeBandClients()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i> {{ freeBandClients[0] }} {{ freeBandClients[1] }}
+                </span>
+            </div>
+        </div>
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addFreeBandClients()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let freeBandClients of getFreeBandClients()">
-            {{ freeBandClients[0] }} {{ freeBandClients[1] }}
-        </p>
-        
         <h4>Número de Acessos por 100 mil</h4>
-        <p formGroupName="num_acessos_banda_larga_100">
-            
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Tipo</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
-            </mat-form-field>
-
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addFreeBandAccessesBy100()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let freeBandAccess of getFreeBandAccessesBy100()">
-            {{ freeBandAccess[0] }} {{ freeBandAccess[1] }}
-        </p>
-       
+        <hr>
+        <div formGroupName="num_acessos_banda_larga_100">
+            <div class="row form-row">
+                <div class="col s5">
+                    <div class="label">Tipo</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="tipo" type="text">
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addFreeBandAccessesBy100()" layout-align="center">Adicionar Acessos p/ 100</button>
+                </div>
+            </div>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let freeBandAccess of getFreeBandAccessesBy100()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i>{{ freeBandAccess[0] }} {{ freeBandAccess[1] }}
+                </span>
+            </div>
+        </div>
 
         <h4>Número de Acessos Banda Larga</h4>
-        <p formGroupName="num_acessos_banda_larga">
-            
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-            </mat-form-field>
+        <hr>
+        <div formGroupName="num_acessos_banda_larga">
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="long" type="number">
-            </mat-form-field>
+            <div class="row form-row">
+                <div class="col s3">
+                    <div class="label">Tipo</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="tipo" type="text">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <div class="label">Latitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="lat" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <div class="label">Longitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="long" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addFreeBandAccesses()" layout-align="center">Adicionar Acessos a Banda Larga</button>
+                </div>
+            </div>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let numberOfClients of getFreeBandAccesses()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i>{{ numberOfClients[0].latitude }} {{ numberOfClients[0].longitude }} {{ numberOfClients[1].type }}
+                        {{ numberOfClients[1].numAccess }}
+                </span>
+            </div>
+        </div>
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Tipo</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
-            </mat-form-field>
-
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addFreeBandAccesses()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let numberOfClients of getFreeBandAccesses()">
-            {{ numberOfClients[0].latitude }} {{ numberOfClients[0].longitude }} {{ numberOfClients[1].type }}
-            {{ numberOfClients[1].numAccess }}
-        </p>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Número de População com 4G</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="populacao_4g" type="number">
-        </mat-form-field>
+        <div class="row">
+            <div class="col s6">
+                <div class="label">Número de População com 4G</div>
+                <div class="input-field">
+                    <input placeholder="Placeholder" formControlName="populacao_4g" type="number">
+                </div>
+            </div>
+        </div>
     </form>
-    
+
     <form [hidden]="currentCommunication() != 'correio'" [formGroup]="mailForm">
 
         <h4>Informação Correio</h4>
-        <p formGroupName="informacao_empresa">
-
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-            </mat-form-field>
-    
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="long" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addMailInformation()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
+        <hr>
+        <div formGroupName="informacao_empresa">
+            <div class="row form-row">
+                <div class="col s5">
+                    <div class="label">Latitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="lat" type="number">
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="label">Longitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="long" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addMailInformation()" layout-align="center">Adicionar Informação Correio</button>
+                </div>
+            </div>
+        </div>
 
         <h4>Número de Estações</h4>
-            <p formGroupName="num_estacoes">
-                <mat-form-field class="full-width" appearance="fill">
-                    <mat-label>Tipo</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
-                </mat-form-field>
-        
-                <mat-form-field class="full-width" appearance="fill">
-                    <mat-label>Quantidade</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-                </mat-form-field>
-        
-                <button mat-raised-button (click)="addMailStation()" layout-align="center" color="warn">Adicionar Equipamento</button>
-            </p>
-            <p *ngFor="let mailStation of getMailStation()">
-                {{ mailStation[0] }} {{ mailStation[1] }}
-            </p>
+        <hr>
+        <div formGroupName="num_estacoes">
+            <div class="row form-row">
+                <div class="col s5">
+                    <div class="label">Tipo</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="tipo" type="text">
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addMailStation()" layout-align="center">Adicionar Estação de Correio</button>
+                </div>
+            </div>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let mailStation of getMailStation()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i>{{ mailStation[0] }} {{ mailStation[1] }}
+                </span>
+            </div>
+        </div>
 
-            <h4>Número de Postos</h4>
-            <p formGroupName="num_postos">
-                <mat-form-field class="full-width" appearance="fill">
-                    <mat-label>Tipo</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="tipo" type="text">
-                </mat-form-field>
-        
-                <mat-form-field class="full-width" appearance="fill">
-                    <mat-label>Quantidade</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-                </mat-form-field>
-        
-                <button mat-raised-button (click)="addMailPost()" layout-align="center" color="warn">Adicionar Equipamento</button>
-            </p>
-            <p *ngFor="let mailPost of getMailPost()">
-                {{ mailPost[0] }} {{ mailPost[1] }}
-            </p>
+        <h4>Número de Postos</h4>
+        <hr>
+        <div formGroupName="num_postos">
+            <div class="row form-row">
+                <div class="col s5">
+                    <div class="label">Tipo</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="tipo" type="text">
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addMailPost()" layout-align="center">Adicionar Posto de Correio</button>
+                </div>
+            </div>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let mailPost of getMailPost()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i>{{ mailPost[0] }} {{ mailPost[1] }}
+                </span>
+            </div>
+        </div>
     </form>
 
     <form [hidden]="currentCommunication() != 'televisao'" [formGroup]="televisionForm">
 
         <h4>Número de Subscrições</h4>
-        <p formGroupName="num_subscricoes">
-
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="lat" type="number">
-            </mat-form-field>
-    
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="long" type="number">
-            </mat-form-field>
-
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addTVSubscription()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let subscription of getTVSubscription()">
-            {{ subscription[0].latitude }} {{ subscription[0].longitude }} {{ subscription[1] }}
-        </p>
+        <hr>
+        <div formGroupName="num_subscricoes">
+            <div class="row form-row">
+                <div class="col s3">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Latitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="lat" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <div class="label">Longitude</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="long" type="number">
+                    </div>
+                </div>
+                <div class="col s3">
+                    <button (click)="addTVSubscription()" layout-align="center">Adicionar Subscrição</button>
+                </div>
+            </div>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let subscription of getTVSubscription()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i>{{ subscription[0].latitude }} {{ subscription[0].longitude }} {{ subscription[1] }}
+                </span>
+            </div>
+        </div>
 
         <h4>Número de Subscrições</h4>
-        <p formGroupName="num_clientes">
+        <hr>
+        <div formGroupName="num_clientes">
 
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Operador</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="operador" type="text">
-            </mat-form-field>
-    
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Quantidade</mat-label>
-                <input matInput placeholder="Placeholder" formControlName="quantidade" type="number">
-            </mat-form-field>
-
-            <button mat-raised-button (click)="addTVClient()" layout-align="center" color="warn">Adicionar Equipamento</button>
-        </p>
-        <p *ngFor="let subscription of getTVClient()">
-            {{ subscription[0] }} {{ subscription[1] }}
-        </p>
-        
+            <div class="row form-row">
+                <div class="col s5">
+                    <div class="label">Operador</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="operador" type="text">
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="label">Quantidade</div>
+                    <div class="input-field">
+                        <input placeholder="Placeholder" formControlName="quantidade" type="number">
+                    </div>
+                </div>
+                <div class="col s2">
+                    <button (click)="addTVClient()" layout-align="center">Adicionar Cliente</button>
+                </div>
+            </div>
+        </div>
+        <div class="row bagde-wrapper">
+            <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let subscription of getTVClient()">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                            cancel
+                        </span></i> {{ subscription[0] }} {{ subscription[1] }}
+                </span>
+            </div>
+        </div>
     </form>
 </form>

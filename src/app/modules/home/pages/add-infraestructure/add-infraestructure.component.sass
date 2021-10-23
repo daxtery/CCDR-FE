@@ -1,11 +1,110 @@
+@import "/src/styles.sass"
 .full-width
     width: 100%
 
-mat-card
-    margin: 0 auto
-    width: 60%
+div.wrapper-row
+    margin: 80px auto
+    width: 80%
 
+    h5
+        font-family: $main-font
+        font-size: 25pt
+        margin-bottom: 40px
+    
+    h4
+        font-family: $main-font
+        font-size: 20pt
+        margin-bottom: 20px   
+    
+    hr
+        margin-bottom: 35px
+
+    div.label
+        font-family: $main-font
+        font-size: 15pt
+
+    #submit-equipment
+        width: 300px
+        height: 50px
+       
+        font-size: 15pt
+        margin-top: 50px
+
+    div.form-row
+
+        div.col
+            
+            button
+                margin-top: 40px
+
+    .text-area
+        height: 100px !important
+        border-radius: 15px !important
+        padding: 10px 0px !important
+
+    .input-field
+        height: 40px
+        width: 100%
+        display: flex
+        align-items: center
+        margin: 30px auto
+        margin-top: 10px
+        background-color: #F2F2F2
+        border-radius: 25px
+
+        select
+            background-color: #F2F2F2
+            border-radius: 25px
+            outline: none
+            height: 40px
+            padding: 0px 25px
+
+        input
+            width: 90%
+            display: block
+            margin: 0 auto
+            text-decoration: none
+            border-bottom: none
+
+        input:focus
+            box-shadow: none
+
+    textarea
+        border: none
+        overflow: auto
+        outline: none
+        resize: none
+        height: 95%
+        background-color: transparent
+        margin: 0px auto
+        width: 95%
 button
-    margin: 0 auto
-    height: 60px
-    width: 200px
+    background: #7AC943
+    border: none
+    height: 40px
+    width: 100%
+    border-radius: 25px
+    color: white
+    font-family: $main-font
+    
+span.badge
+    background: #F2F2F2 !important
+    border-radius: 25px !important
+    display: inline-flex !important
+    align-items: center !important
+    padding: 15px 10px !important
+    margin-bottom: 5px
+
+    i
+        padding-right: 5px
+        
+
+div.bagde-wrapper
+    .col
+        display: flex !important
+        justify-items: flex-start
+        flex-wrap: wrap
+        padding: 0px
+
+.pac-container
+    z-index: 9999999

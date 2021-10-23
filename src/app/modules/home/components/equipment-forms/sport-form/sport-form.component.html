@@ -1,43 +1,66 @@
 <form [formGroup]="sportFormGroup">
-    <p>
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Capacidade</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="capacidade" type="number">
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Iluminado</mat-label>
-            <mat-select formControlName="iluminado">
-                <mat-option [value]="true">Sim</mat-option>
-                <mat-option [value]="false">Não</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Acesso a mobilidade reduzida</mat-label>
-            <mat-select formControlName="mobilidade_reduzida_assistencia">
-                <mat-option [value]="true">Sim</mat-option>
-                <mat-option [value]="false">Não</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Acesso a práticas de mobilidade reduzida</mat-label>
-            <mat-select formControlName="mobilidade_reduzida_pratica">
-                <mat-option [value]="true">Sim</mat-option>
-                <mat-option [value]="false">Não</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Instalação de Apoio</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="instalacao_apoio">
-        </mat-form-field>
-        <button mat-raised-button (click)="addFacility()" layout-align="center" color="warn">Adicionar Instalação</button>
-    </p>
-    <p *ngFor="let facility of facilities">
-        {{ facility }}
-    </p>
+    <h4>Desporto</h4>
+    <hr>
+    <div class="row">
+        <div class="col s6">
+            <div class="label">Capacidade</div>
+            <div class="input-field">
+                <input placeholder="Placeholder" formControlName="capacidade" type="number">
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="label">Iluminado</div>
+            <div class="input-field">
+                <select class="browser-default" required formControlName="iluminado" name="iluminado" id="iluminado">
+                    <option value="" selected disabled>Selecionar</option>
+                    <option [value]="true">Sim</option>
+                    <option [value]="false">Não</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <div class="label">Acesso a mobilidade reduzida</div>
+            <div class="input-field">
+                <select class="browser-default" required formControlName="mobilidade_reduzida_assistencia" name="mobilidade_reduzida_assistencia" id="mobilidade_reduzida_assistencia">
+                    <option value="" selected disabled>Selecionar</option>
+                    <option [value]="true">Sim</option>
+                    <option [value]="false">Não</option>
+                </select>
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="label">Acesso a práticas de mobilidade reduzida</div>
+            <div class="input-field">
+                <select class="browser-default" required formControlName="mobilidade_reduzida_pratica" name="mobilidade_reduzida_pratica" id="mobilidade_reduzida_pratica">
+                    <option value="" selected disabled>Selecionar</option>
+                    <option [value]="true">Sim</option>
+                    <option [value]="false">Não</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row form-row">
+        <div class="col s6">
+            <div class="label">
+                Instalação de Apoio
+            </div>
+            <div class="input-field">
+                <input placeholder="Placeholder" formControlName="instalacao_apoio" type="text">
+            </div>
+        </div>
+        <div class="col s2">
+            <button (click)="addFacility()" layout-align="center" color="warn">Adicionar Instalação</button>
+        </div>
+    </div>
+    <div class="row bagde-wrapper">
+        <div class="col s12">
+                <span class="badge valign-wrapper" *ngFor="let facility of facilities">
+                    <i class="material-icons"><span class="material-icons material-icons-outlined">
+                        cancel
+                        </span></i> {{ facility }} 
+                </span>
+        </div>
+    </div>
 </form>
