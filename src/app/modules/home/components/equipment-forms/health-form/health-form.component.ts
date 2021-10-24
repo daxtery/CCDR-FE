@@ -23,6 +23,36 @@ export class HealthFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loadData(equipmentDetails) {
+
+    this.healthFormGroup.get('num_utentes').setValue(equipmentDetails['num_utentes'])
+    this.healthFormGroup.get('tipo_saude').setValue(equipmentDetails['tipo_saude'])
+
+    if (equipmentDetails['tipo_saude'] === 'saude_geral') 
+      this.loadGeneralData(equipmentDetails['healh_details'])
+  
+    else this.loadHospitalData(equipmentDetails['healh_details'])
+    
+  }
+
+  loadGeneralData(healthDetails) {
+
+    this.generalHealthForm.get('capacidade').setValue(healthDetails['capacidade']);
+    this.generalHealthForm.get('num_centros_saude').setValue(healthDetails['num_centros_saude']);
+  }
+
+  loadHospitalData(healthDetails) {
+
+    this.equipmentos_por_especialidade = new Map(healthDetails['num_equipamentos_por_especialidade'])
+
+    this.hospitalHealthForm.get('agrupamento_saude').setValue(healthDetails['agrupamento_saude'])
+    this.hospitalHealthForm.get('centro_hospitalar').setValue(healthDetails['centro_hospitalar'])
+
+    this.especialidades = healthDetails['especialidades']
+    this.unidades = healthDetails['tipo_unidades']
+    this.valencias = healthDetails['valencias']
+  }
+
   createGroup() {
 
     this.healthFormGroup = this.formbuilder.group({
@@ -67,21 +97,21 @@ export class HealthFormComponent implements OnInit {
 
     this.equipmentos_por_especialidade.set(especialidade, num_equipamentos)
 
-    this.hospitalHealthForm.reset('num_equipamentos_por_especialidade')
+    this.hospitalHealthForm.get('num_equipamentos_por_especialidade').reset()
   }
 
   addSpecialty() {
 
     this.especialidades.push(this.hospitalHealthForm.get('especialidades').value)
 
-    this.hospitalHealthForm.reset('especialidades')
+    this.hospitalHealthForm.get('especialidades').reset()
   }
 
   addValency() {
 
     this.valencias.push(this.hospitalHealthForm.get('valencias').value)
 
-    this.hospitalHealthForm.reset('valencias')
+    this.hospitalHealthForm.get('valencias').reset()
 
   }
 
@@ -89,7 +119,7 @@ export class HealthFormComponent implements OnInit {
 
     this.unidades.push(this.hospitalHealthForm.get('tipo_unidades').value)
 
-    this.hospitalHealthForm.reset('tipo_unidades')
+    this.hospitalHealthForm.get('tipo_unidades').reset()
   }
 
   currentHealth() {

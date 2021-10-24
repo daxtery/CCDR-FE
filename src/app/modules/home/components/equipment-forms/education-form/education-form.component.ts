@@ -17,6 +17,11 @@ export class EducationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loadData(equipmentDetails) {
+
+    this.schools = equipmentDetails['escolas']
+  }
+
   createGroup() {
 
     this.educationFormGroup = this.formbuilder.group({

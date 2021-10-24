@@ -88,7 +88,8 @@
         <h4>Outros</h4>
         <app-extras-form></app-extras-form>
         <div class="row">
-            <button type="submit" id="submit-equipment">Adicionar Serviço</button>
+            <button *ngIf="!update" type="submit" id="submit-equipment">Adicionar Serviço</button>
+            <button *ngIf="update" type="submit" id="submit-equipment">Actualizar Serviço</button>
         </div>
     </form>
 

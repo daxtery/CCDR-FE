@@ -34,7 +34,8 @@ export class AddEquipmentComponent implements OnInit {
   equipmentFormGroup: FormGroup;
 
   forms;
-  update;
+  update = false;
+  equipment: Equipment;
 
   constructor(private route: ActivatedRoute, private equipmentDetailsService: EquipmentDetailsService, private equipmentService: EquipmentService, private userService: UserService, private formBuilder: FormBuilder) { }
 
@@ -70,6 +71,7 @@ export class AddEquipmentComponent implements OnInit {
         this.equipmentDetailsService.get_or_fetch_and_set(id).subscribe(equipment => {
 
           this.update = true;
+          this.equipment = equipment;
           this.loadData(equipment);
 
           console.log(equipment)
@@ -107,15 +109,31 @@ export class AddEquipmentComponent implements OnInit {
 
     let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, location: location, owner: id, extras };
 
-    this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
+    if (this.update) {
 
-      // NOTE: We do this because the validators from the form don't get reset when we reset the form. This fixes it.
-      // https://stackoverflow.com/questions/48216330/angular-5-formgroup-reset-doesnt-reset-validators
-      formDirective.resetForm();
-      this.equipmentFormGroup.reset();
+      this.equipmentService.updateEquipment(this.equipment._id, equipment).subscribe(({ data }) => {
 
-    }, (error) => {
-      console.log('there was an error sending the query', error);
-    });
+        // NOTE: We do this because the validators from the form don't get reset when we reset the form. This fixes it.
+        // https://stackoverflow.com/questions/48216330/angular-5-formgroup-reset-doesnt-reset-validators
+        formDirective.resetForm();
+        this.equipmentFormGroup.reset();
+  
+      }, (error) => {
+        console.log('there was an error sending the query', error);
+      });
+    } 
+    else {
+
+      this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
+
+        // NOTE: We do this because the validators from the form don't get reset when we reset the form. This fixes it.
+        // https://stackoverflow.com/questions/48216330/angular-5-formgroup-reset-doesnt-reset-validators
+        formDirective.resetForm();
+        this.equipmentFormGroup.reset();
+  
+      }, (error) => {
+        console.log('there was an error sending the query', error);
+      });
+    }
   }
 }

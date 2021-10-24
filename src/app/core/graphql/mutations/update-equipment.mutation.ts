@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const updateEquipment =
   gql`
 mutation 
-updateEquipment($id: String, $equipment: CreateEquipmentDto!) {
+updateEquipment($id: String!, $equipment: CreateEquipmentDto!) {
     updateEquipment(id: $id, equipment: $equipment) {
       name
       area
