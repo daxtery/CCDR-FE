@@ -9,6 +9,7 @@ import { Equipment, EquipmentOfArea, EquipmentOfGroup } from 'src/app/shared/typ
 export class EquipmentDetailsComponent {
 
   @Input() equipment!: Equipment;
+  @Input() preview: boolean;
 
   icon = '';
 

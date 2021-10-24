@@ -104,4 +104,13 @@
 
         </div>
     </div>
+
+    <div id="preview" *ngIf="preview">
+        <button>
+            Editar
+        </button>
+        <button [routerLink]="['/home/profile']" >
+            Voltar
+        </button>
+    </div>
 </div>

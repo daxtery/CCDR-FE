@@ -24,10 +24,10 @@
     <div class="row">
 
         <div class="col s4" *ngFor="let equipment of equipments">
-            <a [routerLink]="['/home/equipment', equipment._id]">
+            
             <app-equipment-preview [equipment]="equipment" [profile]="true">
             </app-equipment-preview>
-            </a>
+            
         </div>
 
     </div>

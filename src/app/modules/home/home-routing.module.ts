@@ -42,7 +42,16 @@ const routes: Routes = [
         component: AddInfraestructureComponent,
         canActivate: [LoginGuard]
       },
-      
+      {
+        path: 'add_equipment/:id',
+        component: AddEquipmentComponent,
+        canActivate: [LoginGuard]
+      },
+      {
+        path: 'add_infrastructure/:id',
+        component: AddInfraestructureComponent,
+        canActivate: [LoginGuard]
+      },
       {
         path: 'profile',
         component: ProfileComponent,

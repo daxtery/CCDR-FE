@@ -11,10 +11,8 @@
     <div class="row">
 
         <div class="col s4" *ngFor="let equipment of $queryResults">
-            <a (click)="markAsClicked(equipment)" [routerLink]="['/home/equipment', equipment._id]">
-            <app-equipment-preview [equipment]="equipment">
+            <app-equipment-preview (click)="markAsClicked(equipment)" [equipment]="equipment">
             </app-equipment-preview>
-            </a>
         </div>
 
     </div>

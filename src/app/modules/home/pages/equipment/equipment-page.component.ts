@@ -13,12 +13,15 @@ import { Equipment } from 'src/app/shared/types';
 })
 export class EquipmentDetailsPageComponent implements OnInit {
   equipment$: Observable<Equipment>;
+  preview: boolean;
 
   constructor(private equipmentDetailsService: EquipmentDetailsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
+      this.preview = params['preview'] === 'true';
+      
       this.equipment$ = this.equipmentDetailsService.get_or_fetch_and_set(id);
     });
   }

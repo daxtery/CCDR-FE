@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 
@@ -9,10 +9,12 @@ import { HealthFormComponent } from '../../components/equipment-forms//health-fo
 import { SocialFormComponent } from '../../components/equipment-forms/social-form/social-form.component';
 import { SportFormComponent } from '../../components/equipment-forms/sport-form/sport-form.component';
 import { ExtrasFormComponent } from '../../components/extras-form/extras-form.component';
-import { EquipmentLocation } from 'src/app/shared/types';
+import { Equipment, EquipmentLocation } from 'src/app/shared/types';
 
 import * as M from 'materialize-css'
 import { UserService } from 'src/app/core/services/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { EquipmentDetailsService } from 'src/app/core/services/equipment-details.service';
 
 @Component({
   selector: 'app-add-equipment',
@@ -32,8 +34,9 @@ export class AddEquipmentComponent implements OnInit {
   equipmentFormGroup: FormGroup;
 
   forms;
+  update;
 
-  constructor(private equipmentService: EquipmentService, private userService: UserService, private formBuilder: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private equipmentDetailsService: EquipmentDetailsService, private equipmentService: EquipmentService, private userService: UserService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -59,6 +62,29 @@ export class AddEquipmentComponent implements OnInit {
 
     this.forms = { 'educacao': this.educationForm, 'social': this.socialForm, 'cultura': this.cultureForm, 'desporto': this.sportForm, 'saude': this.healthForm }
    
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+     
+      if (id != undefined) {
+
+        this.equipmentDetailsService.get_or_fetch_and_set(id).subscribe(equipment => {
+
+          this.update = true;
+          this.loadData(equipment);
+
+          console.log(equipment)
+        })
+      }
+    })
+  }
+
+  loadData(equipment: Equipment) {
+
+    this.equipmentFormGroup.get('name').setValue(equipment.name)
+    this.equipmentFormGroup.get('area').setValue(equipment.area)
+    this.equipmentFormGroup.get('description').setValue(equipment.description)
+
+    this.forms[equipment.area].loadData(equipment.equipmentDetails)
   }
   
   currentArea() {

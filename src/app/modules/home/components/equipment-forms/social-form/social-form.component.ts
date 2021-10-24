@@ -15,6 +15,14 @@ export class SocialFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loadData(equipmentDetails) {
+
+    this.socialFormGroup.get('num_utentes').setValue(equipmentDetails['num_utentes'])
+    this.socialFormGroup.get('capacidade').setValue(equipmentDetails['capacidade'])
+    this.socialFormGroup.get('fins_lucrativos').setValue(equipmentDetails['fins_lucrativos'])
+    this.socialFormGroup.get('organizacao').setValue(equipmentDetails['organizacao'])
+  }
+
   createGroup() {
 
     this.socialFormGroup = this.formbuilder.group({

@@ -8,9 +8,10 @@
         <p class="location">Localizacação: Évora</p>
         <p class="description"> {{ equipment.description }} </p>
         <div class="actions">
-            <a class="more-btn" *ngIf="!profile"></a>
-            <a class="profile-btn" *ngIf="profile">Pré Visualizar</a>
-            <a class="profile-btn" *ngIf="profile">Editar</a>
+            <a [routerLink]="['/home/equipment', equipment._id, {preview: false}]" class="more-btn" *ngIf="!profile"></a>
+            <a [routerLink]="['/home/equipment', equipment._id, {preview: true}]" class="profile-btn" *ngIf="profile">Pré Visualizar</a>
+            <a *ngIf="equipment.group === 'equipment' && profile"[routerLink]="['/home/add_equipment', equipment._id]" class="profile-btn">Editar</a>
+            <a *ngIf="equipment.group === 'infra' && profile"[routerLink]="['/home/add_infrastructure', equipment._id]" class="profile-btn">Editar</a>
             <a (click)="deleteEquipment(equipment._id, equipment.owner)" class="profile-btn" *ngIf="profile">Apagar</a>
         </div>
     </div>

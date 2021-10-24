@@ -16,6 +16,16 @@ export class SportFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loadData(equipmentDetails) {
+
+    this.sportFormGroup.get('capacidade').setValue(equipmentDetails['capacidade'])
+    this.sportFormGroup.get('iluminado').setValue(equipmentDetails['iluminado'])
+    this.sportFormGroup.get('mobilidade_reduzida_pratica').setValue(equipmentDetails['mobilidade_reduzida_pratica'])
+    this.sportFormGroup.get('mobilidade_reduzida_assistencia').setValue(equipmentDetails['mobilidade_reduzida_assistencia'])
+
+    this.facilities = equipmentDetails['instalacao_apoio']
+  }
+
   createGroup() {
 
     this.sportFormGroup = this.formbuilder.group({

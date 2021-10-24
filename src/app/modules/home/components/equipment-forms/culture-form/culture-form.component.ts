@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Equipment } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-culture-form',
@@ -26,6 +27,14 @@ export class CultureFormComponent implements OnInit {
     })
 
     return this.cultureFormGroup
+  }
+
+  loadData(equipmentDetails) {
+
+    this.cultureFormGroup.get('acesso_gratuito').setValue(equipmentDetails['acesso_gratuito'])
+    this.cultureFormGroup.get('num_visitantes_medio').setValue(equipmentDetails['num_visitantes_medio'])
+    this.cultureFormGroup.get('mobilidade_reduzida').setValue(equipmentDetails['mobilidade_reduzida'])
+    this.cultureFormGroup.get('tutela').setValue(equipmentDetails['tutela'])
   }
 
   getFormData() {
