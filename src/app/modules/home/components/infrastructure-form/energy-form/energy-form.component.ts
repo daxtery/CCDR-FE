@@ -30,6 +30,41 @@ export class EnergyFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loadData(equipmentDetails) {
+
+    this.energyFormGroup.get('num_operadores').setValue(equipmentDetails['num_operadores'])
+    this.energyFormGroup.get('tipo_energia').setValue(equipmentDetails['tipo_energia'])
+
+    this.num_lojas_por_operador = new Map(equipmentDetails['lojas_por_operador'])
+    this.num_agentes_por_operador = new Map(equipmentDetails['agentes_por_operador'])
+
+    if (equipmentDetails['tipo_energia'] === 'gas') {
+
+      this.loadGasData(equipmentDetails['energy_details'])
+    }
+
+    else {
+
+      this.loadElectricityData(equipmentDetails['energy_details'])
+    }
+  }
+
+  loadGasData(energyDetails) {
+
+    this.gasForm.get('consumo_p_habitante').setValue(energyDetails['consumo_p_habitante'])
+    this.gasForm.get('populacao_c_gas_naturaç').setValue(energyDetails['populacao_c_gas_naturaç'])
+
+    this.pontos_acesso = new Map(energyDetails['pontos_acesso'])
+    this.num_consumo_gas_por_localizacao = new Map(energyDetails['num_consumo_gas'])
+    this.consumo_gas_por_localizacao = new Map(energyDetails['consumo_gas'])
+  }
+
+  loadElectricityData(energyDetails) {
+
+    this.consumo_elec_por_atividade = new Map(energyDetails['consumo_elec_p_atividade'])
+    this.num_consumo_elec_por_atividade = new Map(energyDetails['num_consumo_elec_p_atividade'])
+  }
+
   createGroup() {
 
     this.energyFormGroup = this.formbuilder.group({

@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { EquipmentDetailsService } from 'src/app/core/services/equipment-details.service';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
-import { EquipmentLocation } from 'src/app/shared/types';
+import { Equipment, EquipmentLocation } from 'src/app/shared/types';
 import { CommunicationFormComponent } from '../../components/infrastructure-form/communication-form/communication-form.component';
 import { EnergyFormComponent } from '../../components/infrastructure-form/energy-form/energy-form.component';
 
@@ -21,8 +23,10 @@ export class AddInfraestructureComponent implements OnInit {
   infrastructureFormGroup: FormGroup;
 
   forms;
+  update = false;
+  equipment: Equipment;
 
-  constructor(private equipmentService: EquipmentService, private userService: UserService, private formBuilder: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private equipmentDetailsService: EquipmentDetailsService, private equipmentService: EquipmentService, private userService: UserService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -43,6 +47,30 @@ export class AddInfraestructureComponent implements OnInit {
 
     this.forms = { 'energia': this.energyForm, 'comunicacao': this.communicationForm }
 
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+     
+      if (id != undefined) {
+
+        this.equipmentDetailsService.get_or_fetch_and_set(id).subscribe(equipment => {
+
+          this.update = true;
+          this.equipment = equipment;
+          this.loadData(equipment);
+
+          console.log(equipment)
+        })
+      }
+    })
+  }
+
+  loadData(equipment: Equipment) {
+
+    this.infrastructureFormGroup.get('name').setValue(equipment.name)
+    this.infrastructureFormGroup.get('area').setValue(equipment.area)
+    this.infrastructureFormGroup.get('description').setValue(equipment.description)
+
+    this.forms[equipment.area].loadData(equipment.equipmentDetails)
   }
 
   currentArea() {
@@ -66,13 +94,32 @@ export class AddInfraestructureComponent implements OnInit {
 
     let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, location, owner: id, extras: [] }
 
-    this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
+    if (this.update) {
 
-      this.infrastructureFormGroup.reset();
+      this.equipmentService.updateEquipment(this.equipment._id, equipment).subscribe(({ data }) => {
 
-    }, (error) => {
-      console.log('there was an error sending the query', error);
-    });
+        // NOTE: We do this because the validators from the form don't get reset when we reset the form. This fixes it.
+        // https://stackoverflow.com/questions/48216330/angular-5-formgroup-reset-doesnt-reset-validators
+        formDirective.resetForm();
+        this.infrastructureFormGroup.reset();
+  
+      }, (error) => {
+        console.log('there was an error sending the query', error);
+      });
+    } 
+    else {
+
+      this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
+
+        // NOTE: We do this because the validators from the form don't get reset when we reset the form. This fixes it.
+        // https://stackoverflow.com/questions/48216330/angular-5-formgroup-reset-doesnt-reset-validators
+        formDirective.resetForm();
+        this.infrastructureFormGroup.reset();
+  
+      }, (error) => {
+        console.log('there was an error sending the query', error);
+      });
+    }
   }
 
 }

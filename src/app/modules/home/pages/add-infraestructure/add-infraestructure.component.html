@@ -82,7 +82,8 @@
         <app-communication-form [hidden]="currentArea() != 'comunicacao'"></app-communication-form>
 
         <div class="row">
-            <button type="submit" id="submit-equipment">Adicionar Infraestrutura</button>
+            <button *ngIf="!update" type="submit" id="submit-equipment">Adicionar Infraestrutura</button>
+            <button *ngIf="update" type="submit" id="submit-equipment">Actualizar Infraestrutura</button>
         </div>
     </form>
 </div>
