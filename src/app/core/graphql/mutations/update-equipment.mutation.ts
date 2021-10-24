@@ -14,6 +14,7 @@ updateEquipment($id: String, $equipment: CreateEquipmentDto!) {
         name
         value
       }
+      owner
     }
   }
 `

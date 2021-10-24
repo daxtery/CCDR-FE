@@ -36,11 +36,11 @@ export class EquipmentService {
 
   }
 
-  removeEquipment(id: string) {
+  removeEquipment(id: string, user_id: string) {
 
     return this.apollo.mutate<{ removeEquipment: boolean }>({
       mutation: removeEquipment,
-      variables: { id: id }
+      variables: { id: id, user_id: user_id }
     });
 
   }

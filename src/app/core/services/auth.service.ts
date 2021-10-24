@@ -10,6 +10,7 @@ import { tap } from 'rxjs/operators';
 import * as moment from 'moment';
 // @ts-ignore  
 import jwt_decode from "jwt-decode";
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,7 @@ export class AuthService {
       const expires_at = moment.unix(expires_in);
 
       localStorage.setItem('access_token', authResult.accessToken);
+      localStorage.setItem('id', authResult.result.userId);
       localStorage.setItem('expires_at', JSON.stringify(expires_at.valueOf()));
     }
 
@@ -45,6 +47,7 @@ export class AuthService {
 
     localStorage.removeItem('access_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('id');
   }
 
   public is_logged_in(): boolean {

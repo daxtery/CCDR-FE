@@ -32,6 +32,7 @@ export type Equipment = {
     description: string;
     group: Group;
     area: EquipmentArea | InfrastructureArea;
+    owner: string;
 
     equipmentDetails: unknown;
     extras: Extra[];
@@ -53,8 +54,8 @@ export type Equipment = {
 export type EquipmentOfGroup<G extends Equipment["group"]> = Equipment & { group: G; };
 export type EquipmentOfArea<A extends Equipment["area"]> = Equipment & { area: A; };
 
-export type EquipmentPreview = Pick<Equipment, "group" | "area" | "_id" | "description" | "name">
-export type EquipmentNonPreviewDetails = Pick<Equipment, "equipmentDetails" | "extras" | "horario" | "numero_de_equipamentos" | "localizacao">
+export type EquipmentPreview = Pick<Equipment, "group" | "area" | "_id" | "description" | "name" | "owner">
+export type EquipmentNonPreviewDetails = Pick<Equipment, "equipmentDetails" | "extras" | "horario" | "numero_de_equipamentos" | "localizacao" | "owner">
 
 export interface EquipmentAndScore {
     equipment: EquipmentPreview;

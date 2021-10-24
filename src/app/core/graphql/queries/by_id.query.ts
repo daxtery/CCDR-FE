@@ -14,6 +14,7 @@ queryById($id: String!) {
         name
         value
       }
+      owner
       equipmentDetails
     }
   }

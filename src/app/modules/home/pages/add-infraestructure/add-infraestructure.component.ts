@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { EquipmentService } from 'src/app/core/services/equipment.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { CreateEquipmentDto } from 'src/app/shared/dtos/create-equipment.dto';
 import { EquipmentLocation } from 'src/app/shared/types';
 import { CommunicationFormComponent } from '../../components/infrastructure-form/communication-form/communication-form.component';
@@ -21,7 +22,7 @@ export class AddInfraestructureComponent implements OnInit {
 
   forms;
 
-  constructor(private equipmentService: EquipmentService, private formBuilder: FormBuilder) { }
+  constructor(private equipmentService: EquipmentService, private userService: UserService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -61,7 +62,9 @@ export class AddInfraestructureComponent implements OnInit {
 
     const group = 'infra';
 
-    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, location, extras: [] }
+    const id = localStorage.getItem('id')
+
+    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, location, owner: id, extras: [] }
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

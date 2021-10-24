@@ -14,6 +14,7 @@ createEquipment($equipment: CreateEquipmentDto!) {
         name
         value
       }
+      owner
     }
   }
 `

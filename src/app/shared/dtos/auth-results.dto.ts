@@ -7,7 +7,7 @@ export enum Status {
 
 class Result {
 
-    userId: String;
+    userId: string;
 }
 
 export class AuthResult {

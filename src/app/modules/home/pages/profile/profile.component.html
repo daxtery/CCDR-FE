@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper bg" *ngIf="showEmptyPage()">
     <h5>
         Seja bem vindo à plataforma de acesso a Serviços <br> do Interesse Geral do Alentejo!
         Nesta plataforma pode <br> registar os seus serviços bem como adicionar todas <br> 
@@ -10,4 +10,25 @@
     <button [routerLink]="['/home/add_equipment']" >
         Adicionar Serviço
     </button>
+</div>
+<div class="wrapper" *ngIf="!showEmptyPage()">
+    <div class="row valign-wrapper header">
+        <button [routerLink]="['/home/add_equipment']" >
+            Adicionar Equipamento
+        </button>
+        <button [routerLink]="['/home/add_infrastructure']" >
+            Adicionar Infraestrutura
+        </button>
+    </div>
+    <hr>
+    <div class="row">
+
+        <div class="col s4" *ngFor="let equipment of equipments">
+            <a [routerLink]="['/home/equipment', equipment._id]">
+            <app-equipment-preview [equipment]="equipment" [profile]="true">
+            </app-equipment-preview>
+            </a>
+        </div>
+
+    </div>
 </div>

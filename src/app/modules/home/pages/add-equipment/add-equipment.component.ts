@@ -12,6 +12,7 @@ import { ExtrasFormComponent } from '../../components/extras-form/extras-form.co
 import { EquipmentLocation } from 'src/app/shared/types';
 
 import * as M from 'materialize-css'
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-add-equipment',
@@ -32,7 +33,7 @@ export class AddEquipmentComponent implements OnInit {
 
   forms;
 
-  constructor(private equipmentService: EquipmentService, private formBuilder: FormBuilder) { }
+  constructor(private equipmentService: EquipmentService, private userService: UserService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -65,15 +66,6 @@ export class AddEquipmentComponent implements OnInit {
     return this.equipmentFormGroup.get('area').value
   }
 
-  onAutocompleteSelected(result) {
-    console.log('onAutocompleteSelected: ', result);
-  }
-
-  onLocationSelected(location: Location) {
-    console.log('onLocationSelected: ', location);
-    
-  }
-
   formSubmit(formDirective: FormGroupDirective) {
     const details = this.forms[this.currentArea()].getFormData()
 
@@ -85,8 +77,9 @@ export class AddEquipmentComponent implements OnInit {
     const location: EquipmentLocation = this.equipmentFormGroup.value['location'];
 
     const extras = this.extrasForm.getFormData();
+    const id = localStorage.getItem('id')
 
-    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, location: location, extras };
+    let equipment: CreateEquipmentDto = { area, group, description, name, equipmentDetails: details, location: location, owner: id, extras };
 
     this.equipmentService.createEquipment(equipment).subscribe(({ data }) => {
 

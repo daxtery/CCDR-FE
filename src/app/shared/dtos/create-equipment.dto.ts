@@ -10,4 +10,5 @@ export class CreateEquipmentDto {
     extras: Extra[];
     equipmentDetails: Object;
     location: EquipmentLocation;
+    owner: String;
 }

@@ -54,7 +54,8 @@ div.card
             height: auto
             width: 100%
             display: flex
-            justify-content: flex-end
+            justify-content: flex-start
+            gap: 20px
 
             a.more-btn
                 
@@ -64,3 +65,20 @@ div.card
                 background: url(/assets/icons/more-btn.svg) no-repeat
                 background-size: 30px 30px
                 background-position: center center
+                justify-self: flex-end
+
+            a.profile-btn
+                
+                height: 20px
+                border: 1px solid #000000
+                border-radius: 20px
+                padding: 12px 20px
+                text-align: center
+                line-height: 0 
+                text-decoration: none
+                color: black
+
+            a.profile-btn:hover
+
+                background-color: black
+                color: white

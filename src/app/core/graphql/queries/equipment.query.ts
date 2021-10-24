@@ -11,6 +11,7 @@ queryEquipments($options: QueryOptions!) {
         group
         area
         description
+        owner
       }
       score
     }
