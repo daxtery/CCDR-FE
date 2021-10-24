@@ -47,6 +47,56 @@ export class CommunicationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loadData(equipmentDetails) {
+
+    this.communicationFormGroup.get('num_operadores').setValue(equipmentDetails['num_operadores'])
+    this.communicationFormGroup.get('tipo_comunicacao').setValue(equipmentDetails['tipo_comunicacao'])
+
+    this.num_lojas_por_operador = new Map(equipmentDetails["lojas_por_operador"])
+    this.cobertura_operador_regiao = new Map(equipmentDetails["cobertura_por_operador"])
+
+    if (equipmentDetails['tipo_comunicacao'] === 'telefone')
+      this.loadTelephoneData(equipmentDetails['communication_details'])
+
+    if (equipmentDetails['tipo_comunicacao'] === 'internet')
+      this.loadInternetData(equipmentDetails['communication_details'])
+
+    if (equipmentDetails['tipo_comunicacao'] === 'correio')
+      this.loadMailData(equipmentDetails['communication_details'])
+
+    if (equipmentDetails['tipo_comunicacao'] === 'televisao')
+      this.loadTvData(equipmentDetails['communication_details'])
+  }
+
+  loadTelephoneData(communicationDetails) {
+
+    this.number_posts = new Map(communicationDetails['num_postos'])
+    this.number_public_posts = new Map(communicationDetails['num_postos_publicos'])
+    this.number_access = new Map(communicationDetails['num_acessos'])
+    this.number_access_100 = new Map(communicationDetails['num_acessos_p_100'])
+    this.number_clients = new Map(communicationDetails['num_clientes'])
+  }
+  
+  loadInternetData(communicationDetails) {
+
+    this.internetForm.get('populacao_4g').setValue(communicationDetails['populacao_4g'])
+
+    this.number_access_free_band = new Map(communicationDetails['num_acessos_banda_larga'])
+    this.number_access_free_band_100 = new Map(communicationDetails['num_acessos_banda_larga_100'])
+    this.number_clients_free_band = new Map(communicationDetails['num_clientes_banda_larga'])
+  }
+
+  loadMailData(communicationDetails) {
+
+    this.information_by_company = new Map(communicationDetails)
+  }
+
+  loadTvData(communicationDetails) {
+
+    this.number_subscriptions = new Map(communicationDetails['num_subscricoes'])
+    this.number_tv_clients = new Map(communicationDetails['num_clientes'])
+  }
+
   createGroup() {
 
     this.communicationFormGroup = this.formbuilder.group({
